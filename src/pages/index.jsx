@@ -3,8 +3,6 @@ import { GoogleMap, LoadScript, MarkerF } from "@react-google-maps/api";
 
 
 const Map = () => {
-  // const [latitude, setLatitude] = useState('');
-  // const [longitude, setLongitude] = useState('');
   const [position, setPosition] = useState({
     lat: 0,
     lng: 0,
@@ -18,8 +16,6 @@ const Map = () => {
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
-      // setLatitude(position.coords.latitude)
-      // setLongitude(position.coords.longitude)
       setPosition({...position, lat: position.coords.latitude, lng: position.coords.longitude})
       console.log(position.coords)
     },
