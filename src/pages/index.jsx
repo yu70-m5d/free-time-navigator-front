@@ -23,7 +23,7 @@ export default function Home( {spots} ) {
   return (
     <>
       <div>
-        {/* <Map /> */}
+        <Map />
       </div>
       <div>
         {spots.map((spot) => (
