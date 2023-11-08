@@ -1,51 +1,34 @@
 import React, { useState, useEffect } from "react";
 import { GoogleMap, LoadScript, MarkerF } from "@react-google-maps/api";
+import Link from "next/link";
+import Map from "../components/Map";
+import BasicCard from "../components/BasicCard";
 
 
-const Map = () => {
-  const [position, setPosition] = useState({
-    lat: 0,
-    lng: 0,
-  });
-  const containerStyle = {
-    width: "100%",
-    height: "86vh",
-  };
-  const zoom = 13;
+export async function getStaticProps() {
+  const res = await fetch("http://localhost:3001/api/v1/spots");
+  const spots = await res.json();
 
+  console.log(spots);
 
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition((position) => {
-      setPosition({...position, lat: position.coords.latitude, lng: position.coords.longitude})
-      console.log(position.coords)
+  return {
+    props: {
+      spots,
     },
-    (err) => {
-      console.log(err);
-    })
-
-  }, [])
-
-  return (
-    <>
-      <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}>
-        <GoogleMap
-          mapContainerStyle={containerStyle}
-          center={position}
-          zoom={zoom}
-        >
-          <MarkerF position={position} label={"現在地"} />
-        </GoogleMap>
-      </LoadScript>
-    </>
-  )
+    revalidate: 60 * 60 * 24,
+  };
 }
 
-
-export default function Home() {
+export default function Home( {spots} ) {
   return (
     <>
       <div>
-        <Map />
+        {/* <Map /> */}
+      </div>
+      <div>
+        {spots.map((spot) => (
+          <BasicCard spot={spot} sx={{maxWidth: 288, maxHeight: 120}} />
+        ))}
       </div>
     </>
   )
