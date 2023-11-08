@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { GoogleMap, LoadScript, MarkerF } from "@react-google-maps/api";
-import Link from "next/link";
+import React from "react";
 import Map from "../components/Map";
 import BasicCard from "../components/BasicCard";
 
