@@ -27,7 +27,7 @@ export default function Home( {spots} ) {
       </div>
       <div>
         {spots.map((spot) => (
-          <BasicCard spot={spot} sx={{maxWidth: 288, maxHeight: 120}} />
+          <BasicCard spot={spot} />
         ))}
       </div>
     </>
