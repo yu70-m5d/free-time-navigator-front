@@ -6,7 +6,6 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import NextLink from 'next/link';
-import MuiLink from '@mui/material/Link';
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 
 const bull = (
@@ -35,9 +34,7 @@ export default function BasicCard({spot}) {
       </CardContent>
       <CardActions sx={{width: 32}}>
         <NextLink href="/show" passHref>
-          <MuiLink>
-            <ArrowForwardIosSharpIcon />
-          </MuiLink>
+          <ArrowForwardIosSharpIcon />
         </NextLink>
       </CardActions>
     </Card>

@@ -25,7 +25,7 @@ export default function Home( {spots} ) {
       </div>
       <div>
         {spots.map((spot) => (
-          <BasicCard spot={spot} />
+          <BasicCard key={spot.id} spot={spot} />
         ))}
       </div>
     </>
