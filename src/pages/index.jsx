@@ -4,10 +4,8 @@ import BasicCard from "../components/BasicCard";
 
 
 export async function getStaticProps() {
-  const res = await fetch("http://localhost:3001/api/v1/spots");
+  const res = await fetch(`${process.env.NEXT_PUBLIC_FTN_API_INDEX}`);
   const spots = await res.json();
-
-  console.log(spots);
 
   return {
     props: {
