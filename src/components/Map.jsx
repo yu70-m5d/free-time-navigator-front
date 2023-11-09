@@ -1,29 +1,41 @@
-import React from "react";
-import { GoogleMap, LoadScript } from "@react-google-maps/api";
+import React, { useState, useEffect } from "react";
+import { GoogleMap, LoadScript, MarkerF } from "@react-google-maps/api";
 
-const containerStyle = {
-  width: "100%",
-  height: "86vh",
-};
 
-const center = {
-  lat: 34.7293466708865,
-  lng: 135.49939605607292,
-};
+export default function Map() {
 
-const zoom = 13;
+  const [position, setPosition] = useState({
+    lat: 0,
+    lng: 0,
+  });
+  const containerStyle = {
+    width: "100%",
+    height: "86vh",
+  };
+  const zoom = 13;
 
-const Map = () => {
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      setPosition({...position, lat: position.coords.latitude, lng: position.coords.longitude})
+      console.log(position.coords)
+    },
+    (err) => {
+      console.log(err);
+    })
+  }, [])
+
   return (
-    <LoadScript googleMapsApiKey={process.env.GOOGLE_MAPS_API_KEY}>
-      <GoogleMap
-        mapContainerStyle={containerStyle}
-        center={center}
-        zoom={zoom}
-      ></GoogleMap>
-    </LoadScript>
-  );
-};
-
-export default Map;
+    <>
+      <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}>
+        <GoogleMap
+          mapContainerStyle={containerStyle}
+          center={position}
+          zoom={zoom}
+        >
+          <MarkerF position={position} label={"現在地"} />
+        </GoogleMap>
+      </LoadScript>
+    </>
+  )
+}
 
