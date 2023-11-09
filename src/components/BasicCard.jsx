@@ -21,9 +21,6 @@ export default function BasicCard({spot}) {
   const router = useRouter()
   const isContactPage = router.pathname === "/spots/[id]"
 
-  console.log(router.pathname)
-
-
   if (isContactPage) {
     return (
       <Card sx={{ width: 288 , display: 'flex', padding: '4px auto', margin: '4px auto'}}>
