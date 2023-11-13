@@ -17,7 +17,7 @@ const bull = (
   </Box>
 );
 
-export default function BasicCard({spot}) {
+export default function BasicCard(spot) {
   const router = useRouter()
   const isContactPage = router.pathname === "/spots/[id]"
 

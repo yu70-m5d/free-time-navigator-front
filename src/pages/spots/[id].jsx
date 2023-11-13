@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import React from "react";
 import BasicCard from "../../components/BasicCard";
+import Map from "../../components/Map";
 
 
 export async function getStaticPaths() {
@@ -21,10 +22,6 @@ export async function getStaticProps({ params }) {
   const res = await fetch(`${process.env.NEXT_PUBLIC_FTN_API_INDEX}`+`/${params.id}`)
   const spot = await res.json();
 
-  console.log("コンソールログ");
-  console.log(`${process.env.NEXT_PUBLIC_FTN_API_INDEX}`+`/${params.id}`);
-  console.log(spot);
-
   return {
     props: {
       spot,
@@ -43,7 +40,8 @@ export default function Spot( {spot} ) {
   return (
     <>
       <div>
-        <BasicCard spot={spot} />
+        <BasicCard {...spot} />
+        <Map {...spot} />
       </div>
     </>
   );
