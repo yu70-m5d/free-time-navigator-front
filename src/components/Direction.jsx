@@ -8,16 +8,6 @@ export default function Direction( props ) {
   // 目的地を指定する
   const destination = props.destination;
 
-  // 経由地を指定する
-  // const transitPoints = [
-  //   {
-  //     lacation: { lat: , lng:  },
-  //     stopover: true,
-  //   },
-  //   { location: { lat: , lng:  } },
-  //   { location: { lat: , lng:  } },
-  // ];
-
   // DirectionsServiceへのAPIコールで得られたルート情報を保存する
   const [currentDirection, setCurrentDirection] = useState(null);
 
@@ -29,17 +19,19 @@ export default function Direction( props ) {
           googleResponse.geocoded_waypoints.length !==
             currentDirection.geocoded_waypoints.length
         ) {
-          console.log("ルートが変更されたのでstateを更新する");
+          console.log("a.ルートが変更されたのでstateを更新する");
           setCurrentDirection(googleRespons);
         } else {
-          console.log("前回と同じルートのためstateを更新しない");
+          console.log("b.前回と同じルートのためstateを更新しない");
         }
       } else {
         if (googleResponse.status === "OK") {
-          console.log("初めてルートが設定されたため、stateを更新する");
+          const duration = googleResponse.routes[0].legs[0].duration.text
+          console.log("所要時間:", duration);
+          console.log("c.初めてルートが設定されたため、stateを更新する");
           setCurrentDirection(googleResponse);
         } else {
-          console.log("前回と同じルートのためstateを更新しない");
+          console.log("d.前回と同じルートのためstateを更新しない");
         }
       }
     }
@@ -63,7 +55,7 @@ export default function Direction( props ) {
           options={{
             directions: currentDirection,
           }}
-          />
+        />
       )}
     </>
   );
