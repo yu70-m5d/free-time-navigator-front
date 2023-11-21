@@ -7,8 +7,6 @@ export default function Map(props) {
 
   const { latitude, longitude, onDurationChange } = props;
 
-  // 子コンポーネントから受け取る
-
   // 現在地を取得する
   const [origin, setOrigin] = useState({
     lat: 0,

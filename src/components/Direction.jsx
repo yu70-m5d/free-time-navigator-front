@@ -5,12 +5,6 @@ export default function Direction( props ) {
   // 出発点=origin、目的地=destination
   const { origin, destination, onDurationChange } = props;
 
-  // 出発点を指定する
-  // const origin = props.origin;
-
-  // 目的地を指定する
-  // const destination = props.destination;
-
   // DirectionsServiceへのAPIコールで得られたルート情報を保存する
   const [currentDirection, setCurrentDirection] = useState(null);
 
