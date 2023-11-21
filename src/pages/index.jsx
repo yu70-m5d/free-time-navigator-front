@@ -17,11 +17,37 @@ export async function getStaticProps() {
 
 export default function Home( {spots} ) {
 
+    // 現在地を取得する
+    const [origin, setOrigin] = useState({
+      lat: 0,
+      lng: 0,
+    });
+
+    // useEffect完了の状態を管理
+    const [isEffectComplete, setIsEffectComplete] = useState(false);
+
+    useEffect(() => {
+      navigator.geolocation.getCurrentPosition((position) => {
+        setOrigin({
+          ...origin,
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        });
+        setIsEffectComplete(true);
+      },
+      (err) => {
+        console.log(err);
+        setIsEffectComplete(true);
+      })
+    }, []);
+
+    if (!isEffectComplete) return <div>現在地を取得しています。</div>;
+
   return (
     <>
       <div>
         {spots.map((spot) => (
-          <BasicCard key={spot.id} {...spot} />
+          <BasicCard key={spot.id} {...spot} origin={origin} />
         ))}
       </div>
     </>

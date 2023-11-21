@@ -39,6 +39,10 @@ export default function Spot( {spot} ) {
   };
 
   const router = useRouter()
+  const { origin } = router.query;
+
+  const parsedOrigin = origin ? JSON.parse(origin) : null;
+  console.log(parsedOrigin);
 
   if( router.isFallback ) {
     return <div>Loading...</div>
@@ -48,7 +52,7 @@ export default function Spot( {spot} ) {
     <>
       <div>
         <BasicCard {...spot} duration={duration} />
-        <Map {...spot} onDurationChange={handleDurationChange} />
+        <Map {...spot} origin={parsedOrigin} onDurationChange={handleDurationChange} />
       </div>
     </>
   );
