@@ -3,7 +3,9 @@ import { GoogleMap, MarkerF, useLoadScript } from "@react-google-maps/api";
 import Direction from "./Direction";
 
 
-export default function Map(spot) {
+export default function Map(props) {
+
+  const { latitude, longitude, onDurationChange } = props;
 
   // 現在地を取得する
   const [origin, setOrigin] = useState({
@@ -23,8 +25,8 @@ export default function Map(spot) {
 
   //目的地を取得する
   const destination = {
-    lat: spot.latitude,
-    lng: spot.longitude
+    lat: latitude,
+    lng: longitude
   };
 
   //Map表示サイズ
@@ -46,14 +48,14 @@ export default function Map(spot) {
 
   return (
     <>
-        <GoogleMap
-          mapContainerStyle={containerStyle}
-          center={origin}
-          zoom={zoom}
-        >
-          <MarkerF position={origin} label={"現在地"} />
-          <Direction {...route} />
-        </GoogleMap>
+      <GoogleMap
+        mapContainerStyle={containerStyle}
+        center={origin}
+        zoom={zoom}
+      >
+        <MarkerF position={origin} label={"現在地"} />
+        <Direction {...route} onDurationChange={onDurationChange} />
+      </GoogleMap>
     </>
   )
 }
