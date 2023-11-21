@@ -1,40 +1,61 @@
 import React, { useState, useEffect } from "react";
-import { GoogleMap, LoadScript, MarkerF } from "@react-google-maps/api";
+import { GoogleMap, MarkerF, useLoadScript } from "@react-google-maps/api";
+import Direction from "./Direction";
 
 
-export default function Map() {
+export default function Map(props) {
 
-  const [position, setPosition] = useState({
+  const { latitude, longitude, onDurationChange } = props;
+
+  // 現在地を取得する
+  const [origin, setOrigin] = useState({
     lat: 0,
     lng: 0,
   });
-  const containerStyle = {
-    width: "100%",
-    height: "86vh",
-  };
-  const zoom = 13;
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
-      setPosition({...position, lat: position.coords.latitude, lng: position.coords.longitude})
-      console.log(position.coords)
+      setOrigin({...origin, lat: position.coords.latitude, lng: position.coords.longitude})
+      // console.log(position.coords)
     },
     (err) => {
       console.log(err);
     })
   }, [])
 
+  //目的地を取得する
+  const destination = {
+    lat: latitude,
+    lng: longitude
+  };
+
+  //Map表示サイズ
+  const containerStyle = {
+    width: "100%",
+    height: "86vh",
+  };
+
+  const zoom = 13;
+
+  const route = { origin: origin, destination: destination };
+
+
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
+  });
+
+  if (!isLoaded) return <div>Loading...</div>;
+
   return (
     <>
-      <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}>
-        <GoogleMap
-          mapContainerStyle={containerStyle}
-          center={position}
-          zoom={zoom}
-        >
-          <MarkerF position={position} label={"現在地"} />
-        </GoogleMap>
-      </LoadScript>
+      <GoogleMap
+        mapContainerStyle={containerStyle}
+        center={origin}
+        zoom={zoom}
+      >
+        <MarkerF position={origin} label={"現在地"} />
+        <Direction {...route} onDurationChange={onDurationChange} />
+      </GoogleMap>
     </>
   )
 }

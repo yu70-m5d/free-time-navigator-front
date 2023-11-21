@@ -1,8 +1,7 @@
-import React from "react";
-import Map from "../components/Map";
+import React, { useEffect, useState } from "react";
 import BasicCard from "../components/BasicCard";
 
-
+// RailsAPIとの通信
 export async function getStaticProps() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_FTN_API_INDEX}`);
   const spots = await res.json();
@@ -15,15 +14,14 @@ export async function getStaticProps() {
   };
 }
 
+
 export default function Home( {spots} ) {
+
   return (
     <>
       <div>
-        <Map />
-      </div>
-      <div>
         {spots.map((spot) => (
-          <BasicCard key={spot.id} spot={spot} />
+          <BasicCard key={spot.id} {...spot} />
         ))}
       </div>
     </>
