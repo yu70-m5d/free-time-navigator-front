@@ -2,14 +2,18 @@ import { DirectionsRenderer, DirectionsService } from "@react-google-maps/api";
 import React, { useState, useCallback, useEffect } from "react";
 
 export default function Direction( props ) {
+  // 出発点=origin、目的地=destination
+  const { origin, destination, onDurationChange } = props;
+
   // 出発点を指定する
-  const origin = props.origin;
+  // const origin = props.origin;
 
   // 目的地を指定する
-  const destination = props.destination;
+  // const destination = props.destination;
 
   // DirectionsServiceへのAPIコールで得られたルート情報を保存する
   const [currentDirection, setCurrentDirection] = useState(null);
+
 
   const directionsCallback = useCallback((googleResponse) => {
     if (googleResponse) {
@@ -20,14 +24,19 @@ export default function Direction( props ) {
             currentDirection.geocoded_waypoints.length
         ) {
           console.log("a.ルートが変更されたのでstateを更新する");
-          setCurrentDirection(googleRespons);
+          setCurrentDirection(googleResponse);
         } else {
           console.log("b.前回と同じルートのためstateを更新しない");
         }
       } else {
         if (googleResponse.status === "OK") {
-          const duration = googleResponse.routes[0].legs[0].duration.text
-          console.log("所要時間:", duration);
+          const distance = googleResponse.routes[0].legs[0].distance.text
+          const newDuration = googleResponse.routes[0].legs[0].duration.text
+
+          onDurationChange(newDuration);
+
+          console.log("距離:", distance);
+          console.log("所要時間:", newDuration);
           console.log("c.初めてルートが設定されたため、stateを更新する");
           setCurrentDirection(googleResponse);
         } else {

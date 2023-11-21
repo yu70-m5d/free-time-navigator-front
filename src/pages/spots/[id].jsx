@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
 import BasicCard from "../../components/BasicCard";
 import Map from "../../components/Map";
 
@@ -31,6 +31,13 @@ export async function getStaticProps({ params }) {
 }
 
 export default function Spot( {spot} ) {
+
+   // 子コンポーネントから受け取る
+  const [duration, setDuration] = useState(null);
+  const handleDurationChange = (newDuration) => {
+    setDuration(newDuration);
+  };
+
   const router = useRouter()
 
   if( router.isFallback ) {
@@ -40,8 +47,8 @@ export default function Spot( {spot} ) {
   return (
     <>
       <div>
-        <BasicCard {...spot} />
-        <Map {...spot} />
+        <BasicCard {...spot} duration={duration} />
+        <Map {...spot} onDurationChange={handleDurationChange} />
       </div>
     </>
   );
