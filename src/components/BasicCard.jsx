@@ -18,8 +18,9 @@ const bull = (
 );
 
 export default function BasicCard(props) {
-  const { id, name, address, latitude, longitude, rating, image, duration } = props;
+  const { id, name, address, latitude, longitude, rating, image, duration, origin } = props;
   const router = useRouter()
+  const queryParams = `origin=${encodeURIComponent(JSON.stringify(origin))}`;
   const isContactPage = router.pathname === "/spots/[id]"
 
 
@@ -45,6 +46,7 @@ export default function BasicCard(props) {
     );
   }
 
+
   return (
     <Card sx={{ width: 288 , display: 'flex', padding: '4px auto', margin: '4px auto'}}>
       <CardContent sx={{width: 266}}>
@@ -62,7 +64,8 @@ export default function BasicCard(props) {
       </CardContent>
       <CardActions sx={{width: 32}}>
         <NextLink
-          href={`spots/${id}`}
+          // href={`spots/${id}`}
+          href={`spots/${id}?${queryParams}`}
           passHref
         >
           <ArrowForwardIosSharpIcon />
