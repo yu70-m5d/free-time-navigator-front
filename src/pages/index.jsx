@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import BasicCard from "../components/BasicCard";
+import Header from "@/components/header";
 
 
 export default function Home() {
@@ -67,11 +68,19 @@ export default function Home() {
   }, []);
 
 
-  if (!isEffectComplete) return <div>現在地を取得しています。</div>;
+  if (!isEffectComplete) {
+    return (
+      <>
+        <Header></Header>
+        <div>現在地を取得しています。</div>
+      </>
+    );
+  }
 
   return (
     <>
-      <div>
+      <div className="container">
+        <Header></Header>
         {fetchedSpots.map((spot) => (
           <BasicCard key={spot.id} {...spot} origin={origin} />
         ))}

@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import BasicCard from "../../components/BasicCard";
 import Map from "../../components/Map";
+import Header from "@/components/header";
 
 
 export async function getStaticPaths() {
@@ -50,6 +51,7 @@ export default function Spot( {spot} ) {
 
   return (
     <>
+      <Header></Header>
       <div>
         <BasicCard {...spot} duration={duration} />
         <Map {...spot} origin={parsedOrigin} onDurationChange={handleDurationChange} />
