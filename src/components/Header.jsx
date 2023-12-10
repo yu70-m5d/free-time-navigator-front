@@ -2,6 +2,9 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Drawer } from "@mui/material";
 import { useState } from "react";
 import DrawerMenu from './DrawerMenu';
+import { useForm } from 'react-hook-form';
+import { AccessTime } from '@mui/icons-material';
+
 
 export default function Header() {
 
@@ -12,6 +15,9 @@ export default function Header() {
   const handleDrawerClose = () => {
     setDrawerOpened(false);
   };
+
+  const { register, handleSubmit } = useForm();
+  const onSubmit = (data) => console.log(data);
 
   return (
     <>
@@ -25,8 +31,26 @@ export default function Header() {
         <Drawer anchor='top' open={drawerOpened} onClose={handleDrawerClose}>
           <DrawerMenu />
         </Drawer>
-      </div>
 
+        <div className='time-form' >
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <label htmlFor='time'>
+              空き時間
+            </label>
+            <input
+              id="time"
+              type="time"
+              placeholder='空き時間'
+              {...register("time", {
+                required: "空き時間を入力してください"
+              })}
+            />
+            <button type="submit">
+              検索
+            </button>
+          </form>
+        </div>
+      </div>
     </>
   );
 }

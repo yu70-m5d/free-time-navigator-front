@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import BasicCard from "../components/BasicCard";
-import Header from "@/components/header";
+import Header from "@/components/Header";
 
 
 export default function Home() {

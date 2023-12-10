@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import BasicCard from "../../components/BasicCard";
 import Map from "../../components/Map";
-import Header from "@/components/header";
+import Header from "@/components/Header";
 
 
 export async function getStaticPaths() {
