@@ -17,6 +17,11 @@ export default function Home() {
   //// useEffect完了の状態を管理
   const [isEffectComplete, setIsEffectComplete] = useState(false);
 
+  // 検索時sFetchedSpots更新
+  const handleSpotsDataChange = (newSpotsData) => {
+    setFetchedSpots(newSpotsData)
+  };
+
   // 初回マウント時に実行
   useEffect(() => {
     // Railsからspot情報を持ってくる
@@ -71,7 +76,7 @@ export default function Home() {
   if (!isEffectComplete) {
     return (
       <>
-        <Header></Header>
+        <Header />
         <div>現在地を取得しています。</div>
       </>
     );
@@ -80,10 +85,10 @@ export default function Home() {
   return (
     <>
       <div className="container">
-        <Header></Header>
-        {fetchedSpots.map((spot) => (
+        <Header onSpotsData={handleSpotsDataChange} />
+        {fetchedSpots.length ? fetchedSpots.map((spot) => (
           <BasicCard key={spot.id} {...spot} origin={origin} />
-        ))}
+        )) : <div>データが見つかりませんでした。</div> }
       </div>
     </>
   )
