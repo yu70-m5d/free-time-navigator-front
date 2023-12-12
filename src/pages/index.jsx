@@ -14,6 +14,7 @@ export default function Home() {
 
   //// 取得したspots
   const [fetchedSpots, setFetchedSpots] = useState([]);
+  console.log(fetchedSpots);
 
   //// useEffect完了の状態を管理
   const [isEffectComplete, setIsEffectComplete] = useState(false);
