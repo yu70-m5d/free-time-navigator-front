@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import BasicCard from "../components/BasicCard";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 
 export default function Home() {
@@ -15,6 +17,11 @@ export default function Home() {
 
   //// useEffect完了の状態を管理
   const [isEffectComplete, setIsEffectComplete] = useState(false);
+
+  // 検索時sFetchedSpots更新
+  const handleSpotsDataChange = (newSpotsData) => {
+    setFetchedSpots(newSpotsData)
+  };
 
   // 初回マウント時に実行
   useEffect(() => {
@@ -67,15 +74,24 @@ export default function Home() {
   }, []);
 
 
-  if (!isEffectComplete) return <div>現在地を取得しています。</div>;
+  if (!isEffectComplete) {
+    return (
+      <>
+        <Header onSpotsData={handleSpotsDataChange} origin={origin} />
+        <div>現在地を取得しています。</div>
+      </>
+    );
+  }
 
   return (
     <>
-      <div>
-        {fetchedSpots.map((spot) => (
+      <Header onSpotsData={handleSpotsDataChange} origin={origin} />
+      <div className="container">
+        {fetchedSpots.length ? fetchedSpots.map((spot) => (
           <BasicCard key={spot.id} {...spot} origin={origin} />
-        ))}
+        )) : <div>データが見つかりませんでした。</div> }
       </div>
+      <Footer />
     </>
   )
 }
