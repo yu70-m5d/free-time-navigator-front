@@ -85,7 +85,7 @@ export default function Home() {
   return (
     <>
       <div className="container">
-        <Header onSpotsData={handleSpotsDataChange} />
+        <Header onSpotsData={handleSpotsDataChange} origin={origin} />
         {fetchedSpots.length ? fetchedSpots.map((spot) => (
           <BasicCard key={spot.id} {...spot} origin={origin} />
         )) : <div>データが見つかりませんでした。</div> }

@@ -5,21 +5,22 @@ import { useForm } from "react-hook-form";
 
 export default function TimeForm(props) {
 
-  const { onSpotsData } = props;
+  const { onSpotsData, origin } = props;
   const { register, handleSubmit } = useForm();
   const onSubmit = (time) => console.log(time);
 
   const fetchData = async (time) => {
     try {
+      const params = { time: time.time, lat: origin.lat, lng: origin.lng }
       const response = await axios.get(`${process.env.NEXT_PUBLIC_FTN_API_INDEX}`, {
-        params: time
+        params: params
       });
-      console.log(time);
+      console.log(params);
       console.log(response.data);
       onSpotsData(response.data);
     } catch (error) {
       console.error('エラーが発生しました。', error);
-      console.log(time);
+      console.log(params);
     }
   };
 
