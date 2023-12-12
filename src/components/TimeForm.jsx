@@ -28,7 +28,7 @@ export default function TimeForm(props) {
     <div className='time-form' >
       <form onSubmit={handleSubmit(fetchData)}>
         <label htmlFor='time'>
-          空き時間
+          <span className="label">空き時間</span>
         </label>
         <input
           id="time"

@@ -20,10 +20,13 @@ export default function Header(props) {
   return (
     <>
       <div className="header">
-        <div className="logo">
+        <div className="logo" onClick={handleDrawerOpen}>
           {/* <a>Free Time Navigator</a> */}
-          <div>
-            <ExpandMoreIcon onClick={handleDrawerOpen} />
+          <div className='site-name'>
+            <p3>Free Time Navigator</p3>
+          </div>
+          <div className='menu-icon'>
+            <ExpandMoreIcon />
           </div>
         </div>
         <Drawer anchor='top' open={drawerOpened} onClose={handleDrawerClose}>
