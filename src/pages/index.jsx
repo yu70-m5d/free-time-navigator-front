@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import BasicCard from "../components/BasicCard";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 
 export default function Home() {
@@ -76,7 +77,7 @@ export default function Home() {
   if (!isEffectComplete) {
     return (
       <>
-        <Header />
+        <Header onSpotsData={handleSpotsDataChange} origin={origin} />
         <div>現在地を取得しています。</div>
       </>
     );
@@ -84,12 +85,13 @@ export default function Home() {
 
   return (
     <>
+      <Header onSpotsData={handleSpotsDataChange} origin={origin} />
       <div className="container">
-        <Header onSpotsData={handleSpotsDataChange} origin={origin} />
         {fetchedSpots.length ? fetchedSpots.map((spot) => (
           <BasicCard key={spot.id} {...spot} origin={origin} />
         )) : <div>データが見つかりませんでした。</div> }
       </div>
+      <Footer />
     </>
   )
 }

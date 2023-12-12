@@ -19,10 +19,10 @@ const bull = (
 
 export default function BasicCard(props) {
   const { id, name, address, latitude, longitude, rating, image, duration, origin, tags } = props;
-
   const router = useRouter()
   const queryParams = `origin=${encodeURIComponent(JSON.stringify(origin))}`;
-  const isContactPage = router.pathname === "/spots/[id]"
+  const isContactPage = router.pathname.includes("/spots/[id]");
+
 
   if (isContactPage) {
     const regex = /[^0-9]/g;
@@ -36,15 +36,16 @@ export default function BasicCard(props) {
     const min = stayTimeAry.reduce(aryMin);
     const ave = ( max + min ) / 2;
 
+
     return (
       <Card sx={{ width: 288 , display: 'flex', padding: '4px auto', margin: '4px auto'}}>
         <CardContent sx={{width: 266}}>
           <Typography variant="h5" component="div" sx={{fontSize: 16}}>
             {name}
             <br />
-            所要時間:{durationTime + ave}分
+            { durationTime ? `所要時間:${durationTime + ave}分` : "所要時間:Loading..."}
             <br />
-            移動時間:{duration}
+            { duration ? `移動時間:${duration}` : "移動時間:Loading..."}
             <br />
             { max === min ? `滞在時間:${ave}分` : `滞在時間:${min}分~${max}分` }
           </Typography>
@@ -76,11 +77,7 @@ export default function BasicCard(props) {
         </Typography>
       </CardContent>
       <CardActions sx={{width: 32}}>
-        <NextLink
-          // href={`spots/${id}`}
-          href={`spots/${id}?${queryParams}`}
-          passHref
-        >
+        <NextLink href={`spots/${id}?${queryParams}`} >
           <ArrowForwardIosSharpIcon />
         </NextLink>
       </CardActions>

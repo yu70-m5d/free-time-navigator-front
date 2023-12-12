@@ -23,7 +23,7 @@ export default function Header(props) {
         <div className="logo" onClick={handleDrawerOpen}>
           {/* <a>Free Time Navigator</a> */}
           <div className='site-name'>
-            <p3>Free Time Navigator</p3>
+            <span>Free Time Navigator</span>
           </div>
           <div className='menu-icon'>
             <ExpandMoreIcon />
