@@ -7,7 +7,7 @@ import TimeForm from './TimeForm';
 
 export default function Header(props) {
 
-  const { onSpotsData, origin } = props;
+  const { onSpotsData, onTimeChange, origin, tags } = props;
   const [drawerOpened, setDrawerOpened] = useState(false);
   const handleDrawerOpen = () => {
     setDrawerOpened(true);
@@ -32,7 +32,7 @@ export default function Header(props) {
         <Drawer anchor='top' open={drawerOpened} onClose={handleDrawerClose}>
           <DrawerMenu />
         </Drawer>
-        <TimeForm onSpotsData={onSpotsData} origin={origin} />
+        <TimeForm onSpotsData={onSpotsData} onTimeChange={onTimeChange} origin={origin} tags={tags} />
       </div>
     </>
   );
