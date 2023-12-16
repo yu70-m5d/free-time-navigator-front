@@ -26,6 +26,7 @@ export default function MultiSelectDropdown(props) {
     fetchTagsSpots(event.target.value);
   };
 
+
   useEffect(() => {
     const fetchTags = async () => {
       try {
@@ -43,16 +44,27 @@ export default function MultiSelectDropdown(props) {
 
 
   return (
-    <FormControl fullWidth >
-      <InputLabel>タグで絞り込む</InputLabel>
+    <FormControl fullWidth sx={{ marginBottom: 2, position: "relative" }} >
+      {selectedOptions.length === 0 && (
+        <InputLabel
+        sx={{
+          fontSize: 12,
+          transform: "translate(0, 8.0px)",
+          position: "absolute",
+          }}
+        >
+          タグで絞り込む
+        </InputLabel>
+      )}
       <Select
+        sx={{height: 32}}
         multiple
         value={selectedOptions}
         onChange={handleSelectChange}
         renderValue={(selected) => (
           <div>
             {selected.map((value) => (
-              <Chip key={value} label={value} />
+          <Chip sx={{height: 24, color: "#FFFFFF", backgroundColor: "#0B8CE9" }} key={value} label={value} />
             ))}
           </div>
         )}
