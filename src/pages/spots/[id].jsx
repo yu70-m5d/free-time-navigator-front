@@ -63,8 +63,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({params}) {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_FTN_API_INDEX}/${params.id}`);
-    // const res = await fetch("http://localhost:3000/spots/1?origin=%7B%22lat%22%3A35.5505823%2C%22lng%22%3A139.4455394%7D");
+    const res = await fetch(`${process.env.NEXT_PUBLIC_FTN_API_SPOTS}/${params.id}`);
     if (!res.ok) {
       throw new Error(`Failed to fetch data. Status: ${res.status}`);
     }
