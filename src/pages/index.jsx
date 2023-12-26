@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import BasicCard from "../components/BasicCard";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import MultiSelectDropdown from "@/components/MultiSelectDropdown";
+import axios from "axios";
 
 
 export default function Home() {
@@ -13,68 +15,69 @@ export default function Home() {
   });
 
   //// 取得したspots
-  const [fetchedSpots, setFetchedSpots] = useState([]);
-
-  //// useEffect完了の状態を管理
-  const [isEffectComplete, setIsEffectComplete] = useState(false);
+  const [spots, setSpots] = useState([]);
+  const [time, setTime] = useState("");
+  const [tags, setTags] = useState([]);
+  const [useEffectFinished, setUseEffectFinished] = useState(false);
 
   // 検索時sFetchedSpots更新
   const handleSpotsDataChange = (newSpotsData) => {
-    setFetchedSpots(newSpotsData)
+    setSpots(newSpotsData);
+  };
+
+  const handleTimeChange = (newTime) => {
+    setTime(newTime);
+    console.log(newTime);
+  };
+
+  const handleTagsChange = (newTags) => {
+    setTags(newTags);
+    console.log(newTags);
   };
 
   // 初回マウント時に実行
   useEffect(() => {
-    // Railsからspot情報を持ってくる
-    const sendOriginToRails = async (origin) => {
+
+    // RailsAPIに現在地を送信し、スポット情報を取得する
+    const getSpots = async (origin) => {
       try {
-        const queryParams = new URLSearchParams({ lat: origin.lat, lng: origin.lng });
-        const url = `${process.env.NEXT_PUBLIC_FTN_API_INDEX}?${queryParams}`;
-        const res = await fetch(url);
-        const spots = await res.json();
-
-        return spots
-
+        const getSpotsUrl = `${process.env.NEXT_PUBLIC_FTN_API_SPOTS}`
+        const responseSpotsData = await axios.get(getSpotsUrl, {
+          params: origin,
+        });
+        handleSpotsDataChange(responseSpotsData.data);
       } catch (error) {
-        console.log("error", error);
+        console.error("データが取得できませんでした:", error);
+      } finally {
+        setUseEffectFinished(true);
       }
     };
 
-    // スポット情報を取得する
-    const getSpots = async () => {
+    // 現在地を取得後、周辺スポット情報を取得する
+    const getOriginFetchData = async () => {
       try {
         const position = await new Promise((resolve, reject) => {
           navigator.geolocation.getCurrentPosition(resolve, reject);
         });
 
-        // 現在地を更新
-        setOrigin({
+        const originData = {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
-        })
+        }
 
-        // 現在地をRailsAPIに渡し、spotsを受け取る
-        const fetchedSpots = await sendOriginToRails({
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        });
-
-        // spots状態を更新
-        setFetchedSpots(fetchedSpots);
-
-        // useEffect状態を更新
-        setIsEffectComplete(true);
+        setOrigin(originData);
+        await getSpots(originData);
       } catch (error) {
-        console.error("error", error);
-        setIsEffectComplete(true);
+        console.error("現在地の取得に失敗:", error);
       }
     };
 
-    getSpots();
+    getOriginFetchData();
+
   }, []);
 
 
-  if (!isEffectComplete) {
+  if (!useEffectFinished) {
     return (
       <>
         <Header onSpotsData={handleSpotsDataChange} origin={origin} />
@@ -85,9 +88,10 @@ export default function Home() {
 
   return (
     <>
-      <Header onSpotsData={handleSpotsDataChange} origin={origin} />
+      <Header onSpotsData={handleSpotsDataChange} onTimeChange={handleTimeChange} origin={origin} tags={tags} />
+      <MultiSelectDropdown onSpotsData={handleSpotsDataChange} onTagsChange={handleTagsChange} origin={origin} time={time} />
       <div className="container">
-        {fetchedSpots.length ? fetchedSpots.map((spot) => (
+        {spots.length ? spots.map((spot) => (
           <BasicCard key={spot.id} {...spot} origin={origin} />
         )) : <div>データが見つかりませんでした。</div> }
       </div>

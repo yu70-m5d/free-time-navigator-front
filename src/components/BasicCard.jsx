@@ -23,7 +23,6 @@ export default function BasicCard(props) {
   const queryParams = `origin=${encodeURIComponent(JSON.stringify(origin))}`;
   const isContactPage = router.pathname.includes("/spots/[id]");
 
-
   if (isContactPage) {
     const regex = /[^0-9]/g;
     const result = duration ? duration.replace(regex, "") : "";
@@ -54,6 +53,8 @@ export default function BasicCard(props) {
           </Typography>
           <Typography variant="body2">
             {address}
+            <br />
+            {tags.map((tag) => (`/${tag.name}`))}
           </Typography>
         </CardContent>
       </Card>
@@ -71,9 +72,9 @@ export default function BasicCard(props) {
           {rating}
         </Typography>
         <Typography variant="body2">
-          well meaning and kindly.
+          {address}
           <br />
-          {'"a benevolent smile"'}
+          {tags.map((tag) => (`/${tag.name}`))}
         </Typography>
       </CardContent>
       <CardActions sx={{width: 32}}>
