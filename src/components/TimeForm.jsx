@@ -24,7 +24,7 @@ export default function TimeForm(props) {
 
 
   return (
-    <div className='time-form' >
+    <>
       <form onSubmit={handleSubmit(fetchData)}>
         <label htmlFor='time'>
           <span className="label">空き時間</span>
@@ -41,6 +41,6 @@ export default function TimeForm(props) {
           検索
         </button>
       </form>
-    </div>
+    </>
   )
 }
