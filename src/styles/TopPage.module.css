@@ -74,9 +74,3 @@
 .textColorGray {
   color: #383838;
 }
-
-.contentD {
-  grid-row: 4 / 5;
-  grid-column: 2 / 3;
-  background-color: yellow;
-}
