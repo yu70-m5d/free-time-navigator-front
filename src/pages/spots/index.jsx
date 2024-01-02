@@ -6,7 +6,7 @@ import MultiSelectDropdown from "@/components/MultiSelectDropdown";
 import axios from "axios";
 
 
-export default function Spots() {
+export default function Home() {
   // 状態管理
   //// 現在地
   const [origin, setOrigin] = useState({
