@@ -40,11 +40,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  color: white;
 }
 
 .label {
   font-size: 12px;
-  color: #FFFFFF;
 }
 
 .container {
