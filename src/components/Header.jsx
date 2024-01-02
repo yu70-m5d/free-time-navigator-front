@@ -32,7 +32,9 @@ export default function Header(props) {
         <Drawer anchor='top' open={drawerOpened} onClose={handleDrawerClose}>
           <DrawerMenu />
         </Drawer>
-        <TimeForm onSpotsData={onSpotsData} onTimeChange={onTimeChange} origin={origin} tags={tags} />
+        <div className='time-form'>
+          <TimeForm onSpotsData={onSpotsData} onTimeChange={onTimeChange} origin={origin} tags={tags} />
+        </div>
       </div>
     </>
   );
