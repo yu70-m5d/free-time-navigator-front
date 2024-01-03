@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { GoogleMap, MarkerF, useLoadScript } from "@react-google-maps/api";
 import Direction from "./Direction";
+import { useRecoilValue } from "recoil";
+import { locationState } from "@/state/atoms";
 
 
 export default function Map(props) {
 
-  const { latitude, longitude, origin, onDurationChange } = props;
+  const { latitude, longitude, onDurationChange } = props;
+  const origin = useRecoilValue(locationState);
 
   //目的地を取得する
   const destination = {
