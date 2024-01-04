@@ -1,7 +1,6 @@
 import { locationState } from "@/state/atoms";
-import { LocalGasStationRounded } from "@mui/icons-material";
 import { DirectionsRenderer, DirectionsService } from "@react-google-maps/api";
-import React, { useState, useCallback, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { useRecoilValue } from "recoil";
 
 export default function Direction( props ) {

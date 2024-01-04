@@ -2,7 +2,7 @@ import useFetchSpots from "@/hooks/useFetchSpots";
 import { selectedTagsState, tagsState } from "@/state/atoms";
 import { Chip, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 
 

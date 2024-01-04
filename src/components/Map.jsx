@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import { GoogleMap, MarkerF, useLoadScript } from "@react-google-maps/api";
 import Direction from "./Direction";
 import { useRecoilValue } from "recoil";
