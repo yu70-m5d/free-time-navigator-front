@@ -1,19 +1,28 @@
 import { useForm } from "react-hook-form";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { timeState } from "@/state/atoms";
 import useFetchSpots from "@/hooks/useFetchSpots";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 
 export default function TimeForm() {
 
-  const { register, handleSubmit } = useForm();
-  const setTime = useSetRecoilState(timeState);
+  const { register, handleSubmit, setValue } = useForm();
+  // const setTime = useSetRecoilState(timeState);
+  const [time, setTime] = useRecoilState(timeState);
   const { loading } = useFetchSpots();
+  const router = useRouter();
 
 
   const handleTime = (data) => {
     setTime(data.time);
+    router.push('/spots');
   }
+
+  useEffect(() => {
+    setValue("time",time);
+  }, [time, setValue]);
 
 
   return (
