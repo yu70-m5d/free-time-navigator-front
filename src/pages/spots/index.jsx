@@ -1,18 +1,18 @@
+import { useRecoilValue } from "recoil";
+import { spotsState } from "@/state/atoms";
+import useGetLocation from "@/hooks/useGetLocation";
+import useFetchSpots from "@/hooks/useFetchSpots";
 import BasicCard from "@/components/BasicCard";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MultiSelectDropdown from "@/components/MultiSelectDropdown";
-import useGetLocation from "@/hooks/useGetLocation";
-import { useRecoilValue } from "recoil";
-import { locationState, spotsState } from "@/state/atoms";
-import useFetchSpots from "@/hooks/useFetchSpots";
 
 
 export default function Home() {
 
-  const { location } = useGetLocation();
+  useGetLocation();
   const { loading } = useFetchSpots();
-  const origin = useRecoilValue(locationState);
+
   const spots = useRecoilValue(spotsState);
 
 
