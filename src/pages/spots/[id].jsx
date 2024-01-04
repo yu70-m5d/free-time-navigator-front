@@ -1,7 +1,7 @@
-import { useRouter } from "next/router";
 import React, { useState } from "react";
-import BasicCard from "../../components/BasicCard";
-import Map from "../../components/Map";
+import { useRouter } from "next/router";
+import BasicCard from "@/components/BasicCard";
+import Map from "@/components/Map";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
