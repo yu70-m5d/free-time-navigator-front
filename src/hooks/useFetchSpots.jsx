@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { locationState, selectedTagsState, spotsState } from "@/state/atoms";
+import { locationState, selectedTagsState, spotsState, timeState } from "@/state/atoms";
 
 export default function useFetchSpots() {
   // const [spots, setSpots] = useState([]);
@@ -10,7 +10,7 @@ export default function useFetchSpots() {
   const [loading, setLoading] = useState(true);
   const location = useRecoilValue(locationState);
   const selectedTags = useRecoilValue(selectedTagsState);
-  const time = [];
+  const time = useRecoilValue(timeState);
   const setSpots = useSetRecoilState(spotsState);
 
   const fetchSpots = async () => {
@@ -28,7 +28,7 @@ export default function useFetchSpots() {
 
   useEffect(() => {
     fetchSpots();
-  }, [location, setSpots, selectedTags]);
+  }, [location, setSpots, selectedTags, time]);
 
   useEffect(() => {
     if (!loading) {

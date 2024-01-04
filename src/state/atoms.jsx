@@ -22,3 +22,8 @@ export const selectedTagsState = atom({
   key: "selectedTagsState",
   default: [],
 });
+
+export const timeState = atom({
+  key: "timeState",
+  default: '',
+});
