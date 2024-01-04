@@ -1,31 +1,33 @@
-import { useState } from "react";
-import axios from "axios";
 import { useForm } from "react-hook-form";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { timeState } from "@/state/atoms";
+import useFetchSpots from "@/hooks/useFetchSpots";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 
-export default function TimeForm(props) {
+export default function TimeForm() {
 
-  const { onSpotsData, onTimeChange, origin, tags } = props;
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, setValue } = useForm();
+  // const setTime = useSetRecoilState(timeState);
+  const [time, setTime] = useRecoilState(timeState);
+  const { loading } = useFetchSpots();
+  const router = useRouter();
 
-  const fetchData = async (data) => {
-    try {
-      const params = { tags: tags, time: data.time, lat: origin.lat, lng: origin.lng }
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_FTN_API_SPOTS}`, {
-        params: params
-      });
-      console.log(params);
-      onSpotsData(response.data);
-      onTimeChange(data.time);
-    } catch (error) {
-      console.error('データの取得に失敗:', error);
-    }
-  };
+
+  const handleTime = (data) => {
+    setTime(data.time);
+    router.push('/spots');
+  }
+
+  useEffect(() => {
+    setValue("time",time);
+  }, [time, setValue]);
 
 
   return (
     <>
-      <form onSubmit={handleSubmit(fetchData)}>
+      <form onSubmit={handleSubmit(handleTime)}>
         <label htmlFor='time'>
           <span className="label">空き時間</span>
         </label>

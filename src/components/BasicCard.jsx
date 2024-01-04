@@ -1,13 +1,13 @@
-import * as React from 'react';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import NextLink from 'next/link';
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 import { useRouter } from 'next/router';
+import { useRecoilValue } from 'recoil';
+import { locationState } from '@/state/atoms';
 
 const bull = (
   <Box
@@ -18,7 +18,8 @@ const bull = (
 );
 
 export default function BasicCard(props) {
-  const { id, name, address, latitude, longitude, rating, image, duration, origin, tags } = props;
+  const { id, name, address, latitude, longitude, rating, image, duration, tags } = props;
+  const origin = useRecoilValue(locationState);
   const router = useRouter()
   const queryParams = `origin=${encodeURIComponent(JSON.stringify(origin))}`;
   const isContactPage = router.pathname.includes("/spots/[id]");

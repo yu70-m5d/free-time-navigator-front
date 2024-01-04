@@ -1,8 +1,31 @@
 import { Box, List, ListItem, ListItemButton, ListItemText } from "@mui/material";
+import { useRouter } from "next/router";
 
 
 export default function DrawerMenu() {
-  const menuList = ['お問い合わせ', '利用規約', 'プライバシーポリシー']
+  const router = useRouter();
+
+  const menuList = ['トップページ', 'お問い合わせ', '利用規約', 'プライバシーポリシー']
+
+  const handleMenuClick = (text) => {
+    // クリックされたメニューに応じて遷移
+    switch (text) {
+      case 'トップページ':
+        router.push('/');
+        break;
+      case 'お問い合わせ':
+        router.push('/#');
+        break;
+        case '利用規約':
+          router.push('https://www.kiyac.app/termsOfService/pIdEs0GXmPGjVT7UMnUa');
+          break;
+        case 'プライバシーポリシー':
+          router.push('https://www.kiyac.app/privacypolicy/VfYPLKTsPDuvjwh4AAMM');
+          break;
+      default:
+        break;
+    }
+  };
 
   return (
     <Box
@@ -13,7 +36,7 @@ export default function DrawerMenu() {
       <List>
         {menuList.map((text, index) => (
           <ListItem key={text} disablePadding>
-            <ListItemButton>
+            <ListItemButton onClick={() => handleMenuClick(text)}>
               <ListItemText primary={text} />
             </ListItemButton>
           </ListItem>

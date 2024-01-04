@@ -1,7 +1,8 @@
 import MapIcon from '@mui/icons-material/Map';
 import Header from "@/components/Header"
-import styles from "../styles/TopPage.module.css"
 import TimeForm from '@/components/TimeForm';
+import styles from "../styles/TopPage.module.css"
+
 
 export default function Home() {
 

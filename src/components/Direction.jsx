@@ -1,9 +1,13 @@
+import { locationState } from "@/state/atoms";
 import { DirectionsRenderer, DirectionsService } from "@react-google-maps/api";
-import React, { useState, useCallback, useEffect } from "react";
+import { useState, useCallback } from "react";
+import { useRecoilValue } from "recoil";
 
 export default function Direction( props ) {
   // 出発点=origin、目的地=destination
-  const { origin, destination, onDurationChange } = props;
+  const { destination, onDurationChange } = props;
+
+  const origin = useRecoilValue(locationState);
 
   // DirectionsServiceへのAPIコールで得られたルート情報を保存する
   const [currentDirection, setCurrentDirection] = useState(null);
