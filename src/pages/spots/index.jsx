@@ -33,6 +33,10 @@ export default function Home() {
     console.log(newTags);
   };
 
+  console.log(origin);
+  console.log(spots);
+  console.log(loading);
+
 
   if (!loading) {
     return (
@@ -47,7 +51,7 @@ export default function Home() {
   return (
     <>
       {/* <Header onSpotsData={handleSpotsDataChange} onTimeChange={handleTimeChange} origin={origin} tags={tags} /> */}
-      {/* <MultiSelectDropdown onSpotsData={handleSpotsDataChange} onTagsChange={handleTagsChange} origin={origin} time={time} /> */}
+      <MultiSelectDropdown />
       <div className="container">
         {spots.length ? spots.map((spot) => (
           <BasicCard key={spot.id} {...spot} />

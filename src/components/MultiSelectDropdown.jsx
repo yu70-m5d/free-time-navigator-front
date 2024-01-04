@@ -1,29 +1,21 @@
+import useFetchSpots from "@/hooks/useFetchSpots";
+import { selectedTagsState, tagsState } from "@/state/atoms";
 import { Chip, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
 
 
 export default function MultiSelectDropdown(props) {
-  const {onSpotsData, onTagsChange, origin, time} = props;
-  const [tags, setTags] = useState([]);
-  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [tags, setTags] = useRecoilState(tagsState);
+  const [selectedTags, setSelectedTags] = useRecoilState(selectedTagsState);
 
+  const { loading } = useFetchSpots();
 
-  const fetchTagsSpots = async (tags) => {
-    const params = { tags: tags, time: time, lat: origin.lat, lng: origin.lng }
-    const tagSearchUrl = `${process.env.NEXT_PUBLIC_FTN_API_SPOTS}`;
-    const tagResponse = await axios.get(tagSearchUrl, {
-      params: params
-    });
-    console.log(tags);
-    onSpotsData(tagResponse.data);
-    onTagsChange(tags);
-  };
 
   const handleSelectChange = (event) => {
-    setSelectedOptions(event.target.value);
+    setSelectedTags(event.target.value);
     console.log(event.target.value);
-    fetchTagsSpots(event.target.value);
   };
 
 
@@ -45,7 +37,7 @@ export default function MultiSelectDropdown(props) {
 
   return (
     <FormControl fullWidth sx={{ marginBottom: 2, position: "relative" }} >
-      {selectedOptions.length === 0 && (
+      {selectedTags.length === 0 && (
         <InputLabel
         sx={{
           fontSize: 12,
@@ -59,7 +51,7 @@ export default function MultiSelectDropdown(props) {
       <Select
         sx={{height: 32}}
         multiple
-        value={selectedOptions}
+        value={selectedTags}
         onChange={handleSelectChange}
         renderValue={(selected) => (
           <div>
