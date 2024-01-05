@@ -14,7 +14,7 @@ export default function DrawerMenu() {
         router.push('/');
         break;
       case 'お問い合わせ':
-        router.push('/#');
+        router.push('/contact/input');
         break;
         case '利用規約':
           router.push('https://www.kiyac.app/termsOfService/pIdEs0GXmPGjVT7UMnUa');

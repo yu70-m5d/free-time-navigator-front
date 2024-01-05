@@ -8,7 +8,7 @@ import Footer from "@/components/Footer";
 import MultiSelectDropdown from "@/components/MultiSelectDropdown";
 
 
-export default function Home() {
+export default function Page() {
 
   useGetLocation();
   const { loading } = useFetchSpots();
