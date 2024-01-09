@@ -4,10 +4,12 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import NextLink from 'next/link';
+import StarIcon from '@mui/icons-material/Star';
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 import { useRouter } from 'next/router';
 import { useRecoilValue } from 'recoil';
 import { locationState } from '@/state/atoms';
+import styles from '@/styles/BasicCard.module.css';
 
 const bull = (
   <Box
@@ -23,6 +25,11 @@ export default function BasicCard(props) {
   const router = useRouter()
   const queryParams = `origin=${encodeURIComponent(JSON.stringify(origin))}`;
   const isContactPage = router.pathname.includes("/spots/[id]");
+
+
+  const textContainerStyles = {
+    paddingLeft: 2,  // テキストコンテナと画像の間隔
+  };
 
   if (isContactPage) {
     const regex = /[^0-9]/g;
@@ -40,6 +47,7 @@ export default function BasicCard(props) {
     return (
       <Card sx={{ width: 288 , display: 'flex', padding: '4px auto', margin: '4px auto'}}>
         <CardContent sx={{width: 266}}>
+          <img src={image} />
           <Typography variant="h5" component="div" sx={{fontSize: 16}}>
             {name}
             <br />
@@ -64,25 +72,34 @@ export default function BasicCard(props) {
 
 
   return (
-    <Card sx={{ width: 288 , display: 'flex', padding: '4px auto', margin: '4px auto'}}>
-      <CardContent sx={{width: 266}}>
-        <Typography variant="h5" component="div" sx={{fontSize: 16}}>
-          {name}
-        </Typography>
-        <Typography sx={{ mb: 1.5, fontSize: 14 }} color="text.secondary">
-          {rating}
-        </Typography>
-        <Typography variant="body2">
-          {address}
-          <br />
-          {tags.map((tag) => (`/${tag.name}`))}
-        </Typography>
-      </CardContent>
-      <CardActions sx={{width: 32}}>
-        <NextLink href={`spots/${id}?${queryParams}`} >
-          <ArrowForwardIosSharpIcon />
-        </NextLink>
-      </CardActions>
-    </Card>
+      <Card className={styles.container}>
+        <CardContent component="div" className={styles.item1}>
+          <Typography variant="h5" sx={{fontSize: 16}}>
+            {name}
+          </Typography>
+        </CardContent>
+        <CardContent component="div" className={styles.item2}>
+          <img src={image} width={120} height={120} />
+        </CardContent>
+        <CardContent component="div" className={styles.item3}>
+          <CardContent sx={{display: 'flex', padding: '0px'}}>
+            <StarIcon sx={{height: '20px', width: '20px'}} />
+            <Typography sx={{ fontSize: 14 }} color="text.secondary">
+              {rating}
+            </Typography>
+          </CardContent>
+          <Typography sx={{ fontSize: 14 }}>
+            {tags.map((tag) => (`滞在時間 約${tag.stay_time}分`))}
+          </Typography>
+          <Typography variant='body2' sx={{ fontSiz: 12 }}>
+            {tags.map((tag) => (`/${tag.name}`))}
+          </Typography>
+        </CardContent>
+        <CardActions className={styles.item4}>
+          <NextLink href={`spots/${id}?${queryParams}`} >
+            <ArrowForwardIosSharpIcon />
+          </NextLink>
+        </CardActions>
+      </Card>
   );
 }
