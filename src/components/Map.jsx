@@ -3,6 +3,7 @@ import Direction from "./Direction";
 import { useRecoilValue } from "recoil";
 import { locationState } from "@/state/atoms";
 
+const libraries = ["places"];
 
 export default function Map(props) {
 
@@ -26,8 +27,9 @@ export default function Map(props) {
   const route = { origin: origin, destination: destination };
 
 
-  const { isLoaded } = useLoadScript({
+  const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
+    libraries,
   });
 
   if (!isLoaded) return <div>Loading...</div>;
