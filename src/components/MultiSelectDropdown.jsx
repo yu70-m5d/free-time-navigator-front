@@ -36,7 +36,7 @@ export default function MultiSelectDropdown(props) {
 
 
   return (
-    <FormControl fullWidth sx={{ marginBottom: 2, position: "relative" }} >
+    <FormControl fullWidth sx={{position: "sticky", top: 52, backgroundColor: "#FFFFFF" }} >
       {selectedTags.length === 0 && (
         <InputLabel
         sx={{
