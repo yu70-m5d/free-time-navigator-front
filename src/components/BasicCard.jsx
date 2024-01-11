@@ -55,9 +55,9 @@ export default function BasicCard(props) {
 						<p className={styles.timeText}>滞在時間:{ max === min ? `約${ave}分` : `約${min}分~${max}分` }</p>
 					</div>
 					<div>
-          {tags.map((tag, index) => (
+          {tags.map((tag) => (
               <Chip
-                key={index}
+                key={tag.id}
                 sx={{
                       height: 24,
                       color: "#FFFFFF",
@@ -96,9 +96,9 @@ export default function BasicCard(props) {
             { max === min ? `約${ave}分` : `約${min}分~${max}分` }</p>
           </div>
           <div>
-            {tags.map((tag, index) => (
+            {tags.map((tag) => (
               <Chip
-                key={index}
+                key={tag.id}
                 sx={{
                       height: 24,
                       color: "#FFFFFF",
