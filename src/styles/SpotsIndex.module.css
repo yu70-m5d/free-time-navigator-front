@@ -1,13 +1,17 @@
 .container {
   display: grid;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   margin-top: 8px;
   grid-template-columns: 1fr 320px 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
   gap: 8px;
 }
 
 .item1 {
   grid-column: 2;
+}
+
+.push {
+  grid-column: 2;
+  height: 48px;
 }
