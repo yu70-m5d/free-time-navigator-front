@@ -43,7 +43,7 @@ export default function BasicCard(props) {
 					<p className={styles.nameText}>{name}</p>
 				</div>
 				<div className={styles.item2Show}>
-					<img src={image} width={100} height={100} alt='施設画像' />
+					<img src={image} width={100} height={100} alt={`施設画像: ${name}`} />
 				</div>
 				<div className={styles.item3Show}>
 					<div className={styles.rate}>
@@ -55,16 +55,18 @@ export default function BasicCard(props) {
 						<p className={styles.timeText}>滞在時間:{ max === min ? `約${ave}分` : `約${min}分~${max}分` }</p>
 					</div>
 					<div>
-						{tags.map((tag) => (
-              <Chip sx={{
-                          height: 24,
-                          color: "#FFFFFF",
-                          backgroundColor: "#757575",
-                          border: "solid",
-                          borderColor: "#383838",
-                          borderWidth: "1px"
-                        }}
-                    label={tag.name} />
+          {tags.map((tag, index) => (
+              <Chip
+                key={index}
+                sx={{
+                      height: 24,
+                      color: "#FFFFFF",
+                      backgroundColor: "#757575",
+                      border: "solid",
+                      borderColor: "#383838",
+                      borderWidth: "1px"
+                    }}
+                label={tag.name} />
             ))}
 					</div>
 				</div>
@@ -82,7 +84,7 @@ export default function BasicCard(props) {
           <p className={styles.nameText}>{name}</p>
         </div>
         <div className={styles.item2Index}>
-          <img src={image} width={120} height={120} alt='施設画像' />
+          <img src={image} width={120} height={120} alt={`施設画像: ${name}`} />
         </div>
         <div className={styles.item3Index}>
           <div className={styles.rate}>
@@ -94,16 +96,18 @@ export default function BasicCard(props) {
             { max === min ? `約${ave}分` : `約${min}分~${max}分` }</p>
           </div>
           <div>
-            {tags.map((tag) => (
-              <Chip sx={{
-                          height: 24,
-                          color: "#FFFFFF",
-                          backgroundColor: "#757575",
-                          border: "solid",
-                          borderColor: "#383838",
-                          borderWidth: "1px"
-                        }}
-                    label={tag.name} />
+            {tags.map((tag, index) => (
+              <Chip
+                key={index}
+                sx={{
+                      height: 24,
+                      color: "#FFFFFF",
+                      backgroundColor: "#757575",
+                      border: "solid",
+                      borderColor: "#383838",
+                      borderWidth: "1px"
+                    }}
+                label={tag.name} />
             ))}
           </div>
         </div>
