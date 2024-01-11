@@ -1,15 +1,13 @@
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-import NextLink from 'next/link';
 import StarIcon from '@mui/icons-material/Star';
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 import { useRouter } from 'next/router';
 import { useRecoilValue } from 'recoil';
 import { locationState } from '@/state/atoms';
 import styles from '@/styles/BasicCard.module.css';
+import { Chip } from '@mui/material';
+import Link from 'next/link';
 
 const bull = (
   <Box
@@ -26,80 +24,94 @@ export default function BasicCard(props) {
   const queryParams = `origin=${encodeURIComponent(JSON.stringify(origin))}`;
   const isContactPage = router.pathname.includes("/spots/[id]");
 
+  const aryMax = (a, b) => {return Math.max(a, b);}
+  const aryMin = (a, b) => {return Math.min(a, b);}
+  const stayTimeAry = tags.map((tag) => tag.stay_time);
+  const max = stayTimeAry.length > 0 ? stayTimeAry.reduce(aryMax) : 0;
+  const min = stayTimeAry.length > 0 ? stayTimeAry.reduce(aryMin) : 0;
+  const ave = stayTimeAry.length > 0 ? (max + min) / 2 : 0;
 
-  const textContainerStyles = {
-    paddingLeft: 2,  // テキストコンテナと画像の間隔
-  };
 
   if (isContactPage) {
     const regex = /[^0-9]/g;
     const result = duration ? duration.replace(regex, "") : "";
     const durationTime = parseInt(result);
 
-    const aryMax = (a, b) => {return Math.max(a, b);}
-    const aryMin = (a, b) => {return Math.min(a, b);}
-    const stayTimeAry = tags.map((tag) => tag.stay_time);
-    const max = stayTimeAry.reduce(aryMax);
-    const min = stayTimeAry.reduce(aryMin);
-    const ave = ( max + min ) / 2;
-
-
     return (
-      <Card sx={{ width: 288 , display: 'flex', padding: '4px auto', margin: '4px auto'}}>
-        <CardContent sx={{width: 266}}>
-          <img src={image} />
-          <Typography variant="h5" component="div" sx={{fontSize: 16}}>
-            {name}
-            <br />
-            { durationTime ? `所要時間:${durationTime + ave}分` : "所要時間:Loading..."}
-            <br />
-            { duration ? `移動時間:${duration}` : "移動時間:Loading..."}
-            <br />
-            { max === min ? `滞在時間:${ave}分` : `滞在時間:${min}分~${max}分` }
-          </Typography>
-          <Typography sx={{ mb: 1.5, fontSize: 14 }} color="text.secondary">
-            {rating}
-          </Typography>
-          <Typography variant="body2">
-            {address}
-            <br />
-            {tags.map((tag) => (`/${tag.name}`))}
-          </Typography>
-        </CardContent>
+      <Card className={styles.containerShow}>
+				<div className={styles.item1Show}>
+					<p className={styles.nameText}>{name}</p>
+				</div>
+				<div className={styles.item2Show}>
+					<img src={image} width={100} height={100} />
+				</div>
+				<div className={styles.item3Show}>
+					<div className={styles.rate}>
+						<StarIcon sx={{height: '20px', width: '20px'}} />
+						<p className={styles.rateText}>{rating}</p>
+					</div>
+					<div>
+						<p className={styles.timeText}>移動時間:{`約${durationTime}分`}</p>
+						<p className={styles.timeText}>滞在時間:{ max === min ? `約${ave}分` : `約${min}分~${max}分` }</p>
+					</div>
+					<div>
+						{tags.map((tag) => (
+              <Chip sx={{
+                          height: 24,
+                          color: "#FFFFFF",
+                          backgroundColor: "#757575",
+                          border: "solid",
+                          borderColor: "#383838",
+                          borderWidth: "1px"
+                        }}
+                    label={tag.name} />
+            ))}
+					</div>
+				</div>
+				<div className={styles.item4Show}>
+					<p className={styles.addressText}>{address}</p>
+				</div>
       </Card>
     );
   }
 
 
   return (
-      <Card className={styles.container}>
-        <CardContent component="div" className={styles.item1}>
-          <Typography variant="h5" sx={{fontSize: 16}}>
-            {name}
-          </Typography>
-        </CardContent>
-        <CardContent component="div" className={styles.item2}>
+        <Card className={styles.containerIndex}>
+        <div className={styles.item1Index}>
+          <p className={styles.nameText}>{name}</p>
+        </div>
+        <div className={styles.item2Index}>
           <img src={image} width={120} height={120} />
-        </CardContent>
-        <CardContent component="div" className={styles.item3}>
-          <CardContent sx={{display: 'flex', padding: '0px'}}>
+        </div>
+        <div className={styles.item3Index}>
+          <div className={styles.rate}>
             <StarIcon sx={{height: '20px', width: '20px'}} />
-            <Typography sx={{ fontSize: 14 }} color="text.secondary">
-              {rating}
-            </Typography>
-          </CardContent>
-          <Typography sx={{ fontSize: 14 }}>
-            {tags.map((tag) => (`滞在時間 約${tag.stay_time}分`))}
-          </Typography>
-          <Typography variant='body2' sx={{ fontSiz: 12 }}>
-            {tags.map((tag) => (`/${tag.name}`))}
-          </Typography>
-        </CardContent>
-        <CardActions className={styles.item4}>
-          <NextLink href={`spots/${id}?${queryParams}`} >
+            <p className={styles.rateText}>{ rating == undefined ? '-' : rating }</p>
+          </div>
+          <div>
+            <p className={styles.timeText}>滞在時間:<br />
+            { max === min ? `約${ave}分` : `約${min}分~${max}分` }</p>
+          </div>
+          <div>
+            {tags.map((tag) => (
+              <Chip sx={{
+                          height: 24,
+                          color: "#FFFFFF",
+                          backgroundColor: "#757575",
+                          border: "solid",
+                          borderColor: "#383838",
+                          borderWidth: "1px"
+                        }}
+                    label={tag.name} />
+            ))}
+          </div>
+        </div>
+        <div className={styles.item4Index}>
+          <Link href={`spots/${id}?${queryParams}`}>
             <ArrowForwardIosSharpIcon />
-          </NextLink>
-        </CardActions>
+          </Link>
+        </div>
       </Card>
   );
 }
