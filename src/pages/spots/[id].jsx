@@ -4,6 +4,7 @@ import BasicCard from "@/components/BasicCard";
 import Map from "@/components/Map";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import styles from "@/styles/SpotShow.module.css"
 
 
 export async function getStaticPaths() {
@@ -78,10 +79,12 @@ export default function Spot( {spot} ) {
   return (
     <>
       <Header origin={origin} />
-      <div>
-        <BasicCard {...spot} duration={duration} />
-        <Map {...spot} origin={parsedOrigin} onDurationChange={handleDurationChange} />
+      <div className={styles.container}>
+        <div className={styles.item1}>
+          <BasicCard {...spot} duration={duration} />
+        </div>
       </div>
+      <Map {...spot} origin={parsedOrigin} onDurationChange={handleDurationChange} />
       <Footer />
     </>
   );
