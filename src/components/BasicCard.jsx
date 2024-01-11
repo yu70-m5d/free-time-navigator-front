@@ -43,7 +43,13 @@ export default function BasicCard(props) {
 					<p className={styles.nameText}>{name}</p>
 				</div>
 				<div className={styles.item2Show}>
-					<img src={image} width={100} height={100} alt={`施設画像: ${name}`} />
+        { !!image ? (
+            <img src={image} width={120} height={120} alt={`施設画像: ${name}`} />
+          ) : (
+            <div className={styles.noImageBox}>
+              <p>No Image</p>
+            </div>
+          ) }
 				</div>
 				<div className={styles.item3Show}>
 					<div className={styles.rate}>
@@ -84,7 +90,13 @@ export default function BasicCard(props) {
           <p className={styles.nameText}>{name}</p>
         </div>
         <div className={styles.item2Index}>
-          <img src={image} width={120} height={120} alt={`施設画像: ${name}`} />
+          { !!image ? (
+            <img src={image} width={120} height={120} alt={`施設画像: ${name}`} />
+          ) : (
+            <div className={styles.noImageBox}>
+              <p>No Image</p>
+            </div>
+          ) }
         </div>
         <div className={styles.item3Index}>
           <div className={styles.rate}>

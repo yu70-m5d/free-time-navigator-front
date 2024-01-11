@@ -46,6 +46,16 @@
   align-items: center;
 }
 
+.noImageBox {
+  display: flex;
+  height: 120px;
+  width: 120px;
+  border: solid;
+  border-width: 1px;
+  justify-content: center;
+  align-items: center;
+}
+
 .item3Index {
   grid-column: 2/4;
   grid-row: 2;

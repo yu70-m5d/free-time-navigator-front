@@ -9,7 +9,7 @@ import styles from "@/styles/SpotShow.module.css"
 
 export async function getStaticPaths() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_FTN_API_INDEX}`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_FTN_API_SPOTS}`);
     if(!res.ok) {
       throw new Error(`Failed to fetch data. Status: ${res.status}`);
     }
@@ -17,7 +17,7 @@ export async function getStaticPaths() {
     const spots = await res.json();
     console.log(spots);
 
-    const paths = spots.map((spot, index) => ({
+    const paths = spots.map((spot) => ({
       params: { id: spot.id.toString() },
     }));
 
@@ -51,7 +51,7 @@ export async function getStaticProps({params}) {
       revalidate: false,
     };
   } catch (error) {
-    console.error("Error in getStaticProps:", error);
+    console.error(`Error in getStaticProps for spot ID ${params.id}:`, error);
     return {
       props: {},
       revalidate: false,
