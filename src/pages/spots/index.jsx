@@ -36,6 +36,7 @@ export default function Page() {
             <BasicCard key={spot.id} {...spot} />
           </div>
         )) : <div>データが見つかりませんでした。</div> }
+        <div className={styles.push}></div>
       </div>
       <Footer />
     </>
