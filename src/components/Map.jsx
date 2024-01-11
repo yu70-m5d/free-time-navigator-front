@@ -1,9 +1,10 @@
-import { GoogleMap, MarkerF, useLoadScript } from "@react-google-maps/api";
+import { GoogleMap, MarkerF, useJsApiLoader, useLoadScript } from "@react-google-maps/api";
 import Direction from "./Direction";
 import { useRecoilValue } from "recoil";
 import { locationState } from "@/state/atoms";
+import { useCallback, useState } from "react";
 
-const libraries = ["places"];
+// const libraries = ["places"];
 
 export default function Map(props) {
 
@@ -22,29 +23,41 @@ export default function Map(props) {
     height: "86vh",
   };
 
-  const zoom = 13;
+  const zoom = 100;
 
   const route = { origin: origin, destination: destination };
 
-
-  const { isLoaded, loadError } = useLoadScript({
+  const { isLoaded } = useJsApiLoader({
+    id: 'google-map-script',
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
-    libraries,
+    language: 'ja'
   });
 
-  if (!isLoaded) return <div>Loading...</div>;
+  const [map, setMap] = useState(null);
+  const onLoad = useCallback(function callback(map) {
+    const bounds = new window.google.maps.LatLngBounds(origin);
+    map.fitBounds(bounds);
 
-  return (
-    <>
-      <GoogleMap
-        mapContainerStyle={containerStyle}
-        center={origin}
-        zoom={zoom}
-      >
-        <MarkerF position={origin} label={"現在地"} />
+    setMap(map)
+  }, []);
+
+  const onUnmount = useCallback(function callback(map) {
+    setMap(null)
+  }, []);
+
+
+  return isLoaded ? (
+    <GoogleMap
+      mapContainerStyle={containerStyle}
+      center={origin}
+      zoom={zoom}
+      onLoad={onLoad}
+      onUnmount={onUnmount}
+    >
+      <>
         <Direction {...route} onDurationChange={onDurationChange} />
-      </GoogleMap>
-    </>
-  )
+      </>
+    </GoogleMap>
+    ) : <></>
 }
 
