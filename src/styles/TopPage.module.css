@@ -2,9 +2,10 @@
   display: grid;
   width: 100%;
   height: 100vh;
-  margin-top: 8px;
+  margin-top: 4px;
+  margin-bottom: 50px;
   grid-template-columns: 1fr 320px 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: auto auto auto;
 }
 
 .item1 {
@@ -12,17 +13,26 @@
   grid-column: 2 / 3;
   border-left: 1px solid #383838;
   border-right: 1px solid #383838;
+  margin: 0px;
 }
 
 .headLineSiteName {
   font-size: 30px;
-  margin: 16px;
+  margin: 0px;
+  padding: 8px;
   text-align: center;
 }
 
 .welcome {
   text-align: center;
-  margin: 16px;
+  margin: 0px;
+  padding: 8px;
+}
+
+.headLineText {
+  text-align: center;
+  margin: 0px;
+  padding: 8px;
 }
 
 .text {
@@ -40,18 +50,25 @@
 .contentHead {
   display: flex;
   align-items: center;
+  justify-content: center;
+  padding: 2px;
+}
+
+.spotIconBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .headLineSearchSpots {
   height: 56px;
   text-align: center;
-  margin: 16px 8px;
+  margin: 0px;
+  padding: 16px 4px;
 }
 
 .icon {
-  width: 56px;
-  height: 56px;
-  margin: 16px 8px;
+  padding: 16px 4px;
 }
 
 .item3 {
@@ -59,6 +76,12 @@
   grid-column: 2 / 3;
   border-left: 1px solid #383838;
   border-right: 1px solid #383838;
+}
+
+.headLineLetsUse {
+  text-align: center;
+  margin: 0px;
+  padding: 8px
 }
 
 .headLine {
@@ -69,8 +92,28 @@
 
 .textCenter {
   text-align: center;
+  margin: 0px;
+  padding: 8px;
 }
 
 .textColorGray {
   color: #383838;
+}
+
+.push {
+  height: 48px;
+}
+
+.timeFormBox {
+  height: 80px;
+  text-align: center;
+}
+
+.timeForm {
+  width: 120px;
+  margin: 0 auto;
+}
+
+.timeFormText {
+  margin: 0px;
 }

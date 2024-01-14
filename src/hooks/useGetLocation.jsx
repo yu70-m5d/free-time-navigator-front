@@ -6,6 +6,7 @@ export default function useGetLocation() {
   const [error, setError] = useState(null);
   const [location, setLocation] = useRecoilState(locationState);
 
+
   const getGeolocation = async () => {
     try {
       const position = await new Promise((resolve, reject) => {
@@ -17,7 +18,9 @@ export default function useGetLocation() {
         lng: position.coords.longitude,
       };
 
-      setLocation(newLocation);
+      if (newLocation.lat !== location.lat || newLocation.lng !== location.lng) {
+        setLocation(newLocation);
+      }
     } catch (error) {
       setError(error);
     }

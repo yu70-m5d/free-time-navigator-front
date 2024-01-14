@@ -4,7 +4,6 @@ import { useRecoilValue } from "recoil";
 import { locationState } from "@/state/atoms";
 import { useCallback, useState } from "react";
 
-// const libraries = ["places"];
 
 export default function Map(props) {
 

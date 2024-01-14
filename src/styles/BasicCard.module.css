@@ -1,14 +1,14 @@
 .containerIndex {
   display: grid;
   grid-template-columns: 1fr 2fr 2fr 1fr;
-  grid-template-rows: auto auto;
+  grid-template-rows: auto auto auto;
   gap: 2;
 }
 
 .containerShow {
   display: grid;
   grid-template-columns: 1fr 2fr 2fr;
-  grid-template-rows: 0.5fr 2fr auto;
+  grid-template-rows: 0.5fr 2fr auto auto;
   gap: 2;
 }
 
@@ -35,14 +35,19 @@
 .item2Index {
   grid-column: 1;
   grid-row: 2;
+  display: flex;
+  align-items: center;
   padding: 8px;
+  padding-bottom: 4px;
   justify-self: center;
 }
 
 .item2Show {
   grid-column: 1;
   grid-row: 2/3;
-  padding: 8px;
+  display: flex;
+  align-items: center;
+  padding: 8px 4px;
   align-items: center;
 }
 
@@ -50,22 +55,22 @@
   display: flex;
   height: 120px;
   width: 120px;
-  border: solid;
-  border-width: 1px;
   justify-content: center;
   align-items: center;
+  background-color: #757575;
 }
 
 .item3Index {
   grid-column: 2/4;
   grid-row: 2;
   padding: 8px;
+  padding-bottom: 4px;
 }
 
 .item3Show {
   grid-column: 2/4;
   grid-row: 2;
-  padding: 8px;
+  padding: 8px 4px;
   align-items: start;
   justify-content: center;
   width: auto;
@@ -88,9 +93,14 @@
   /* font-size: 14px; */
 }
 
+.requiredTime {
+  margin: 0px;
+  font-weight: bold;
+}
+
 .item4Index {
   grid-column: 4;
-  grid-row: 1/3;
+  grid-row: 1/4;
   align-self: center;
   justify-self: center;
 }
@@ -105,4 +115,18 @@
 
 .addressText {
   margin: 0px;
+}
+
+.item5Index {
+  grid-column: 1/5;
+  grid-row: 3;
+  padding: 0px 4px;
+  padding-bottom: 4px;
+}
+
+.item5Show {
+  grid-column: 1/4;
+  grid-row: 4;
+  padding: 0px 4px;
+  padding-bottom: 4px;
 }
