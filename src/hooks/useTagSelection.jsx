@@ -7,7 +7,6 @@ export default function useTagSelection() {
 
   const handleSelectedChange = (selected) => {
     setSelectedTags(selected);
-    console.log(selected);
   };
 
   return { selectedTags, handleSelectedChange };

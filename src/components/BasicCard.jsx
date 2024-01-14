@@ -9,7 +9,7 @@ import styles from '@/styles/BasicCard.module.css';
 import { Chip } from '@mui/material';
 import Link from 'next/link';
 import useTagSelection from '@/hooks/useTagSelection';
-import { translateToJapanese, translateToEnglish } from '@/utils/translationUtils';
+import { translateToJapanese } from '@/utils/translationUtils';
 
 const bull = (
   <Box

@@ -1,10 +1,10 @@
 import useTagSelection from "@/hooks/useTagSelection";
-import { selectedTagsState, tagsState } from "@/state/atoms";
+import { tagsState } from "@/state/atoms";
 import { Chip, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import axios from "axios";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
-import { translateToJapanese, translateToEnglish } from '@/utils/translationUtils';
+import { translateToJapanese } from '@/utils/translationUtils';
 
 
 export default function MultiSelectDropdown() {
