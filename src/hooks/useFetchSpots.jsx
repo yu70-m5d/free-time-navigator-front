@@ -4,14 +4,12 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { locationState, selectedTagsState, spotsState, timeState } from "@/state/atoms";
 
 export default function useFetchSpots() {
-  // const [spots, setSpots] = useState([]);
-  // const tags = [];
-  // const [time]
   const [loading, setLoading] = useState(true);
   const location = useRecoilValue(locationState);
   const selectedTags = useRecoilValue(selectedTagsState);
   const time = useRecoilValue(timeState);
   const setSpots = useSetRecoilState(spotsState);
+
 
   const fetchSpots = async () => {
     try {
@@ -23,18 +21,17 @@ export default function useFetchSpots() {
       setSpots(response.data);
     } catch (error) {
       console.error("データが取得できませんでした:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchSpots();
-  }, [location, setSpots, selectedTags, time]);
-
-  useEffect(() => {
-    if (!loading) {
-      setLoading(false);
+    if (location.lat !== 0 || location.lng !== 0) {
+      fetchSpots();
     }
-  }, [loading]);
+  }, [ location, setSpots, selectedTags, time]);
+
 
   return { loading, fetchSpots };
 }

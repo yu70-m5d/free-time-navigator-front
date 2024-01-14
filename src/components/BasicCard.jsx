@@ -18,7 +18,7 @@ const bull = (
 );
 
 export default function BasicCard(props) {
-  const { id, name, address, latitude, longitude, rating, image, duration, tags } = props;
+  const { id, name, address, rating, image, duration, tags } = props;
   const origin = useRecoilValue(locationState);
   const router = useRouter()
   const queryParams = `origin=${encodeURIComponent(JSON.stringify(origin))}`;
@@ -36,6 +36,7 @@ export default function BasicCard(props) {
     const regex = /[^0-9]/g;
     const result = duration ? duration.replace(regex, "") : "";
     const durationTime = parseInt(result);
+    console.log(durationTime);
 
     return (
       <Card className={styles.containerShow}>
@@ -57,10 +58,15 @@ export default function BasicCard(props) {
 						<p className={styles.rateText}>{rating}</p>
 					</div>
 					<div>
+            <p className={styles.requiredTime}>所要時間:{`約${durationTime + ave}分`}</p>
 						<p className={styles.timeText}>移動時間:{`約${durationTime}分`}</p>
-						<p className={styles.timeText}>滞在時間:{ max === min ? `約${ave}分` : `約${min}分~${max}分` }</p>
+						<p className={styles.timeText}>滞在時間:{ max === min ? `約${ave}分` : `約${min}~${max}分` }</p>
 					</div>
-					<div>
+				</div>
+				<div className={styles.item4Show}>
+					<p className={styles.addressText}>{address}</p>
+				</div>
+        <div className={styles.item5Show}>
           {tags.map((tag) => (
               <Chip
                 key={tag.id}
@@ -75,10 +81,6 @@ export default function BasicCard(props) {
                 label={tag.name} />
             ))}
 					</div>
-				</div>
-				<div className={styles.item4Show}>
-					<p className={styles.addressText}>{address}</p>
-				</div>
       </Card>
     );
   }
@@ -104,10 +106,16 @@ export default function BasicCard(props) {
             <p className={styles.rateText}>{ rating == undefined ? '-' : rating }</p>
           </div>
           <div>
-            <p className={styles.timeText}>滞在時間:<br />
-            { max === min ? `約${ave}分` : `約${min}分~${max}分` }</p>
+            <p className={styles.timeText}>滞在時間<br />
+            { max === min ? `約${ave}分` : `約${min}~${max}分` }</p>
           </div>
-          <div>
+        </div>
+        <div className={styles.item4Index}>
+          <Link href={`spots/${id}?${queryParams}`}>
+            <ArrowForwardIosSharpIcon />
+          </Link>
+        </div>
+        <div className={styles.item5Index}>
             {tags.map((tag) => (
               <Chip
                 key={tag.id}
@@ -122,12 +130,6 @@ export default function BasicCard(props) {
                 label={tag.name} />
             ))}
           </div>
-        </div>
-        <div className={styles.item4Index}>
-          <Link href={`spots/${id}?${queryParams}`}>
-            <ArrowForwardIosSharpIcon />
-          </Link>
-        </div>
       </Card>
   );
 }

@@ -1,4 +1,4 @@
-import { useRecoilValue } from "recoil";
+import { useRecoilValueLoadable } from "recoil";
 import { spotsState } from "@/state/atoms";
 import useGetLocation from "@/hooks/useGetLocation";
 import useFetchSpots from "@/hooks/useFetchSpots";
@@ -13,18 +13,19 @@ export default function Page() {
 
   useGetLocation();
   const { loading } = useFetchSpots();
+  const spotsLoadable = useRecoilValueLoadable(spotsState);
 
-  const spots = useRecoilValue(spotsState);
 
-
-  if (!loading) {
+  if (loading) {
     return (
       <>
         <Header />
-        <div>現在地を取得しています。</div>
+        <div className={styles.item1NotFound}>スポットを取得しています。</div>
       </>
     );
   };
+
+  const spots = spotsLoadable.state === 'hasValue' ? spotsLoadable.contents : [];
 
   return (
     <>
@@ -35,7 +36,7 @@ export default function Page() {
           <div className={styles.item1} key={spot.id}>
             <BasicCard key={spot.id} {...spot} />
           </div>
-        )) : <div>データが見つかりませんでした。</div> }
+        )) : <div className={styles.item1NotFound}>データが見つかりませんでした。</div> }
         <div className={styles.push}></div>
       </div>
       <Footer />

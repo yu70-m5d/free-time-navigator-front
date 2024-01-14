@@ -6,16 +6,13 @@ import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 
 
-export default function MultiSelectDropdown(props) {
+export default function MultiSelectDropdown() {
   const [tags, setTags] = useRecoilState(tagsState);
   const [selectedTags, setSelectedTags] = useRecoilState(selectedTagsState);
-
-  const { loading } = useFetchSpots();
 
 
   const handleSelectChange = (event) => {
     setSelectedTags(event.target.value);
-    console.log(event.target.value);
   };
 
 

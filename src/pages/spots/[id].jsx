@@ -15,7 +15,6 @@ export async function getStaticPaths() {
     }
 
     const spots = await res.json();
-    console.log(spots);
 
     const paths = spots.map((spot) => ({
       params: { id: spot.id.toString() },
@@ -85,6 +84,7 @@ export default function Spot( {spot} ) {
         </div>
       </div>
       <Map {...spot} origin={parsedOrigin} onDurationChange={handleDurationChange} />
+      <div className={styles.push}></div>
       <Footer />
     </>
   );

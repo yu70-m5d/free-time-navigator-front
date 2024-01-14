@@ -11,6 +11,11 @@
   grid-column: 2;
 }
 
+.item1NotFound {
+  grid-column: 2;
+  text-align: center;
+}
+
 .push {
   grid-column: 2;
   height: 48px;
