@@ -4,6 +4,7 @@ import { Chip, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import axios from "axios";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
+import { translateToJapanese, translateToEnglish } from '@/utils/translationUtils';
 
 
 export default function MultiSelectDropdown() {
@@ -49,13 +50,13 @@ export default function MultiSelectDropdown() {
         renderValue={(selected) => (
           <div>
             {selected.map((value) => (
-          <Chip sx={{height: 24, color: "#FFFFFF", backgroundColor: "#0B8CE9" }} key={value} label={value} />
+          <Chip sx={{height: 24, color: "#FFFFFF", backgroundColor: "#0B8CE9" }} key={value} label={translateToJapanese(value)} />
             ))}
           </div>
         )}
       >
         {tags && tags.map((tag) => (
-          <MenuItem key={tag.id} value={tag.name}>{tag.name}</MenuItem>
+          <MenuItem key={tag.id} value={tag.name}>{translateToJapanese(tag.name)}</MenuItem>
         ))}
       </Select>
     </FormControl>
