@@ -9,6 +9,7 @@ import styles from '@/styles/BasicCard.module.css';
 import { Chip } from '@mui/material';
 import Link from 'next/link';
 import useTagSelection from '@/hooks/useTagSelection';
+import { translateToJapanese } from '@/utils/translationUtils';
 
 const bull = (
   <Box
@@ -91,7 +92,7 @@ export default function BasicCard(props) {
                       borderColor: "#383838",
                       borderWidth: "1px"
                     }}
-                label={tag.name} />
+                label={translateToJapanese(tag.name)} />
             ))}
 					</div>
       </Card>
@@ -140,7 +141,7 @@ export default function BasicCard(props) {
                       borderColor: "#383838",
                       borderWidth: "1px"
                     }}
-                label={tag.name}
+                label={translateToJapanese(tag.name)}
                 onClick={() => handleChipClick(tag.name)} />
             ))}
           </div>
