@@ -34,5 +34,13 @@ export const useContactForm = () => {
     setIsLoading(false);
   };
 
-  return { hasError, isLoading, sendData, closeError };
+  const handleFormSubmit = () => {
+    const isConfirmed = window.confirm('この内容で送信しますか？');
+
+    if (isConfirmed) {
+      onSubmit(); // 実際の送信処理
+    }
+  };
+
+  return { hasError, isLoading, sendData, handleFormSubmit, closeError };
 };

@@ -17,10 +17,10 @@ export default function DrawerMenu() {
         router.push('/contact/input');
         break;
         case '利用規約':
-          router.push('https://www.kiyac.app/termsOfService/pIdEs0GXmPGjVT7UMnUa');
+          window.open('https://www.kiyac.app/termsOfService/pIdEs0GXmPGjVT7UMnUa');
           break;
         case 'プライバシーポリシー':
-          router.push('https://www.kiyac.app/privacypolicy/VfYPLKTsPDuvjwh4AAMM');
+          window.open('https://www.kiyac.app/privacypolicy/VfYPLKTsPDuvjwh4AAMM');
           break;
       default:
         break;
