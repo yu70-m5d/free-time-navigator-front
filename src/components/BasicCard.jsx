@@ -3,11 +3,12 @@ import Card from '@mui/material/Card';
 import StarIcon from '@mui/icons-material/Star';
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 import { useRouter } from 'next/router';
-import { useRecoilValue } from 'recoil';
-import { locationState } from '@/state/atoms';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { locationState, selectedTagsState } from '@/state/atoms';
 import styles from '@/styles/BasicCard.module.css';
 import { Chip } from '@mui/material';
 import Link from 'next/link';
+import useTagSelection from '@/hooks/useTagSelection';
 
 const bull = (
   <Box
@@ -23,6 +24,18 @@ export default function BasicCard(props) {
   const router = useRouter()
   const queryParams = `origin=${encodeURIComponent(JSON.stringify(origin))}`;
   const isContactPage = router.pathname.includes("/spots/[id]");
+
+  const [selectedTags, setSelectedTags] = useRecoilState(selectedTagsState);
+  const { handleSelectedChange } = useTagSelection();
+
+  const handleChipClick = (clickedTag) => {
+    const isSelected = selectedTags.includes(clickedTag);
+    const newSelectedTags = isSelected
+      ? selectedTags.filter((tag) => tag !== clickedTag)
+      : [...selectedTags, clickedTag];
+
+    handleSelectedChange(newSelectedTags);
+  };
 
   const aryMax = (a, b) => {return Math.max(a, b);}
   const aryMin = (a, b) => {return Math.min(a, b);}
@@ -127,7 +140,8 @@ export default function BasicCard(props) {
                       borderColor: "#383838",
                       borderWidth: "1px"
                     }}
-                label={tag.name} />
+                label={tag.name}
+                onClick={() => handleChipClick(tag.name)} />
             ))}
           </div>
       </Card>

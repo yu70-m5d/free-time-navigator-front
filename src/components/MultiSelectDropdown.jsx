@@ -1,4 +1,4 @@
-import useFetchSpots from "@/hooks/useFetchSpots";
+import useTagSelection from "@/hooks/useTagSelection";
 import { selectedTagsState, tagsState } from "@/state/atoms";
 import { Chip, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import axios from "axios";
@@ -7,13 +7,9 @@ import { useRecoilState } from "recoil";
 
 
 export default function MultiSelectDropdown() {
+
+  const { selectedTags, handleSelectedChange } = useTagSelection();
   const [tags, setTags] = useRecoilState(tagsState);
-  const [selectedTags, setSelectedTags] = useRecoilState(selectedTagsState);
-
-
-  const handleSelectChange = (event) => {
-    setSelectedTags(event.target.value);
-  };
 
 
   useEffect(() => {
@@ -29,7 +25,7 @@ export default function MultiSelectDropdown() {
 
     fetchTags();
 
-  }, []);
+  }, [setTags]);
 
 
   return (
@@ -49,7 +45,7 @@ export default function MultiSelectDropdown() {
         sx={{height: 32}}
         multiple
         value={selectedTags}
-        onChange={handleSelectChange}
+        onChange={(event) => handleSelectedChange(event.target.value)}
         renderValue={(selected) => (
           <div>
             {selected.map((value) => (
