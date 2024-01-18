@@ -22,6 +22,7 @@ export default function useFetchSpots() {
       });
 
       setSpots(response.data);
+      console.log(response.data);
     } catch (error) {
       console.error("データが取得できませんでした:", error);
     }
@@ -35,6 +36,7 @@ export default function useFetchSpots() {
         params: params
       });
       setLeadSpots(response.data);
+      console.log(response.data);
     } catch (error) {
       console.error("データが取得できませんでした:", error);
     } finally {
