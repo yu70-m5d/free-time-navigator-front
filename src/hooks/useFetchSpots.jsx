@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { locationState, selectedTagsState, spotsState, timeState } from "@/state/atoms";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { leadSpotsState, locationState, selectedTagsState, spotsState, timeState } from "@/state/atoms";
 
 export default function useFetchSpots() {
   const [loading, setLoading] = useState(true);
@@ -9,6 +9,8 @@ export default function useFetchSpots() {
   const selectedTags = useRecoilValue(selectedTagsState);
   const time = useRecoilValue(timeState);
   const setSpots = useSetRecoilState(spotsState);
+  // const setLeadSpots = useSetRecoilState(leadSpotsState);
+  const [leadSpots, setLeadSpots] = useRecoilState(leadSpotsState);
 
 
   const fetchSpots = async () => {
@@ -18,7 +20,21 @@ export default function useFetchSpots() {
       const response = await axios.get(getSpotsUrl, {
         params: params
       });
+
       setSpots(response.data);
+    } catch (error) {
+      console.error("データが取得できませんでした:", error);
+    }
+  };
+
+  const fetchLeadSpots = async () => {
+    try {
+      const params = { tags: selectedTags, time: time, lat: location.lat, lng: location.lng};
+      const url = `${process.env.NEXT_PUBLIC_FTN_API_LEAD_SPOTS}`;
+      const response = await axios.get(url, {
+        params: params
+      });
+      setLeadSpots(response.data);
     } catch (error) {
       console.error("データが取得できませんでした:", error);
     } finally {
@@ -28,10 +44,16 @@ export default function useFetchSpots() {
 
   useEffect(() => {
     if (location.lat !== 0 || location.lng !== 0) {
+      fetchLeadSpots();
+    }
+  }, [ location, setLeadSpots, selectedTags, time]);
+
+  useEffect(() => {
+    if (!loading && leadSpots.length > 0) {
       fetchSpots();
     }
-  }, [ location, setSpots, selectedTags, time]);
+  }, [leadSpots]);
 
 
-  return { loading, fetchSpots };
+  return { loading, fetchSpots, fetchLeadSpots };
 }

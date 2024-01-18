@@ -127,6 +127,7 @@
 .tagSearchBox {
   max-width: 300px;
   margin: 0 auto;
+  margin-bottom: 16px;
 }
 
 .tagSearchText {
