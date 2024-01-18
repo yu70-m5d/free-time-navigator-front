@@ -38,7 +38,9 @@ export default function Page() {
   return (
     <>
       <Header />
-      <MultiSelectDropdown />
+      <div className={styles.searchTags}>
+        <MultiSelectDropdown />
+      </div>
       <div className={styles.container} >
         {spots.length ? spots.map((spot) => (
           <div className={styles.item1} key={spot.id}>

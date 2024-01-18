@@ -50,10 +50,15 @@ export default function MultiSelectDropdown() {
         renderValue={(selected) => (
           <div>
             {selected.map((value) => (
-          <Chip sx={{height: 24, color: "#FFFFFF", backgroundColor: "#0B8CE9" }} key={value} label={translateToJapanese(value)} />
+              <Chip sx={{height: 24, color: "#FFFFFF", backgroundColor: "#0B8CE9" }} key={value} label={translateToJapanese(value)} />
             ))}
           </div>
         )}
+        MenuProps={{
+          PaperProps: {
+            style: { maxHeight: '50%', width: 200, overflowY: 'scroll' },
+          },
+        }}
       >
         {tags && tags.map((tag) => (
           <MenuItem key={tag.id} value={tag.name}>{translateToJapanese(tag.name)}</MenuItem>
