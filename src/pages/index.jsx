@@ -3,6 +3,7 @@ import Header from "@/components/Header"
 import TimeForm from '@/components/TimeForm';
 import Footer from '@/components/Footer';
 import styles from "@/styles/TopPage.module.css"
+import MultiSelectDropdown from '@/components/MultiSelectDropdown';
 
 
 export default function Home() {
@@ -37,10 +38,17 @@ export default function Home() {
           <h1 className={styles.headLineLetsUse}>使ってみよう!</h1>
           <p className={styles.textCenter}>検索はこちらから</p>
           <div className={styles.timeFormBox}>
+            <p className={styles.timeFormText}>空き時間から検索</p>
             <div className={styles.timeForm}>
               <TimeForm color={"white"} />
             </div>
-            <p className={styles.timeFormText}>空き時間を入力してください</p>
+          </div>
+          <p className={styles.orText}>または</p>
+          <div className={styles.tagSearchBox}>
+            <p className={styles.tagSearchText}>スポットタイプから検索</p>
+            <div className={styles.tagSearch}>
+              <MultiSelectDropdown />
+            </div>
           </div>
           <div className={styles.push}></div>
         </div>

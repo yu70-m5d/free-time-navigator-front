@@ -117,3 +117,24 @@
 .timeFormText {
   margin: 0px;
 }
+
+.orText {
+  text-align: center;
+  margin: 0;
+  padding-bottom: 8px;
+}
+
+.tagSearchBox {
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.tagSearchText {
+  margin: 0px;
+  text-align: center;
+}
+
+.tagSearch {
+  width: 100%;
+  margin: 0 auto;
+}
