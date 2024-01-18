@@ -53,7 +53,7 @@ export default function Page() {
           <div className={styles.item1} key={spot.id}>
             <BasicCard key={spot.id} {...spot} />
           </div>
-        ))};
+        ))}
         <div className={styles.push}></div>
       </div>
       <Footer />
