@@ -18,10 +18,10 @@ export default function TimeForm(props) {
   const router = useRouter();
 
 
-  const handleTime = (data) => {
-    setTime(data.time);
-    router.push('/spots');
-  }
+  // const handleTime = (data) => {
+  //   setTime(data.time);
+  //   router.push('/spots');
+  // }
 
   const handleChange = (event) => {
     setTime(event.target.value);
