@@ -6,7 +6,6 @@ import BasicCard from "@/components/BasicCard";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MultiSelectDropdown from "@/components/MultiSelectDropdown";
-import SyncIcon from '@mui/icons-material/Sync';
 import styles from "@/styles/SpotsIndex.module.css";
 
 
@@ -36,7 +35,8 @@ export default function Page() {
 
   const leadSpots = leadSpotsLoadable.state === 'hasValue' ? leadSpotsLoadable.contents : [];
   const spots = spotsLoadable.state === 'hasValue' ? spotsLoadable.contents : [];
-  // console.log(leadSpots);
+  console.log(leadSpots);
+  console.log(spots);
   return (
     <>
       <Header />
