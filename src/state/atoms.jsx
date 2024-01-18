@@ -13,6 +13,11 @@ export const spotsState = atom({
   default: [],
 });
 
+export const leadSpotsState = atom({
+  key: "leadSpotsState",
+  default: [],
+});
+
 export const tagsState = atom({
   key: "tagsState",
   default: [],
