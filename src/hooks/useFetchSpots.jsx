@@ -54,7 +54,7 @@ export default function useFetchSpots() {
     if (!loading && leadSpots.length > 0) {
       fetchSpots();
     }
-  }, [leadSpots]);
+  }, [location, leadSpots, selectedTags, time]);
 
 
   return { loading, fetchSpots, fetchLeadSpots };
