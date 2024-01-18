@@ -11,7 +11,7 @@ export default function useTagSelection() {
   const handleSelectedChange = (selected) => {
     setSelectedTags(selected);
 
-    if (isContactPage) {
+    if (isContactPage && selected.length) {
       router.push("/spots");
     }
   };
