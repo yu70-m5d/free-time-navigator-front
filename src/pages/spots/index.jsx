@@ -7,7 +7,6 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MultiSelectDropdown from "@/components/MultiSelectDropdown";
 import styles from "@/styles/SpotsIndex.module.css";
-import { useEffect } from "react";
 
 
 export default function Page() {
@@ -20,12 +19,6 @@ export default function Page() {
   const leadSpots = leadSpotsLoadable.state === 'hasValue' ? leadSpotsLoadable.contents : [];
   const spots = spotsLoadable.state === 'hasValue' ? spotsLoadable.contents : [];
 
-  useEffect(() => {
-    if (!loading && leadSpots.length > 0) {
-      // ページの初回読み込み時にもfetchSpotsを実行
-      fetchSpots();
-    }
-  }, [loading, leadSpots]);
 
   if (loading) {
     return (
@@ -44,7 +37,7 @@ export default function Page() {
     );
   };
 
-  
+
   return (
     <>
       <Header />
