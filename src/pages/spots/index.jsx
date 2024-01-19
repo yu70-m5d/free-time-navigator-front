@@ -16,11 +16,6 @@ export default function Page() {
   const { loading, leadLoading } = useFetchSpots();
   const leadSpots = useRecoilValue(leadSpotsState);
   const spots = useRecoilValue(spotsState);
-  const [localSpots, setLocalSpots] = useState(spots);
-
-  useEffect(() => {
-    setLocalSpots(spots);
-  }, [spots]);
 
 
   if (leadLoading) {
@@ -53,7 +48,7 @@ export default function Page() {
             <BasicCard key={spot.id} {...spot} />
           </div>
         )) : <div className={styles.item1NotFound}>データが見つかりませんでした。</div> }
-        { !loading && localSpots.map((spot) => (
+        { !loading && spots.map((spot) => (
           <div className={styles.item1} key={spot.id}>
             <BasicCard key={spot.id} {...spot} />
           </div>
