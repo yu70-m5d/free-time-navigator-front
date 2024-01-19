@@ -12,7 +12,7 @@ import styles from "@/styles/SpotsIndex.module.css";
 export default function Page() {
 
   useGetLocation();
-  const { loading, fetchSpots } = useFetchSpots();
+  const { loading, leadLoading } = useFetchSpots();
   const spotsLoadable = useRecoilValueLoadable(spotsState);
   const leadSpotsLoadable = useRecoilValueLoadable(leadSpotsState);
 
@@ -20,7 +20,7 @@ export default function Page() {
   const spots = spotsLoadable.state === 'hasValue' ? spotsLoadable.contents : [];
 
 
-  if (loading) {
+  if (leadLoading) {
     return (
       <>
         <Header />
@@ -50,7 +50,7 @@ export default function Page() {
             <BasicCard key={spot.id} {...spot} />
           </div>
         )) : <div className={styles.item1NotFound}>データが見つかりませんでした。</div> }
-        {spots.map((spot) => (
+        { !loading && spots.map((spot) => (
           <div className={styles.item1} key={spot.id}>
             <BasicCard key={spot.id} {...spot} />
           </div>

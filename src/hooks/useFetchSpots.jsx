@@ -5,6 +5,7 @@ import { leadSpotsState, locationState, selectedTagsState, spotsState, timeState
 
 export default function useFetchSpots() {
   const [loading, setLoading] = useState(true);
+  const [leadLoading, setLeadLoading] = useState(true);
   const location = useRecoilValue(locationState);
   const selectedTags = useRecoilValue(selectedTagsState);
   const time = useRecoilValue(timeState);
@@ -22,9 +23,11 @@ export default function useFetchSpots() {
       });
 
       setSpots(response.data);
-      console.log(response.data);
+      console.log(response.data)
     } catch (error) {
       console.error("データが取得できませんでした:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -40,7 +43,7 @@ export default function useFetchSpots() {
     } catch (error) {
       console.error("データが取得できませんでした:", error);
     } finally {
-      setLoading(false);
+      setLeadLoading(false);
     }
   };
 
@@ -51,11 +54,12 @@ export default function useFetchSpots() {
   }, [ location, setLeadSpots, selectedTags, time]);
 
   useEffect(() => {
-    if (!loading && leadSpots.length > 0) {
+    if (!leadLoading && leadSpots.length > 0) {
       fetchSpots();
     }
+
   }, [location, leadSpots, selectedTags, time]);
 
 
-  return { loading, fetchSpots, fetchLeadSpots };
+  return { loading, leadLoading, fetchSpots, fetchLeadSpots };
 }
