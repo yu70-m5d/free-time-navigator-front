@@ -51,14 +51,14 @@ export default function useFetchSpots() {
     if (location.lat !== 0 || location.lng !== 0) {
       fetchLeadSpots();
     }
-  }, [ location, setLeadSpots, selectedTags, time]);
+  }, [ location, selectedTags, time]);
 
   useEffect(() => {
     if (!leadLoading && leadSpots.length > 0) {
       fetchSpots();
     }
 
-  }, [location, leadSpots, selectedTags, time]);
+  }, [leadSpots]);
 
 
   return { loading, leadLoading, fetchSpots, fetchLeadSpots };
