@@ -64,12 +64,12 @@ export default function Page() {
         <MultiSelectDropdown />
       </div>
       <div className={styles.container} >
-        {!leadLoading ? leadSpots.map((spot) => (
+        {leadSpots.length > 0 ? leadSpots.map((spot) => (
           <div className={styles.item1} key={spot.id}>
             <BasicCard key={spot.id} {...spot} />
           </div>
-        )) : <div className={styles.item1NotFound}>データが見つかりませんでした。</div> }
-        { !loading && spots.map((spot) => (
+        )) : <div className={styles.item1NotFound}>スポットが見つかりませんでした。</div> }
+        { spots.length > 0 && spots.map((spot) => (
           <div className={styles.item1} key={spot.id}>
             <BasicCard key={spot.id} {...spot} />
           </div>
