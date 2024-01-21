@@ -1,5 +1,5 @@
-import { useRecoilValue, useRecoilValueLoadable } from "recoil";
-import { leadSpotsState, spotsState } from "@/state/atoms";
+import { useRecoilValue } from "recoil";
+import { leadSpotsState, locationState, selectedTagsState, spotsState, timeState } from "@/state/atoms";
 import useGetLocation from "@/hooks/useGetLocation";
 import useFetchSpots from "@/hooks/useFetchSpots";
 import BasicCard from "@/components/BasicCard";
@@ -7,15 +7,36 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MultiSelectDropdown from "@/components/MultiSelectDropdown";
 import styles from "@/styles/SpotsIndex.module.css";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 
 export default function Page() {
 
-  useGetLocation();
-  const { loading, leadLoading } = useFetchSpots();
+  const { getGeolocation } = useGetLocation();
+  const { leadLoading, loading, fetchLeadSpots, fetchSpots } = useFetchSpots();
+
+  const location = useRecoilValue(locationState);
   const leadSpots = useRecoilValue(leadSpotsState);
   const spots = useRecoilValue(spotsState);
+  const time = useRecoilValue(timeState);
+  const selectedTags = useRecoilValue(selectedTagsState);
+
+
+  useEffect(() => {
+    getGeolocation();
+  }, []);
+
+  useEffect(() => {
+    if (location.lat !== 0 || location.lng !== 0) {
+      fetchLeadSpots();
+    };
+  }, [location, time, selectedTags]);
+
+  useEffect(() => {
+    if (leadSpots.length > 0) {
+      fetchSpots();
+    }
+  }, [leadSpots, time, selectedTags]);
 
 
   if (leadLoading) {
@@ -43,7 +64,7 @@ export default function Page() {
         <MultiSelectDropdown />
       </div>
       <div className={styles.container} >
-        {leadSpots.length ? leadSpots.map((spot) => (
+        {!leadLoading ? leadSpots.map((spot) => (
           <div className={styles.item1} key={spot.id}>
             <BasicCard key={spot.id} {...spot} />
           </div>
