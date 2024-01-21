@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { locationState } from "@/state/atoms";
 
@@ -25,10 +25,6 @@ export default function useGetLocation() {
       setError(error);
     }
   };
-
-  useEffect(() => {
-    getGeolocation();
-  }, []);
 
   return { location, error, getGeolocation };
 }
