@@ -22,7 +22,6 @@ export default function useFetchSpots() {
       });
 
       setSpots(response.data);
-      console.log(response.data)
     } catch (error) {
       console.error("データが取得できませんでした:", error);
     } finally {
@@ -32,13 +31,13 @@ export default function useFetchSpots() {
 
   const fetchLeadSpots = async () => {
     try {
+      setLeadLoading(true);
       const params = { tags: selectedTags, time: time, lat: location.lat, lng: location.lng};
       const url = `${process.env.NEXT_PUBLIC_FTN_API_LEAD_SPOTS}`;
       const response = await axios.get(url, {
         params: params
       });
       setLeadSpots(response.data);
-      console.log(response.data);
     } catch (error) {
       console.error("データが取得できませんでした:", error);
     } finally {
