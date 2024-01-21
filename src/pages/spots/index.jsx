@@ -43,6 +43,9 @@ export default function Page() {
     return (
       <>
         <Header />
+        <div className={styles.searchTags}>
+          <MultiSelectDropdown />
+        </div>
         <div className={styles.container}>
           <div className={styles.item1NotFound}>スポットを取得しています。</div>
           <div id={styles.animationContainer}>
