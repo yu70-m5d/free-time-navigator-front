@@ -1,11 +1,9 @@
 .container {
   display: grid;
   width: 100%;
-  height: 100vh;
-  margin-top: 4px;
-  margin-bottom: 50px;
-  grid-template-columns: 1fr 320px 1fr;
-  grid-template-rows: auto auto auto;
+  margin-bottom: 48px;
+  grid-template-columns: 1fr 368px 1fr;
+  grid-template-rows: 568px 568px 568px;
 }
 
 .item1 {
@@ -14,30 +12,40 @@
   border-left: 1px solid #383838;
   border-right: 1px solid #383838;
   margin: 0px;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
 }
 
-.headLineSiteName {
+.item1Item1 {
+  grid-row: 1;
+  margin: auto 0px;
+}
+
+.item1Item1Head {
   font-size: 30px;
-  margin: 0px;
-  padding: 8px;
   text-align: center;
 }
 
-.welcome {
-  text-align: center;
-  margin: 0px;
-  padding: 8px;
+.item1Item2 {
+  grid-row: 2;
+  margin: auto 0px;
 }
 
-.headLineText {
+.item1Item2Head {
   text-align: center;
-  margin: 0px;
-  padding: 8px;
 }
 
-.text {
-  font-size: 14px;
-  margin: 16px;
+.item1Item2Text {
+  text-align: center;
+}
+
+.item1Item3 {
+  grid-row: 3;
+}
+
+.item1Text {
+  margin: auto 32px;
+  padding: 8px;
 }
 
 .item2 {
@@ -45,30 +53,32 @@
   grid-column: 2 / 3;
   border-left: 1px solid #383838;
   border-right: 1px solid #383838;
+  display: grid;
 }
 
-.contentHead {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2px;
-}
-
-.spotIconBox {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.headLineSearchSpots {
-  height: 56px;
+.item2Item1Image {
+  grid-row: 1;
   text-align: center;
-  margin: 0px;
-  padding: 16px 4px;
+  margin: auto 0;
 }
 
-.icon {
-  padding: 16px 4px;
+.item2Item2 {
+  grid-row: 2;
+  margin: auto 0px;
+}
+
+.item2Item2Head {
+  text-align: center;
+  margin: auto 0px;
+}
+
+.item2Item3 {
+  grid-row: 3;
+}
+
+.item2Item3Text {
+  margin: auto 32px;
+  padding: 8px;
 }
 
 .item3 {
@@ -76,36 +86,37 @@
   grid-column: 2 / 3;
   border-left: 1px solid #383838;
   border-right: 1px solid #383838;
+  display: grid;
 }
 
-.headLineLetsUse {
+.item3Item1Image {
+  grid-row: 1;
   text-align: center;
-  margin: 0px;
-  padding: 8px
+  margin: auto 0px;
 }
 
-.headLine {
-  height: 56px;
-  /* text-align: center; */
-  margin: 16px 8px;
+.item3Item2 {
+  grid-row: 2;
+  margin: auto 0px;
 }
 
-.textCenter {
+.item3Item2Head {
   text-align: center;
-  margin: 0px;
-  padding: 8px;
+  margin: auto 0px;
 }
 
-.textColorGray {
-  color: #383838;
+.item3Item3 {
+  grid-row: 3;
+  margin: auto 0px;
 }
 
-.push {
-  height: 48px;
+.item3Item3Head {
+  text-align: center;
+  margin: 16px auto;
 }
 
 .timeFormBox {
-  height: 80px;
+  height: 72px;
   text-align: center;
 }
 
@@ -121,7 +132,7 @@
 .orText {
   text-align: center;
   margin: 0;
-  padding-bottom: 8px;
+  padding-bottom: 4px;
 }
 
 .tagSearchBox {

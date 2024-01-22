@@ -15,7 +15,24 @@
   width: 96px;
   background-color: #383838;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
   cursor: pointer;
+}
+
+.mapIcon {
+  height: 100%;
+  text-align: center;
+  margin: auto 0px;
+}
+
+.mapIconOnPage {
+  height: 45px;
+  text-align: center;
+  margin: auto 0px;
+}
+
+.onPageBar {
+  height: 4px;
+  width: 100%;
+  background-color: #0B8CE9;
 }
