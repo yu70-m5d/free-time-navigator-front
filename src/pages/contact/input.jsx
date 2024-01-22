@@ -4,12 +4,12 @@ import Header from "@/components/Header";
 import { useContactForm } from "@/hooks/useContactForm";
 
 export default function Page() {
-  const { hasError, isLoading, handleFormSubmit, closeError } = useContactForm();
+  const { hasError, isLoading, sendData, closeError } = useContactForm();
 
   return (
     <>
       <Header isLoading={isLoading} />
-      <ContactForm handleFormSubmit={handleFormSubmit} isLoading={isLoading} />
+      <ContactForm onSubmit={sendData} isLoading={isLoading} />
       <ErrorSnackbar hasError={hasError} closeError={closeError} />
     </>
   )

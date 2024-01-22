@@ -11,7 +11,15 @@ export const useContactForm = () => {
   const closeError = () => setHasError(false);
 
   const sendData = async(data) => {
+
+    const isConfirmed = window.confirm("この内容で送信しますか？");
+
+    if (!isConfirmed) {
+      return;
+    };
+
     setIsLoading(true);
+
     try {
       const url = `${process.env.NEXT_PUBLIC_FTN_API_CONTACTS}`;
       const response = await axios.post(url, {
@@ -34,13 +42,5 @@ export const useContactForm = () => {
     setIsLoading(false);
   };
 
-  const handleFormSubmit = () => {
-    const isConfirmed = window.confirm('この内容で送信しますか？');
-
-    if (isConfirmed) {
-      onSubmit(); // 実際の送信処理
-    }
-  };
-
-  return { hasError, isLoading, sendData, handleFormSubmit, closeError };
+  return { hasError, isLoading, sendData, closeError };
 };
