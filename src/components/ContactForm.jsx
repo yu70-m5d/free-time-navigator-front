@@ -7,11 +7,11 @@ import SubjectFrom from "./SubjectForm";
 
 export default function ContactForm(props) {
 
-  const { handleFormSubmit, isLoading } = props;
+  const { onSubmit, isLoading } = props;
   const { handleSubmit, formState: { errors }, register } = useForm();
 
   return (
-    <form noValidate onSubmit={handleSubmit(handleFormSubmit)}>
+    <form noValidate onSubmit={handleSubmit(onSubmit)}>
       <Stack spacing={2} sx={{ maxWidth: 'sm', margin: 'auto', padding: 2, marginTop: 8 }}>
         <NameFrom register={register} errorMessage={errors.name?.message} />
         <EmailFrom register={register} errorMessage={errors.email?.message} />
@@ -23,7 +23,7 @@ export default function ContactForm(props) {
             type="submit"
             disabled={isLoading}
           >
-            送信
+            { !isLoading ? '送信' : '送信中' }
           </Button>
         </Box>
       </Stack>
