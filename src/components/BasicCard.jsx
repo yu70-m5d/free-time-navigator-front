@@ -72,7 +72,7 @@ export default function BasicCard(props) {
 						<p className={styles.rateText}>{rating}</p>
 					</div>
 					<div>
-            <p className={styles.requiredTime}>所要時間:{`約${durationTime + ave}分`}</p>
+            <p className={styles.requiredTime}>所要時間:{ max === min ? `約${durationTime + ave}` : `約${durationTime + min}分~${durationTime + max}分` }</p>
 						<p className={styles.timeText}>移動時間:{`約${durationTime}分`}</p>
 						<p className={styles.timeText}>滞在時間:{ max === min ? `約${ave}分` : `約${min}~${max}分` }</p>
 					</div>
