@@ -3,7 +3,7 @@
   width: 100%;
   margin-top: 8px;
   margin-bottom: 8px;
-  grid-template-columns: 1fr 320px 1fr;
+  grid-template-columns: 1fr 336px 1fr;
   gap: 8px;
 }
 
