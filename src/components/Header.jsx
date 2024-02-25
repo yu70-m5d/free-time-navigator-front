@@ -15,6 +15,7 @@ export default function Header() {
 
   const router = useRouter();
   const isContactPage = router.pathname.includes("/contact");
+  const isSignUpPage = router.pathname.includes("/signup");
 
   const handleDrawerOpen = () => {
     setDrawerOpened(true);
@@ -35,6 +36,19 @@ export default function Header() {
         </div>
         <div className={styles.item2}>
           <h3 className={styles.pageTitle}>お問い合わせ</h3>
+        </div>
+      </div>
+    )
+  }
+
+  if (isSignUpPage) {
+    return (
+      <div className={styles.header}>
+        <div className={styles.item1TopLink} onClick={transitionPage}>
+          <h3 className={styles.topLinkText}>TOP</h3>
+        </div>
+        <div className={styles.item2}>
+          <h3 className={styles.pageTitle}>登録</h3>
         </div>
       </div>
     )
