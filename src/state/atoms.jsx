@@ -1,4 +1,5 @@
 import { atom } from "recoil";
+import { recoilPersist } from "recoil-persist";
 
 export const locationState = atom({
   key: "locationState",
@@ -31,4 +32,35 @@ export const selectedTagsState = atom({
 export const timeState = atom({
   key: "timeState",
   default: '',
+});
+
+
+const { persistAtom } = recoilPersist({
+  key: 'recoil-persist',
+  storage: typeof window === 'undefined' ? undefined : window.sessionStorage,
+  // storage: typeof window === 'undefined' ? undefined : window.localStorage,
+})
+
+export const signInState = atom({
+  key: 'signInState',
+  default: false,
+  effects_UNSTABLE: [persistAtom],
+})
+
+export const accessTokenState = atom({
+  key: 'accessTokenState',
+  default: '',
+  effects_UNSTABLE: [persistAtom],
+});
+
+export const clientState = atom({
+  key: 'clientState',
+  default: '',
+  effects_UNSTABLE: [persistAtom],
+});
+
+export const uidState = atom({
+  key: 'uidState',
+  default: '',
+  effects_UNSTABLE: [persistAtom],
 });

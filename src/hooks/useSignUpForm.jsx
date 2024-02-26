@@ -1,22 +1,23 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
 import axios from "axios";
+import { useRecoilState } from "recoil";
+import { accessTokenState, clientState, signInState, uidState } from "@/state/atoms";
 
 export const useSignUpForm = () => {
   const [hasError, setHasError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
+  const [client, setClient] = useRecoilState(clientState);
+  const [uid, setUid] = useRecoilState(uidState);
+  const [signIn, setSignIn] = useRecoilState(signInState);
 
   const router = useRouter();
 
   const closeError = () => setHasError(false);
 
   const sendData = async(data) => {
-
-    // const isConfirmed = window.confirm("この内容で送信しますか？");
-
-    // if (!isConfirmed) {
-    //   return;
-    // };
 
     setIsLoading(true);
 
@@ -32,7 +33,19 @@ export const useSignUpForm = () => {
         throw new Error(`Request failed with status ${response.status}`);
       }
 
-      router.push('/');
+      console.log(response);
+      console.log(response.headers['access-token']);
+      console.log(response.headers['client']);
+      console.log(response.headers['uid']);
+
+
+      setAccessToken(response.headers['access-token']);
+      setClient(response.headers['client']);
+      setUid(response.headers['uid']);
+      setSignIn(true);
+
+
+      router.push('/auth/test');
 
     } catch {
       setHasError(true);
