@@ -1,4 +1,3 @@
-import MapIcon from '@mui/icons-material/Map';
 import Header from "@/components/Header"
 import TimeForm from '@/components/TimeForm';
 import Footer from '@/components/Footer';
