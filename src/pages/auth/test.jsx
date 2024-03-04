@@ -1,5 +1,5 @@
 import { useSignOut } from '@/hooks/useSignOut';
-import { accessTokenState, signInState } from '@/state/atoms';
+import { accessTokenState, signingInState } from '@/state/atoms';
 import { Button } from '@mui/material';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
@@ -7,12 +7,11 @@ import { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 
 const Auth = dynamic(() =>
-  import('@/components/auth'), { ssr: false })
+  import('@/components/Auth'), { ssr: false })
 
-  
 export default function Page() {
 
-  const signIn = useRecoilValue(signInState);
+  const signingIn = useRecoilValue(signingInState);
   const accessToken = useRecoilValue(accessTokenState);
 
   const { hasError, isLoading, signOut, closeError } = useSignOut();

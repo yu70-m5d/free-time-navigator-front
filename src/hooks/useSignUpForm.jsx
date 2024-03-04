@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import axios from "axios";
 import { useRecoilState } from "recoil";
-import { accessTokenState, clientState, signInState, uidState } from "@/state/atoms";
+import { accessTokenState, clientState, signingInState, uidState } from "@/state/atoms";
 
 export const useSignUpForm = () => {
   const [hasError, setHasError] = useState(false);
@@ -11,7 +11,7 @@ export const useSignUpForm = () => {
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
   const [client, setClient] = useRecoilState(clientState);
   const [uid, setUid] = useRecoilState(uidState);
-  const [signIn, setSignIn] = useRecoilState(signInState);
+  const [signingIn, setSigningIn] = useRecoilState(signingInState);
 
   const router = useRouter();
 
@@ -42,7 +42,7 @@ export const useSignUpForm = () => {
       setAccessToken(response.headers['access-token']);
       setClient(response.headers['client']);
       setUid(response.headers['uid']);
-      setSignIn(true);
+      setSigningIn(true);
 
 
       router.push('/auth/test');

@@ -1,22 +1,22 @@
-import { signInState } from "@/state/atoms";
+import { signingInState } from "@/state/atoms";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 export default function Auth({ children }) {
-  const signIn = useRecoilValue(signInState);
+  const signingIn = useRecoilValue(signingInState);
 
   const router = useRouter();
 
   useEffect(() => {
-    if(!signIn) {
+    if(!signingIn) {
       if (typeof window !== "undefined"){
       router.push("/");
       }
     }
-  }, [signIn]);
+  }, [signingIn]);
 
-  if(!signIn) {
+  if(!signingIn) {
     return null;
   }
 

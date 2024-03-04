@@ -1,4 +1,4 @@
-import { accessTokenState, clientState, signInState, uidState } from "@/state/atoms";
+import { accessTokenState, clientState, signingInState, uidState } from "@/state/atoms";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -11,7 +11,7 @@ export const useSignOut = () => {
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
   const [client, setClient] = useRecoilState(clientState);
   const [uid, setUid] = useRecoilState(uidState);
-  const [signIn, setSignIn] = useRecoilState(signInState);
+  const [signingIn, setSigningIn] = useRecoilState(signingInState);
 
   const router = useRouter();
 
@@ -38,7 +38,7 @@ export const useSignOut = () => {
       setAccessToken("");
       setClient("");
       setUid("");
-      setSignIn(false);
+      setSigningIn(false);
 
       sessionStorage.removeItem('recoil-persist');
 

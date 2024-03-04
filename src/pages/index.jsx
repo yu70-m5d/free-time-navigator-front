@@ -4,9 +4,30 @@ import Footer from '@/components/Footer';
 import styles from "@/styles/TopPage.module.css"
 import MultiSelectDropdown from '@/components/MultiSelectDropdown';
 import Image from 'next/image';
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { useRecoilState } from "recoil";
+import { accessTokenState, clientState, signingInState, uidState } from "@/state/atoms";
+import useSignIn from "@/hooks/useSignIn";
 
 
 export default function Home() {
+
+  const router = useRouter();
+  const { userId } = router.query;
+  const { signIn } = useSignIn();
+
+  const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
+  const [client, setClient] = useRecoilState(clientState);
+  const [uid, setUid] = useRecoilState(uidState);
+  const [signingIn, setSigningIn] = useRecoilState(signingInState);
+
+  useEffect(() => {
+    if(userId) {
+      signIn(userId);
+    }
+  }, [router])
+
 
   return (
     <>
