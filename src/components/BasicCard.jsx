@@ -2,14 +2,18 @@ import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import StarIcon from '@mui/icons-material/Star';
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
+import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
 import { useRouter } from 'next/router';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { locationState, selectedTagsState } from '@/state/atoms';
+import { locationState, modalIsOpenState, selectedTagsState } from '@/state/atoms';
 import styles from '@/styles/BasicCard.module.css';
 import { Chip } from '@mui/material';
 import Link from 'next/link';
 import useTagSelection from '@/hooks/useTagSelection';
 import { translateToJapanese } from '@/utils/translationUtils';
+import { useState } from 'react';
+import TimerModal from './TimerModal';
+import useModalOperation from '@/hooks/useModalOperation';
 
 const bull = (
   <Box
@@ -21,6 +25,7 @@ const bull = (
 
 export default function BasicCard(props) {
   const { id, name, address, rating, image, duration, tags } = props;
+
   const origin = useRecoilValue(locationState);
   const router = useRouter()
   const queryParams = `origin=${encodeURIComponent(JSON.stringify(origin))}`;
@@ -37,6 +42,9 @@ export default function BasicCard(props) {
 
     handleSelectedChange(newSelectedTags);
   };
+
+  const { modalOpen } = useModalOperation();
+
 
   const aryMax = (a, b) => {return Math.max(a, b);}
   const aryMin = (a, b) => {return Math.min(a, b);}
@@ -57,6 +65,9 @@ export default function BasicCard(props) {
 				<div className={styles.item1Show}>
 					<p className={styles.nameText}>{name}</p>
 				</div>
+        <div onClick={modalOpen}>
+          <AccessAlarmIcon />
+        </div>
 				<div className={styles.item2Show}>
         { !!image ? (
             <img src={image} width={120} height={120} alt={`施設画像: ${name}`} />

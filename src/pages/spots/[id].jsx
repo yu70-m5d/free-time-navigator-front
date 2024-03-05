@@ -5,6 +5,9 @@ import Map from "@/components/Map";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import styles from "@/styles/SpotShow.module.css"
+import TimerModal from "@/components/TimerModal";
+import { useRecoilState } from "recoil";
+import { modalIsOpenState } from "@/state/atoms";
 
 
 export async function getStaticPaths() {
@@ -85,6 +88,7 @@ export default function Spot( {spot} ) {
       </div>
       <Map {...spot} origin={parsedOrigin} onDurationChange={handleDurationChange} />
       <div className={styles.push}></div>
+      <TimerModal />
       <Footer />
     </>
   );

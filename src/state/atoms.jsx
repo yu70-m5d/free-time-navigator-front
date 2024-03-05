@@ -34,6 +34,11 @@ export const timeState = atom({
   default: '',
 });
 
+export const modalIsOpenState = atom({
+  key: "modalIsOpenState",
+  default: false,
+});
+
 
 const { persistAtom } = recoilPersist({
   key: 'recoil-persist',
