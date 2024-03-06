@@ -69,3 +69,9 @@ export const uidState = atom({
   default: '',
   effects_UNSTABLE: [persistAtom],
 });
+
+export const providerState = atom({
+  key: 'providerState',
+  default: '',
+  effects_UNSTABLE: [persistAtom],
+});

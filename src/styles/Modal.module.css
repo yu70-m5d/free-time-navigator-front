@@ -13,9 +13,94 @@
     justify-content: center;
   }
 
+#helpOverlay{
+    /*　画面全体を覆う設定　*/
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color:rgba(0,0,0,0.8);
+
+    /*　画面の中央に要素を表示させる設定　*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 #content{
   z-index:999;
-  width:50%;
-  padding: 1em;
+  width:80%;
   background:#fff;
+}
+
+#helpContent{
+  z-index:999;
+  width:80%;
+  background:#fff;
+  border-radius: 50px;
+}
+
+.modalHeader {
+  display: flex;
+  flex-direction: column; /* 縦並びにする */
+  align-items: center;
+}
+
+.helpIcon {
+  margin-left: auto;
+}
+
+.iconAndMessage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.message {
+  padding: 0.5em 1em;
+  margin: 0;
+  text-align: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.labelContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.label {
+  padding: 1em; /* ラベルの下に余白を追加 */
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  flex-direction: row-reverse;
+}
+
+.submitButton,
+.closeButton {
+  padding: 10px 0;
+  width: 100%;
+  border: none;
+  /* border-radius: 5px; */
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.submitButton {
+  background-color: #02C34D;
+  color: #fff;
+}
+
+.closeButton {
+  background-color: #A3A6B3;
+  color: #fff;
 }

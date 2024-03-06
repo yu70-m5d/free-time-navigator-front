@@ -1,12 +1,13 @@
-import { accessTokenState, clientState, signingInState, uidState } from "@/state/atoms";
+import { accessTokenState, clientState, providerState, signingInState, uidState } from "@/state/atoms";
 import axios from "axios";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 
 export default function useSignIn () {
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
   const [client, setClient] = useRecoilState(clientState);
   const [uid, setUid] = useRecoilState(uidState);
   const [signingIn, setSigningIn] = useRecoilState(signingInState);
+  const setProvider = useSetRecoilState(providerState);
 
   const signIn = async(userId) => {
     try {
@@ -19,8 +20,8 @@ export default function useSignIn () {
       setAccessToken(res.data.token);
       setClient(res.data.client);
       setUid(res.data.uid);
+      setProvider(res.data.provider);
       setSigningIn(true);
-      // return res;
     } catch (error) {
       console.error('エラー：' + error.message);
       throw error; // エラーが発生した場合はエラーをスローする

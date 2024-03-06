@@ -65,8 +65,8 @@ export default function BasicCard(props) {
 				<div className={styles.item1Show}>
 					<p className={styles.nameText}>{name}</p>
 				</div>
-        <div onClick={modalOpen}>
-          <AccessAlarmIcon />
+        <div className={styles.item6Show} >
+          <AccessAlarmIcon onClick={modalOpen} />
         </div>
 				<div className={styles.item2Show}>
         { !!image ? (
