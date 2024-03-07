@@ -5,16 +5,15 @@ import EmailFrom from "./EmailForm";
 import PasswordConfirmationFrom from "./PasswordConfirmationForm";
 
 
-export default function SingUpForm(props) {
+export default function SignInForm(props) {
   const { onSubmit, isLoading } = props;
   const { handleSubmit, formState: { errors }, register } = useForm();
 
   return (
     <form noValidate onSubmit={handleSubmit(onSubmit)}>
-      <Stack spacing={2} sx={{ maxWidth: 'sm', margin: 'auto', padding: 2, marginTop: 8 }}>
+      <Stack spacing={2} sx={{ maxWidth: 'sm', margin: 'auto', padding: 2 }}>
         <EmailFrom register={register} errorMessage={errors.email?.message} />
         <PasswordFrom register={register} errorMessage={errors.password?.message} />
-        <PasswordConfirmationFrom register={register} errorMessage={errors.password_confirmation?.message} />
 
         <Box textAlign='center' >
           <Button
@@ -22,11 +21,10 @@ export default function SingUpForm(props) {
             type="submit"
             disabled={isLoading}
           >
-            { !isLoading ? '登録' : '登録中' }
+            { !isLoading ? 'ログイン' : 'ログイン中' }
           </Button>
         </Box>
       </Stack>
-
     </form>
   )
 }

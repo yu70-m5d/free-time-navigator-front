@@ -9,13 +9,11 @@ import { useRouter } from 'next/router';
 import styles from '@/styles/Header.module.css';
 
 
-export default function Header() {
+export default function Header({ pageTitle }) {
 
   const [drawerOpened, setDrawerOpened] = useState(false);
 
   const router = useRouter();
-  const isContactPage = router.pathname.includes("/contact");
-  const isSignUpPage = router.pathname.includes("/signup");
 
   const handleDrawerOpen = () => {
     setDrawerOpened(true);
@@ -28,27 +26,27 @@ export default function Header() {
     router.push('/')
   };
 
-  if (isContactPage) {
+  if (pageTitle === 'お問い合わせ') {
     return (
       <div className={styles.header}>
         <div className={styles.item1TopLink} onClick={transitionPage}>
           <h3 className={styles.topLinkText}>TOP</h3>
         </div>
         <div className={styles.item2}>
-          <h3 className={styles.pageTitle}>お問い合わせ</h3>
+          <h3 className={styles.pageTitle}>{pageTitle}</h3>
         </div>
       </div>
     )
   }
 
-  if (isSignUpPage) {
+  if (pageTitle === '登録' || pageTitle === 'ログイン') {
     return (
       <div className={styles.header}>
         <div className={styles.item1TopLink} onClick={transitionPage}>
           <h3 className={styles.topLinkText}>TOP</h3>
         </div>
         <div className={styles.item2}>
-          <h3 className={styles.pageTitle}>登録</h3>
+          <h3 className={styles.pageTitle}>{pageTitle}</h3>
         </div>
       </div>
     )

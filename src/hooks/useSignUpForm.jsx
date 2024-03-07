@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import axios from "axios";
 import { useRecoilState } from "recoil";
-import { accessTokenState, clientState, signingInState, uidState } from "@/state/atoms";
+import { accessTokenState, clientState, loggedInState, uidState } from "@/state/atoms";
 
 export const useSignUpForm = () => {
   const [hasError, setHasError] = useState(false);
@@ -11,7 +11,7 @@ export const useSignUpForm = () => {
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
   const [client, setClient] = useRecoilState(clientState);
   const [uid, setUid] = useRecoilState(uidState);
-  const [signingIn, setSigningIn] = useRecoilState(signingInState);
+  const [loggedIn, setLoggedIn] = useRecoilState(loggedInState);
 
   const router = useRouter();
 
@@ -22,7 +22,7 @@ export const useSignUpForm = () => {
     setIsLoading(true);
 
     try {
-      const url = `${process.env.NEXT_PUBLIC_FTN_API_SIGN_UP}`;
+      const url = `${process.env.NEXT_PUBLIC_FTN_API_ORIGIN}/api/v1/auth`;
       const response = await axios.post(url, {
         email: data.email,
         password: data.password,
@@ -33,19 +33,14 @@ export const useSignUpForm = () => {
         throw new Error(`Request failed with status ${response.status}`);
       }
 
-      console.log(response);
-      console.log(response.headers['access-token']);
-      console.log(response.headers['client']);
-      console.log(response.headers['uid']);
-
-
       setAccessToken(response.headers['access-token']);
       setClient(response.headers['client']);
       setUid(response.headers['uid']);
-      setSigningIn(true);
+      setLoggedIn(true);
 
 
-      router.push('/auth/test');
+      router.push('/');
+      alert("ログインしました。");
 
     } catch {
       setHasError(true);

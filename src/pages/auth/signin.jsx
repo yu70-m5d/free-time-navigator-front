@@ -1,38 +1,23 @@
 import { ErrorSnackbar } from "@/components/ErrorSnackbar";
 import Header from "@/components/Header";
-import SignUpForm from "@/components/SignUpForm";
+import SignInForm from "@/components/SignInForm";
 import { useLineLogIn } from "@/hooks/useLineLogIn";
 import { useSignUpForm } from "@/hooks/useSignUpForm"
-import { Button } from "@mui/material";
+import useSignIn from "@/hooks/useSignIn";
 import LineLoginButton from "@/components/LineLoginButton";
-import styles from "@/styles/SignUp.module.css";
+import styles from "@/styles/SignIn.module.css";
 import Link from "next/link";
 
-export default function Page() {
+export default function SignIn() {
   const { hasError, isLoading, sendData, closeError } = useSignUpForm();
+  const { signIn } = useSignIn();
   const { lineLogIn } = useLineLogIn();
-
-  const handleLineLogIn = async () => {
-    await lineLogIn();
-  }
 
   return (
     <>
-      <Header isLoading={isLoading} pageTitle={"登録"} />
+      <Header isLoading={isLoading} pageTitle={"ログイン"} />
       <h2 className={styles.appName}>Free Time Navigator</h2>
-      <div className={styles.linkBox}>
-        <div className={styles.flexItem1}>
-          <Link href={"https://www.kiyac.app/termsOfService/pIdEs0GXmPGjVT7UMnUa"}>
-            <p>利用規約</p>
-          </Link>
-        </div>
-        <div className={styles.flexItem2}>
-          <Link href={"https://www.kiyac.app/privacypolicy/VfYPLKTsPDuvjwh4AAMM"}>
-            <p>プライバシーポリシー</p>
-          </Link>
-        </div>
-      </div>
-      <SignUpForm onSubmit={sendData} isLoading={isLoading} />
+      <SignInForm onSubmit={signIn} isLoading={isLoading} />
       <div className={styles.lineLogin} >
         <div>
           <div className={styles.orBox}>
@@ -44,6 +29,10 @@ export default function Page() {
           <LineLoginButton />
         </div>
       </div>
+      <p className={styles.text}>アカウントをお持ちでないですか？</p>
+      <Link href="/auth/signup">
+        <p className={styles.text}>登録する</p>
+      </Link>
       <ErrorSnackbar hasError={hasError} closeError={closeError} />
     </>
   )
