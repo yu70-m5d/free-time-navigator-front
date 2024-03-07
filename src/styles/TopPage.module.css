@@ -1,9 +1,17 @@
-.container {
+.loggedInContainer {
   display: grid;
   width: 100%;
   margin-bottom: 48px;
   grid-template-columns: 1fr 368px 1fr;
   grid-template-rows: 568px 568px 568px;
+}
+
+.loggedOutContainer {
+  display: grid;
+  width: 100%;
+  margin-bottom: 48px;
+  grid-template-columns: 1fr 368px 1fr;
+  grid-template-rows: 568px 568px 568px 284px;
 }
 
 .item1 {
@@ -149,4 +157,19 @@
 .tagSearch {
   width: 100%;
   margin: 0 auto;
+}
+
+.item4 {
+  grid-row: 4;
+  grid-column: 2 / 3;
+  border-left: 1px solid #383838;
+  border-right: 1px solid #383838;
+}
+
+.item4Item1 {
+  text-align: center;
+}
+
+.item4Text {
+  text-align: center;
 }
