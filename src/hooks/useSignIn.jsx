@@ -1,4 +1,4 @@
-import { accessTokenState, clientState, signingInState, uidState } from "@/state/atoms";
+import { accessTokenState, clientState, loggedInState, uidState } from "@/state/atoms";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useRecoilState, useSetRecoilState } from "recoil";
@@ -7,7 +7,7 @@ export default function useSignIn () {
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
   const [client, setClient] = useRecoilState(clientState);
   const [uid, setUid] = useRecoilState(uidState);
-  const [signingIn, setSigningIn] = useRecoilState(signingInState);
+  const [loggedIn, setLoggedIn] = useRecoilState(loggedInState);
   const router = useRouter();
 
   const signIn = async(data) => {
@@ -16,7 +16,6 @@ export default function useSignIn () {
       let params = {};
       let response = {};
 
-      // const url = 'http://localhost:3001/api/v1/auth/sign_in';
       const url = `${process.env.NEXT_PUBLIC_FTN_API_ORIGIN}/api/v1/auth/sign_in`;
 
       if (data.userId) {
@@ -24,11 +23,10 @@ export default function useSignIn () {
           user_id: data.userId
         };
         response = await axios.post(url, params);
-        console.log(response.data);
         setAccessToken(response.data.token);
         setClient(response.data.client);
         setUid(response.data.uid);
-        setSigningIn(true);
+        setLoggedIn(true);
       } else {
         params = {
           email: data.email,
@@ -38,16 +36,16 @@ export default function useSignIn () {
         setAccessToken(response.headers['access-token']);
         setClient(response.headers['client']);
         setUid(response.headers['uid']);
-        setSigningIn(true);
+        setLoggedIn(true);
       }
-      // return res;
+
+      alert("ログインしました。");
     } catch (error) {
       console.error('エラー：' + error.message);
       if (error.response && error.response.status === 401) {
         alert("登録してください。")
         router.push('/auth/signup'); // 401エラーの場合は登録画面へ遷移
       }
-      // throw error; // エラーが発生した場合はエラーをスローする
     }
   };
 

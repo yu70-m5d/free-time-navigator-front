@@ -12,7 +12,7 @@ export default function ContactForm(props) {
 
   return (
     <form noValidate onSubmit={handleSubmit(onSubmit)}>
-      <Stack spacing={2} sx={{ maxWidth: 'sm', margin: 'auto', padding: 2, marginTop: 8 }}>
+      <Stack spacing={2} sx={{ maxWidth: 'sm', margin: 'auto', padding: 2 }}>
         <NameFrom register={register} errorMessage={errors.name?.message} />
         <EmailFrom register={register} errorMessage={errors.email?.message} />
         <SubjectFrom register={register} errorMessage={errors.subject?.message} />

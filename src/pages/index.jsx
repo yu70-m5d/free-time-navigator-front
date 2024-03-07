@@ -6,9 +6,10 @@ import MultiSelectDropdown from '@/components/MultiSelectDropdown';
 import Image from 'next/image';
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { useRecoilState } from "recoil";
-import { accessTokenState, clientState, signingInState, uidState } from "@/state/atoms";
 import useSignIn from "@/hooks/useSignIn";
+import Link from "next/link";
+import { useRecoilValue } from "recoil";
+import { loggedInState } from "@/state/atoms";
 
 
 export default function Home() {
@@ -17,10 +18,7 @@ export default function Home() {
   const { userId } = router.query;
   const { signIn } = useSignIn();
 
-  const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
-  const [client, setClient] = useRecoilState(clientState);
-  const [uid, setUid] = useRecoilState(uidState);
-  const [signingIn, setSigningIn] = useRecoilState(signingInState);
+  const loggedIn = useRecoilValue(loggedInState);
 
   useEffect(() => {
     if(userId) {
@@ -31,11 +29,10 @@ export default function Home() {
     }
   }, [router])
 
-
   return (
     <>
       <Header />
-      <div className={styles.container}>
+      <div className={loggedIn ? styles.loggedInContainer : styles.loggedOutContainer }>
         <div className={styles.item1}>
           <div className={styles.item1Item1}>
             <h1 className={styles.item1Item1Head}>Free Time Navigator</h1>
@@ -89,6 +86,17 @@ export default function Home() {
             </div>
           </div>
         </div>
+        { loggedIn ? null : (
+          <div className={styles.item4}>
+            <h3 className={styles.item4Item1}>ログイン・登録はこちらから</h3>
+            <Link href={"/auth/signin"} >
+              <p className={styles.item4Text}>ログイン</p>
+            </Link>
+            <Link href={"/auth/signup"} >
+              <p className={styles.item4Text}>登録</p>
+            </Link>
+          </div>
+        )}
       </div>
       <Footer />
     </>

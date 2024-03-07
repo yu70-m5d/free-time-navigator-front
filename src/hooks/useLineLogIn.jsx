@@ -11,10 +11,9 @@ export const useLineLogIn = () => {
     setIsLoading(true);
 
     try {
-      const url = 'http://localhost:3001/omniauth/line_url';
+      const url = `${process.env.NEXT_PUBLIC_FTN_API_ORIGIN}/omniauth/line_url`;
 
       const response = await axios.get(url);
-      console.log(response.data);
       const redirectUrl = response.data.line_auth_url; // レスポンスからリダイレクト先のURLを取得
 
     // 新しいタブを開いてリダイレクト

@@ -41,8 +41,8 @@ const { persistAtom } = recoilPersist({
   // storage: typeof window === 'undefined' ? undefined : window.localStorage,
 })
 
-export const signingInState = atom({
-  key: 'signingInState',
+export const loggedInState = atom({
+  key: 'loggedInState',
   default: false,
   effects_UNSTABLE: [persistAtom],
 })

@@ -1,4 +1,5 @@
-import { signingInState } from "@/state/atoms";
+import { useSignOut } from "@/hooks/useSignOut";
+import { loggedInState, signingInState } from "@/state/atoms";
 import { Box, List, ListItem, ListItemButton, ListItemText } from "@mui/material";
 import { useRouter } from "next/router";
 import { useRecoilValue } from "recoil";
@@ -7,10 +8,12 @@ import { useRecoilValue } from "recoil";
 export default function DrawerMenu() {
   const router = useRouter();
 
-  const signingIn = useRecoilValue(signingInState);
+  const loggedIn = useRecoilValue(loggedInState);
 
   const menuList = ['トップページ', 'お問い合わせ', '利用規約', 'プライバシーポリシー', 'ログイン'];
-  const signingInMenuList = ['トップページ', 'お問い合わせ', '利用規約', 'プライバシーポリシー', 'ログアウト'];
+  const loggedInMenuList = ['トップページ', 'お問い合わせ', '利用規約', 'プライバシーポリシー', 'ログアウト'];
+
+  const { signOut } = useSignOut();
 
   const handleMenuClick = (text) => {
     // クリックされたメニューに応じて遷移
@@ -31,12 +34,22 @@ export default function DrawerMenu() {
         router.push('/auth/signin');
         break;
       case 'ログアウト':
-        router.push('/auth/test');
+        const isConfirmed = window.confirm("ログアウトしてよろしいですか？");
+        if (!isConfirmed) {
+          break;
+        }
+        handleSignOut();
+        alert("ログアウトしました。");
         break;
       default:
         break;
     }
   };
+
+  const handleSignOut = async() => {
+    await signOut();
+    router.push('/');
+  }
 
   return (
     <Box
@@ -44,9 +57,9 @@ export default function DrawerMenu() {
       onClick={()=>{}}
       onKeyDown={()=>{}}
     >
-      { signingIn ? (
+      { loggedIn ? (
         <List>
-        {signingInMenuList.map((text, index) => (
+        {loggedInMenuList.map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton onClick={() => handleMenuClick(text)}>
               <ListItemText primary={text} />

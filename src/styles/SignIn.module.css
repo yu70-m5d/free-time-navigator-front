@@ -30,16 +30,3 @@
 .text {
   text-align: center;
 }
-
-.linkBox {
-  display: flex;
-  justify-content: center;
-}
-
-.flexItem1 {
-  margin-right: 10px;
-}
-
-.flexItem2 {
-  margin-left: 10px;
-}
