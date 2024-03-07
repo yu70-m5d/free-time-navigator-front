@@ -34,6 +34,11 @@ export const timeState = atom({
   default: '',
 });
 
+export const modalIsOpenState = atom({
+  key: "modalIsOpenState",
+  default: false,
+});
+
 
 const { persistAtom } = recoilPersist({
   key: 'recoil-persist',
@@ -61,6 +66,12 @@ export const clientState = atom({
 
 export const uidState = atom({
   key: 'uidState',
+  default: '',
+  effects_UNSTABLE: [persistAtom],
+});
+
+export const providerState = atom({
+  key: 'providerState',
   default: '',
   effects_UNSTABLE: [persistAtom],
 });

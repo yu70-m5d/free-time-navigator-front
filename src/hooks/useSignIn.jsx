@@ -1,4 +1,4 @@
-import { accessTokenState, clientState, loggedInState, uidState } from "@/state/atoms";
+import { accessTokenState, clientState, providerState, loggedInState, uidState } from "@/state/atoms";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useRecoilState, useSetRecoilState } from "recoil";
@@ -9,6 +9,7 @@ export default function useSignIn () {
   const [uid, setUid] = useRecoilState(uidState);
   const [loggedIn, setLoggedIn] = useRecoilState(loggedInState);
   const router = useRouter();
+  const setProvider = useSetRecoilState(providerState);
 
   const signIn = async(data) => {
     try {
@@ -26,6 +27,7 @@ export default function useSignIn () {
         setAccessToken(response.data.token);
         setClient(response.data.client);
         setUid(response.data.uid);
+        setProvider(response.data.provider);
         setLoggedIn(true);
       } else {
         params = {
