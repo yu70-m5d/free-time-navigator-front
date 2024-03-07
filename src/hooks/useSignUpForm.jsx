@@ -22,7 +22,7 @@ export const useSignUpForm = () => {
     setIsLoading(true);
 
     try {
-      const url = `${process.env.NEXT_PUBLIC_FTN_API_SIGN_UP}`;
+      const url = `${process.env.NEXT_PUBLIC_FTN_API_ORIGIN}/api/v1/auth`;
       const response = await axios.post(url, {
         email: data.email,
         password: data.password,

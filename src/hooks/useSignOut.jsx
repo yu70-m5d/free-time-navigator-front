@@ -22,7 +22,7 @@ export const useSignOut = () => {
     setIsLoading(true);
 
     try {
-      const url = `${process.env.NEXT_PUBLIC_FTN_API_SIGN_OUT}`;
+      const url = `${process.env.NEXT_PUBLIC_FTN_API_ORIGIN}/api/v1/auth/sign_out`;
       const headers = {
         'access-token': accessToken,
         'client': client,
