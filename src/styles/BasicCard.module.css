@@ -130,3 +130,10 @@
   padding: 0px 4px;
   padding-bottom: 4px;
 }
+
+.item6Show {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0px 8px
+}

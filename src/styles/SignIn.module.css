@@ -1,0 +1,32 @@
+.appName {
+  text-align: center;
+  font-weight: lighter;
+}
+
+.lineLogin {
+  display: flex;
+  justify-content: center;
+}
+
+.orBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.orText {
+  text-align: center;
+  margin: 0 10px;
+}
+
+.horizontalLine {
+  width: 120px;
+  border-bottom: 1px solid #000000; /* 線のスタイルと色を指定 */
+  margin-top: 10px; /* 線と上の要素の間の余白 */
+  margin-bottom: 10px; /* 線と下の要素の間の余白 */
+}
+
+.text {
+  text-align: center;
+}

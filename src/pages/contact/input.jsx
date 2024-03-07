@@ -8,7 +8,7 @@ export default function Page() {
 
   return (
     <>
-      <Header isLoading={isLoading} />
+      <Header isLoading={isLoading} pageTitle={"お問い合わせ"} />
       <ContactForm onSubmit={sendData} isLoading={isLoading} />
       <ErrorSnackbar hasError={hasError} closeError={closeError} />
     </>

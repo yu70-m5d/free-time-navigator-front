@@ -1,0 +1,40 @@
+.lineLoginBtn {
+  background-color: #06C755;
+  border-radius: 5px;
+  margin: 10px;
+  width: 288px;
+  height: 64px;
+  cursor: pointer;
+}
+
+.mouseOver {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.mouseOver:hover {
+  background-color: rgba(0, 0, 0, 0.1); /* マウスオーバー時の背景色（透明度10%） */
+}
+
+.mouseOver:active {
+  background-color: rgba(0, 0, 0, 0.3); /* マウスオーバー時の背景色（透明度10%） */
+}
+
+.line {
+  width: 1px; /* 線の幅 */
+  height: 64px; /* 線の高さ */
+  background-color: rgba(0, 0, 0, 0.08); /* 線の色（透明度8%） */
+}
+
+.text {
+  text-align: center;
+  font-size: 18px;
+  color: #FFFFFF;
+  font-weight: bold;
+  margin-top: 22px;
+  margin-bottom: 22px;
+  margin: 22px 44px;
+  white-space: nowrap;
+}
