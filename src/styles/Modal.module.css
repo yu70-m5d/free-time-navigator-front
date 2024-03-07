@@ -55,6 +55,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 4px 4px;
+}
+
+.helpText {
+  font-size: 12px;
+  margin: 4px 4px;
+}
+
+.login {
+  text-align: center;
+}
+
+.addFriend {
+  text-align: center;
 }
 
 .message {

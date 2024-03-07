@@ -1,15 +1,18 @@
 import useModalOperation from '@/hooks/useModalOperation';
 import useNotification from '@/hooks/useNotification';
-import { modalIsOpenState } from '@/state/atoms';
+import { modalIsOpenState, providerState } from '@/state/atoms';
 import styles from '@/styles/Modal.module.css';
 import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import HelpIcon from '@mui/icons-material/Help';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import HelpModal from './HelpModal';
+import { useRouter } from 'next/router';
 
 export default function TimerModal() {
+  const router = useRouter();
   const modalIsOpen = useRecoilValue(modalIsOpenState);
+  const provider = useRecoilValue(providerState);
   const { modalClose } = useModalOperation();
 
   const { sendNotification } = useNotification();
@@ -31,6 +34,12 @@ export default function TimerModal() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    if (provider !== 'line') {
+      alert("LINEでログインしてください。");
+      router.push('/auth/signup');
+      return;
+    };
     // フォームの送信処理を追加することができます。
     sendNotification(time);
     // この例では、ただ単に入力された時間をコンソールに出力します。
