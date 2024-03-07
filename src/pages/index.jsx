@@ -24,7 +24,10 @@ export default function Home() {
 
   useEffect(() => {
     if(userId) {
-      signIn(userId);
+      const data = {
+        userId: userId
+      };
+      signIn(data);
     }
   }, [router])
 

@@ -28,7 +28,7 @@ export default function DrawerMenu() {
         window.open('https://www.kiyac.app/privacypolicy/VfYPLKTsPDuvjwh4AAMM');
         break;
       case 'ログイン':
-        router.push('/auth/signup');
+        router.push('/auth/signin');
         break;
       case 'ログアウト':
         router.push('/auth/test');
