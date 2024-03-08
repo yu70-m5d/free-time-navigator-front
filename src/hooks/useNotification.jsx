@@ -8,7 +8,7 @@ export default function useNotification () {
 
   const sendNotification = async(time) => {
     try {
-      const url = 'http://localhost:3001/api/v1/notifications/send_push_notification';
+      const url = `${process.env.NEXT_PUBLIC_FTN_API_ORIGIN}/api/v1/notifications/send_push_notification`;
       const headers = {
         'uid': uid,
       };
