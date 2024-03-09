@@ -56,7 +56,7 @@ export default function TimerModal() {
           <div id={styles.content} onClick={(e) => e.stopPropagation()}>
             <div className={styles.modalHeader}>
               <HelpIcon className={styles.helpIcon} onClick={helpOpen} />
-              <p className={styles.message}>設定した時刻にLINEで通知します。</p>
+              <p className={styles.message}>設定した時刻の5分前にLINEで通知します。</p>
             </div>
             <form className={styles.form} onSubmit={handleSubmit}>
               <div className={styles.labelContainer}>
