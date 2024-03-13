@@ -8,6 +8,7 @@ export default function PasswordFrom(props) {
       id="standard-basic"
       label="パスワード"
       variant="filled"
+      type="password"
       error={errorMessage !== undefined}
       helperText={errorMessage || ' '}
       {...register('password', {
