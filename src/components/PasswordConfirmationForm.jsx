@@ -8,6 +8,7 @@ export default function PasswordConfirmationFrom(props) {
       id="standard-basic"
       label="パスワード確認"
       variant="filled"
+      type="password"
       error={errorMessage !== undefined}
       helperText={errorMessage || ' '}
       {...register('password_confirmation', {
