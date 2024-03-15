@@ -6,7 +6,7 @@ import MultiSelectDropdown from '@/components/MultiSelectDropdown';
 import Image from 'next/image';
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import useSignIn from "@/hooks/useSignIn";
+import { useSignIn } from "@/hooks/useSignIn";
 import Link from "next/link";
 import { useRecoilValue } from "recoil";
 import { loggedInState } from "@/state/atoms";

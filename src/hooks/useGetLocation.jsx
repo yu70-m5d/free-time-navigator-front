@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { locationState } from "@/state/atoms";
 
-export default function useGetLocation() {
+export const useGetLocation = () => {
   const [error, setError] = useState(null);
   const [location, setLocation] = useRecoilState(locationState);
 

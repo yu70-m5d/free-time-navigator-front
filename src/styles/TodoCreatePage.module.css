@@ -1,0 +1,41 @@
+.container {
+  display: grid;
+  width: 100%;
+  height: 100vh;
+  margin-bottom: 48px;
+  grid-template-columns: 1fr 368px 1fr;
+}
+
+.item1 {
+  grid-column: 2;
+  border-left: 1px solid #383838;
+  border-right: 1px solid #383838;
+  display: flex;
+  flex-direction: column;
+}
+
+.titleForm {
+  width: 50%;
+  margin-top: 8px;
+  margin-left: 16px;
+}
+
+.date {
+  margin-right: 16px;
+}
+
+.dateText {
+  margin: 8px 0;
+  text-align: right;
+}
+
+.contentForm {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.button {
+  margin-left: auto;
+  margin-right: auto;
+}

@@ -3,7 +3,7 @@ import axios from "axios"
 import { useRouter } from "next/router";
 import { useRecoilValue } from "recoil"
 
-export default function useNotification () {
+export const useNotification = () => {
   const uid = useRecoilValue(uidState);
 
   const sendNotification = async(time) => {

@@ -2,8 +2,9 @@ import { accessTokenState, clientState, providerState, loggedInState, uidState }
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useRecoilState, useSetRecoilState } from "recoil";
+import Cookies from "js-cookie";
 
-export default function useSignIn () {
+export const useSignIn = () => {
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
   const [client, setClient] = useRecoilState(clientState);
   const [uid, setUid] = useRecoilState(uidState);
@@ -38,10 +39,15 @@ export default function useSignIn () {
         setAccessToken(response.headers['access-token']);
         setClient(response.headers['client']);
         setUid(response.headers['uid']);
+        Cookies.set("access-token", response.headers['access-token']);
+        Cookies.set("client", response.headers['client']);
+        Cookies.set("uid", response.headers['uid']);
+
         setLoggedIn(true);
       }
 
       alert("ログインしました。");
+      router.push("/");
     } catch (error) {
       console.error('エラー：' + error.message);
       if (error.response && error.response.status === 401) {

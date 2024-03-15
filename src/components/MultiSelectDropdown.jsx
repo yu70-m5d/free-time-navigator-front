@@ -1,4 +1,4 @@
-import useTagSelection from "@/hooks/useTagSelection";
+import { useTagSelection } from "@/hooks/useTagSelection";
 import { tagsState } from "@/state/atoms";
 import { Chip, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import axios from "axios";

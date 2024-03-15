@@ -1,5 +1,5 @@
-import useModalOperation from '@/hooks/useModalOperation';
-import useNotification from '@/hooks/useNotification';
+import { useModalOperation } from '@/hooks/useModalOperation';
+import { useNotification } from '@/hooks/useNotification';
 import { modalIsOpenState, providerState } from '@/state/atoms';
 import styles from '@/styles/Modal.module.css';
 import { useState } from 'react';

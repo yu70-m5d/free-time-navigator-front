@@ -3,7 +3,7 @@ import axios from "axios";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { leadSpotsState, locationState, selectedTagsState, spotsState, timeState } from "@/state/atoms";
 
-export default function useFetchSpots() {
+export const useFetchSpots = () => {
   const [loading, setLoading] = useState(true);
   const [leadLoading, setLeadLoading] = useState(true);
   const location = useRecoilValue(locationState);
