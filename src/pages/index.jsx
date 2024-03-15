@@ -5,7 +5,7 @@ import styles from "@/styles/TopPage.module.css"
 import MultiSelectDropdown from '@/components/MultiSelectDropdown';
 import Image from 'next/image';
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSignIn } from "@/hooks/useSignIn";
 import Link from "next/link";
 import { useRecoilValue } from "recoil";
@@ -18,7 +18,13 @@ export default function Home() {
   const { userId } = router.query;
   const { signIn } = useSignIn();
 
-  const loggedIn = useRecoilValue(loggedInState);
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  const globalLoggedIn = useRecoilValue(loggedInState);
+
+  useEffect(() => {
+    setLoggedIn(globalLoggedIn);
+  }, [loggedIn, globalLoggedIn]);
 
   useEffect(() => {
     if(userId) {
@@ -27,7 +33,8 @@ export default function Home() {
       };
       signIn(data);
     }
-  }, [router])
+  }, [router]);
+
 
   return (
     <>
