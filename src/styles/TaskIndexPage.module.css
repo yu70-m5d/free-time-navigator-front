@@ -1,0 +1,32 @@
+.container {
+  display: grid;
+  width: 100%;
+  margin-bottom: 48px;
+  grid-template-columns: 1fr 368px 1fr;
+  justify-items: center;
+}
+
+.item {
+  display: flex;
+  width: 100%;
+  grid-column: 2;
+  border-bottom: 1px solid #383838;
+  cursor: pointer;
+}
+
+.title {
+  margin-left: 8px;
+}
+
+.date {
+  margin-left: auto;
+}
+
+.addBtn {
+  display: flex;
+  grid-column: 2;
+  justify-content: center;
+  align-items: center;
+  margin-top: 16px;
+  cursor: pointer;
+}

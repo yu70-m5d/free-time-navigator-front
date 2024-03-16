@@ -6,15 +6,18 @@ import styles from "@/styles/TodoCreatePage.module.css";
 import Header from "@/components/Header";
 import MultiSelectDropdown from "@/components/MultiSelectDropdown";
 import { useTask } from "@/hooks/useTask";
+import { useRouter } from "next/router";
 
 
 export default function CreateTodo() {
 
   const { register, handleSubmit, formState: { errors }} = useForm();
   const { sendData } = useTask();
+  const router = useRouter();
 
   const onSubmit = (data) => {
     sendData(data);
+    router.push('/user/task');
   };
 
   const currentDate = new Date();

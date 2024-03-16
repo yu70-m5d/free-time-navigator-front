@@ -3,6 +3,10 @@ import axios from "axios"
 import { useRecoilValue } from "recoil";
 import Cookies from 'js-cookie';
 import { useEffect, useState } from "react";
+import styles from "@/styles/TaskIndexPage.module.css";
+import Header from "@/components/Header";
+import AddIcon from '@mui/icons-material/Add';
+import { useRouter } from "next/router";
 
 export async function getServerSideProps(context) {
   try {
@@ -47,14 +51,27 @@ export default function Tasks({tasks}) {
 
   console.log(tasks);
 
+  const router = useRouter();
+
+  const handleAdd = () => {
+    router.push('/user/task/create');
+  }
+
   return (
     <>
-      todoいんでっくす
-      <ul>
-        {tasks.map(task => (
-          <li key={task.id}>{task.title}</li>
+      <Header pageTitle={"やりたいこと"} />
+      <div className={styles.container}>
+        {tasks.map((task) => (
+          <div className={styles.item} key={task.id} >
+            <p className={styles.title}>{task.title}</p>
+            <p className={styles.date}>{task.created_at.split('T')[0]}</p>
+          </div>
         ))}
-      </ul>
+        <div className={styles.addBtn} onClick={handleAdd}>
+          <AddIcon />
+          <p>追加</p>
+        </div>
+      </div>
     </>
   )
 }
