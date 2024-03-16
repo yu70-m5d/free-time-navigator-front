@@ -5,15 +5,17 @@ import { useForm } from "react-hook-form";
 import styles from "@/styles/TodoCreatePage.module.css";
 import Header from "@/components/Header";
 import MultiSelectDropdown from "@/components/MultiSelectDropdown";
+import { useTask } from "@/hooks/useTask";
 
 
 export default function CreateTodo() {
 
   const { register, handleSubmit, formState: { errors }} = useForm();
+  const { sendData } = useTask();
 
   const onSubmit = (data) => {
-    console.log(data);
-  }
+    sendData(data);
+  };
 
   const currentDate = new Date();
 

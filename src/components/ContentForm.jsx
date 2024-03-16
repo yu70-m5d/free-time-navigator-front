@@ -10,7 +10,6 @@ export default function ContentForm(props) {
       label="メモ"
       multiline
       rows={10}
-      defaultValue="Default Value"
       variant="filled"
       error={errorMessage !== undefined}
       helperText={errorMessage || ' '}
