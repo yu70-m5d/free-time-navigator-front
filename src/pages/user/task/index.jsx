@@ -7,12 +7,25 @@ import styles from "@/styles/TaskIndexPage.module.css";
 import Header from "@/components/Header";
 import AddIcon from '@mui/icons-material/Add';
 import { useRouter } from "next/router";
+import Footer from "@/components/Footer";
+
 
 export async function getServerSideProps(context) {
+
+  const accessToken = context.req.cookies['access-token'];
+  const client = context.req.cookies['client'];
+  const uid = context.req.cookies['uid'];
+
+  if (!accessToken || !client || !uid) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
+
   try {
-    const accessToken = context.req.cookies['access-token'];
-    const client = context.req.cookies['client'];
-    const uid = context.req.cookies['uid'];
 
     const url = `${process.env.NEXT_PUBLIC_FTN_API_ORIGIN}/api/v1/tasks`;
 
@@ -53,6 +66,11 @@ export default function Tasks({tasks}) {
 
   const router = useRouter();
 
+  const handleTask = (id) => {
+    console.log(id);
+    router.push(`/user/task/${id}`)
+  };
+
   const handleAdd = () => {
     router.push('/user/task/create');
   }
@@ -62,7 +80,7 @@ export default function Tasks({tasks}) {
       <Header pageTitle={"やりたいこと"} />
       <div className={styles.container}>
         {tasks.map((task) => (
-          <div className={styles.item} key={task.id} >
+          <div className={styles.item} key={task.id} onClick={() => handleTask(task.id)} >
             <p className={styles.title}>{task.title}</p>
             <p className={styles.date}>{task.created_at.split('T')[0]}</p>
           </div>
@@ -72,6 +90,7 @@ export default function Tasks({tasks}) {
           <p>追加</p>
         </div>
       </div>
+      <Footer />
     </>
   )
 }

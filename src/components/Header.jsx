@@ -26,20 +26,7 @@ export default function Header({ pageTitle }) {
     router.push('/')
   };
 
-  if (pageTitle === 'お問い合わせ') {
-    return (
-      <div className={styles.header}>
-        <div className={styles.item1TopLink} onClick={transitionPage}>
-          <h3 className={styles.topLinkText}>TOP</h3>
-        </div>
-        <div className={styles.item2}>
-          <h3 className={styles.pageTitle}>{pageTitle}</h3>
-        </div>
-      </div>
-    )
-  }
-
-  if (pageTitle === '登録' || pageTitle === 'ログイン') {
+  if (pageTitle) {
     return (
       <div className={styles.header}>
         <div className={styles.item1TopLink} onClick={transitionPage}>
