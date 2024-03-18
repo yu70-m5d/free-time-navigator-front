@@ -5,12 +5,7 @@ import { useRecoilState, useSetRecoilState } from "recoil";
 import Cookies from "js-cookie";
 
 export const useSignIn = () => {
-  const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
-  const [client, setClient] = useRecoilState(clientState);
-  const [uid, setUid] = useRecoilState(uidState);
-  const [loggedIn, setLoggedIn] = useRecoilState(loggedInState);
   const router = useRouter();
-  const setProvider = useSetRecoilState(providerState);
 
   const signIn = async(data) => {
     try {
@@ -25,25 +20,24 @@ export const useSignIn = () => {
           user_id: data.userId
         };
         response = await axios.post(url, params);
-        setAccessToken(response.data.token);
-        setClient(response.data.client);
-        setUid(response.data.uid);
-        setProvider(response.data.provider);
-        setLoggedIn(true);
+
+        Cookies.set("access-token", response.data.token, { expires: 1, secure: process.env.NODE_ENV === 'production' });
+        Cookies.set("client", response.data.client, { expires: 1, secure: process.env.NODE_ENV === 'production' });
+        Cookies.set("uid", response.data.uid, { expires: 1, secure: process.env.NODE_ENV === 'production' });
+        Cookies.set("provider", response.data.provider, { expires: 1, secure: process.env.NODE_ENV === 'production' });
+        Cookies.set("loggedIn", true, {expires: 1, secure: process.env.NODE_ENV === 'production' });
       } else {
         params = {
           email: data.email,
           password: data.password
         };
         response = await axios.post(url, params);
-        setAccessToken(response.headers['access-token']);
-        setClient(response.headers['client']);
-        setUid(response.headers['uid']);
-        Cookies.set("access-token", response.headers['access-token']);
-        Cookies.set("client", response.headers['client']);
-        Cookies.set("uid", response.headers['uid']);
 
-        setLoggedIn(true);
+        Cookies.set("access-token", response.headers['access-token'], { expires: 1, secure: process.env.NODE_ENV === 'production' });
+        Cookies.set("client", response.headers['client'], { expires: 1, secure: process.env.NODE_ENV === 'production' });
+        Cookies.set("uid", response.headers['uid'], { expires: 1, secure: process.env.NODE_ENV === 'production' });
+        Cookies.set("loggedIn", true, {expires: 1, secure: process.env.NODE_ENV === 'production' });
+
       }
 
       alert("ログインしました。");
