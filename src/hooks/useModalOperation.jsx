@@ -1,7 +1,7 @@
 import { modalIsOpenState } from "@/state/atoms"
 import { useSetRecoilState } from "recoil"
 
-export default function useModalOperation () {
+export const useModalOperation = () => {
   const setModalIsOpen = useSetRecoilState(modalIsOpenState)
 
   const modalOpen = () => {

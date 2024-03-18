@@ -3,7 +3,7 @@
   width: 100%;
   margin-bottom: 48px;
   grid-template-columns: 1fr 368px 1fr;
-  grid-template-rows: 568px 568px 568px;
+  grid-template-rows: 568px 568px 568px 568px;
 }
 
 .loggedOutContainer {
@@ -14,7 +14,7 @@
   grid-template-rows: 568px 568px 568px 284px;
 }
 
-.item1 {
+.itemOfAppTitle {
   grid-row: 1 / 2;
   grid-column: 2 / 3;
   border-left: 1px solid #383838;
@@ -24,34 +24,34 @@
   grid-template-rows: 1fr 1fr 1fr;
 }
 
-.item1Item1 {
+.itemOfAppTitleItem1 {
   grid-row: 1;
   margin: auto 0px;
 }
 
-.item1Item1Head {
+.itemOfAppTitleItem1Head {
   font-size: 30px;
   text-align: center;
 }
 
-.item1Item2 {
+.itemOfAppTitleItem2 {
   grid-row: 2;
   margin: auto 0px;
 }
 
-.item1Item2Head {
+.itemOfAppTitleItem2Head {
   text-align: center;
 }
 
-.item1Item2Text {
+.itemOfAppTitleItem2Text {
   text-align: center;
 }
 
-.item1Item3 {
+.itemOfAppTitleItem3 {
   grid-row: 3;
 }
 
-.item1Text {
+.itemOfAppTitleText {
   margin: auto 32px;
   padding: 8px;
 }
@@ -89,36 +89,36 @@
   padding: 8px;
 }
 
-.item3 {
-  grid-row: 3 / 4;
+.itemOfStart {
+  grid-row: 4;
   grid-column: 2 / 3;
   border-left: 1px solid #383838;
   border-right: 1px solid #383838;
   display: grid;
 }
 
-.item3Item1Image {
+.itemOfStartItem1Image {
   grid-row: 1;
   text-align: center;
   margin: auto 0px;
 }
 
-.item3Item2 {
+.itemOfStartItem2 {
   grid-row: 2;
   margin: auto 0px;
 }
 
-.item3Item2Head {
+.itemOfStartItem2Head {
   text-align: center;
   margin: auto 0px;
 }
 
-.item3Item3 {
+.itemOfStartItem3 {
   grid-row: 3;
   margin: auto 0px;
 }
 
-.item3Item3Head {
+.itemOfStartItem3Head {
   text-align: center;
   margin: 16px auto;
 }
@@ -172,4 +172,37 @@
 
 .item4Text {
   text-align: center;
+}
+
+.itemOfTaskList {
+  grid-row: 3;
+  grid-column: 2;
+  border-left: 1px solid #383838;
+  border-right: 1px solid #383838;
+  display: grid;
+}
+
+.itemOfTaskListItem1Image {
+  grid-row: 1;
+  text-align: center;
+  margin: auto 0px;
+}
+
+.itemOfTaskListItem2 {
+  grid-row: 2;
+  margin: auto 0px;
+}
+
+.itemOfTaskListItem2Head {
+  text-align: center;
+  margin: auto 0px;
+}
+
+.itemOfTaskListItem3 {
+  grid-row: 3;
+}
+
+.itemOfTaskListItem3Text {
+  margin: auto 32px;
+  padding: 8px;
 }

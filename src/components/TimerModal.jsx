@@ -1,5 +1,5 @@
-import useModalOperation from '@/hooks/useModalOperation';
-import useNotification from '@/hooks/useNotification';
+import { useModalOperation } from '@/hooks/useModalOperation';
+import { useNotification } from '@/hooks/useNotification';
 import { modalIsOpenState, providerState } from '@/state/atoms';
 import styles from '@/styles/Modal.module.css';
 import { useState } from 'react';
@@ -8,11 +8,13 @@ import HelpIcon from '@mui/icons-material/Help';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import HelpModal from './HelpModal';
 import { useRouter } from 'next/router';
+import { Cookie } from '@mui/icons-material';
+import Cookies from 'js-cookie';
 
 export default function TimerModal() {
   const router = useRouter();
   const modalIsOpen = useRecoilValue(modalIsOpenState);
-  const provider = useRecoilValue(providerState);
+  const provider = Cookies.get("provider");
   const { modalClose } = useModalOperation();
 
   const { sendNotification } = useNotification();

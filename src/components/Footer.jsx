@@ -1,33 +1,49 @@
 import MapIcon from '@mui/icons-material/Map';
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import styles from "@/styles/Footer.module.css"
 import { useRouter } from 'next/router';
+import { useRecoilValue } from 'recoil';
+import { loggedInState } from '@/state/atoms';
+import { useEffect, useState } from 'react';
+import Cookies from 'js-cookie';
 
 export default function Footer() {
   const router = useRouter();
-  const handlePage = () => {
+  const isSpotsPage = router.pathname.includes("/spots");
+  const isTaskPage = router.pathname.includes("/task");
+
+  const loggedIn = Boolean(Cookies.get("loggedIn"));
+
+
+  const handleSpotsPage = () => {
     router.push('/spots');
   }
 
-  const isContactPageSpots = router.pathname.includes("/spots");
+  const handleTaskPage = () => {
+    if (!loggedIn) {
+      alert("ログインしてください。");
+      return
+    };
+    router.push('/user/task');
+  }
+
 
   return (
     <>
-    <div className={styles.footer} onClick={handlePage}>
-    { isContactPageSpots ? (
-      <div className={styles.mapIconBox}>
-        <div className={styles.mapIconOnPage}>
+      <div className={styles.footer}>
+        <div className={styles.mapIconBox} onClick={handleSpotsPage}>
           <MapIcon sx={{height: "40px", width: '40px', marginTop: '4px', color: '#FFFFFF'}} />
+          { isSpotsPage && (
+            <div className={styles.onPageBar}></div>
+          )}
         </div>
-        <div className={styles.onPageBar}></div>
+          <div className={styles.listIconBox} onClick={handleTaskPage}>
+            <FormatListBulletedIcon sx={{height: "40px", width: '40px', marginTop: '4px', color: '#FFFFFF'}} />
+            { isTaskPage && (
+              <div className={styles.onPageBar}></div>
+            )}
+          </div>
       </div>
-    ) : (
-      <div className={styles.mapIconBox}>
-        <div className={styles.mapIcon}>
-          <MapIcon sx={{height: "40px", width: '40px', marginTop: '4px', color: '#FFFFFF'}} />
-        </div>
-      </div>
-    )}
-    </div>
     </>
   );
 }

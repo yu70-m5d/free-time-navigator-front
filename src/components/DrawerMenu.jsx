@@ -1,6 +1,7 @@
 import { useSignOut } from "@/hooks/useSignOut";
 import { loggedInState, signingInState } from "@/state/atoms";
 import { Box, List, ListItem, ListItemButton, ListItemText } from "@mui/material";
+import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { useRecoilValue } from "recoil";
 
@@ -8,7 +9,7 @@ import { useRecoilValue } from "recoil";
 export default function DrawerMenu() {
   const router = useRouter();
 
-  const loggedIn = useRecoilValue(loggedInState);
+  const loggedIn = Cookies.get("loggedIn");
 
   const menuList = ['トップページ', 'お問い合わせ', '利用規約', 'プライバシーポリシー', 'ログイン'];
   const loggedInMenuList = ['トップページ', 'お問い合わせ', '利用規約', 'プライバシーポリシー', 'ログアウト'];

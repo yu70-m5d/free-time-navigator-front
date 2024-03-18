@@ -16,19 +16,20 @@
   background-color: #383838;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
 }
 
-.mapIcon {
+.listIconBox {
   height: 100%;
-  text-align: center;
-  margin: auto 0px;
-}
-
-.mapIconOnPage {
-  height: 45px;
-  text-align: center;
-  margin: auto 0px;
+  width: 96px;
+  background-color: #383838;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
 
 .onPageBar {
