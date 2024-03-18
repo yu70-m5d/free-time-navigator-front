@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { timeState } from "@/state/atoms";
-import useFetchSpots from "@/hooks/useFetchSpots";
+import { useFetchSpots } from "@/hooks/useFetchSpots";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { Button, FormControl, IconButton, InputLabel, MenuItem, Select } from "@mui/material";

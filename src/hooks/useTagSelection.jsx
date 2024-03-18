@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { useRecoilState } from "recoil";
 
 
-export default function useTagSelection() {
+export const useTagSelection = () => {
   const [ selectedTags, setSelectedTags ] = useRecoilState(selectedTagsState);
   const router = useRouter();
   const isContactPage = router.pathname.includes("/");

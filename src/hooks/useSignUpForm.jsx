@@ -3,6 +3,8 @@ import { useState } from "react";
 import axios from "axios";
 import { useRecoilState } from "recoil";
 import { accessTokenState, clientState, loggedInState, uidState } from "@/state/atoms";
+import Cookies from "js-cookie";
+
 
 export const useSignUpForm = () => {
   const [hasError, setHasError] = useState(false);
@@ -33,10 +35,10 @@ export const useSignUpForm = () => {
         throw new Error(`Request failed with status ${response.status}`);
       }
 
-      setAccessToken(response.headers['access-token']);
-      setClient(response.headers['client']);
-      setUid(response.headers['uid']);
-      setLoggedIn(true);
+      Cookies.set("access-token", response.headers['access-token'], { expires: 1, secure: process.env.NODE_ENV === 'production' });
+      Cookies.set("client", response.headers['client'], { expires: 1, secure: process.env.NODE_ENV === 'production' });
+      Cookies.set("uid", response.headers['uid'], { expires: 1, secure: process.env.NODE_ENV === 'production' });
+      Cookies.set("loggedIn", true, {expires: 1, secure: process.env.NODE_ENV === 'production' });
 
 
       router.push('/');

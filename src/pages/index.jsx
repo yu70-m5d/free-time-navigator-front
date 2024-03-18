@@ -5,11 +5,12 @@ import styles from "@/styles/TopPage.module.css"
 import MultiSelectDropdown from '@/components/MultiSelectDropdown';
 import Image from 'next/image';
 import { useRouter } from "next/router";
-import { useEffect } from "react";
-import useSignIn from "@/hooks/useSignIn";
+import { useEffect, useState } from "react";
+import { useSignIn } from "@/hooks/useSignIn";
 import Link from "next/link";
 import { useRecoilValue } from "recoil";
 import { loggedInState } from "@/state/atoms";
+import Cookies from "js-cookie";
 
 
 export default function Home() {
@@ -18,7 +19,13 @@ export default function Home() {
   const { userId } = router.query;
   const { signIn } = useSignIn();
 
-  const loggedIn = useRecoilValue(loggedInState);
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  const globalLoggedIn = Cookies.get("loggedIn");
+
+  useEffect(() => {
+    setLoggedIn(globalLoggedIn);
+  }, [loggedIn, globalLoggedIn]);
 
   useEffect(() => {
     if(userId) {
@@ -27,22 +34,24 @@ export default function Home() {
       };
       signIn(data);
     }
-  }, [router])
+  }, [router]);
+
+
 
   return (
     <>
       <Header />
       <div className={loggedIn ? styles.loggedInContainer : styles.loggedOutContainer }>
-        <div className={styles.item1}>
-          <div className={styles.item1Item1}>
-            <h1 className={styles.item1Item1Head}>Free Time Navigator</h1>
+        <div className={styles.itemOfAppTitle}>
+          <div className={styles.itemOfAppTitleItem1}>
+            <h1 className={styles.itemOfAppTitleItem1Head}>Free Time Navigator</h1>
           </div>
-          <div className={styles.item1Item2}>
-            <h3 className={styles.item1Item2Head}>Welcome!</h3>
-            <p className={styles.item1Item2Text}>Free Time Navigatorへようこそ</p>
+          <div className={styles.itemOfAppTitleItem2}>
+            <h3 className={styles.itemOfAppTitleItem2Head}>Welcome!</h3>
+            <p className={styles.itemOfAppTitleItem2Text}>Free Time Navigatorへようこそ</p>
           </div>
-          <div className={styles.item1Item3}>
-            <p className={styles.item1Text}>
+          <div className={styles.itemOfAppTitleItem3}>
+            <p className={styles.itemOfAppTitleText}>
               空き時間を入力することで<br />
               時間内に行って楽しめるスポットを<br />
               検索するサービスです。<br />
@@ -63,14 +72,29 @@ export default function Home() {
             </p>
           </div>
         </div>
-        <div className={styles.item3}>
-          <div className={styles.item3Item1Image}>
+        <div className={styles.itemOfTaskList}>
+          <div className={styles.itemOfTaskListItem1Image}>
+            <Image src="/images/undraw_task_re_wi3v.svg" alt="Destination Image" width={240} height={240} />
+          </div>
+          <div className={styles.itemOfTaskListItem2}>
+            <h2 className={styles.itemOfTaskListItem2Head}>やりたいことリスト</h2>
+          </div>
+          <div className={styles.itemOfTaskListItem3}>
+            <p className={styles.itemOfTaskListItem3Text}>
+              登録し、ログインしていただくと<br />
+              「空き時間にやりたいこと」を<br />
+              リストに保存しておくことができます。
+            </p>
+          </div>
+        </div>
+        <div className={styles.itemOfStart}>
+          <div className={styles.itemOfStartItem1Image}>
             <Image src="/images/mobile_login.svg" alt="Mobile Login Image" width={240} height={240} />
           </div>
-          <div className={styles.item3Item2}>
-            <h2 className={styles.item3Item2Head}>始めよう!</h2>
+          <div className={styles.itemOfStartItem2}>
+            <h2 className={styles.itemOfStartItem2Head}>始めよう!</h2>
           </div>
-          <div className={styles.item3Item3}>
+          <div className={styles.itemOfStartItem3}>
             <div className={styles.timeFormBox}>
               <p className={styles.timeFormText}>空き時間から検索</p>
               <div className={styles.timeForm}>

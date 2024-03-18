@@ -9,11 +9,11 @@ import { locationState, modalIsOpenState, selectedTagsState } from '@/state/atom
 import styles from '@/styles/BasicCard.module.css';
 import { Chip } from '@mui/material';
 import Link from 'next/link';
-import useTagSelection from '@/hooks/useTagSelection';
+import { useTagSelection } from '@/hooks/useTagSelection';
 import { translateToJapanese } from '@/utils/translationUtils';
 import { useState } from 'react';
 import TimerModal from './TimerModal';
-import useModalOperation from '@/hooks/useModalOperation';
+import { useModalOperation } from '@/hooks/useModalOperation';
 
 const bull = (
   <Box

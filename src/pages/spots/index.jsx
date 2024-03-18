@@ -1,7 +1,7 @@
 import { useRecoilValue } from "recoil";
 import { leadSpotsState, locationState, selectedTagsState, spotsState, timeState } from "@/state/atoms";
-import useGetLocation from "@/hooks/useGetLocation";
-import useFetchSpots from "@/hooks/useFetchSpots";
+import { useGetLocation } from "@/hooks/useGetLocation";
+import { useFetchSpots } from "@/hooks/useFetchSpots";
 import BasicCard from "@/components/BasicCard";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";

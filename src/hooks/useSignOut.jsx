@@ -3,15 +3,16 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useRecoilState } from "recoil";
+import Cookies from "js-cookie";
+
 
 export const useSignOut = () => {
   const [hasError, setHasError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
-  const [client, setClient] = useRecoilState(clientState);
-  const [uid, setUid] = useRecoilState(uidState);
-  const [loggedIn, setLoggedIn] = useRecoilState(loggedInState);
+  const accessToken = Cookies.get("access-token");
+  const client = Cookies.get("client");
+  const uid = Cookies.get("uid");
 
   const router = useRouter();
 
@@ -35,10 +36,12 @@ export const useSignOut = () => {
         throw new Error(`Request failed with status ${response.status}`);
       }
 
-      setAccessToken("");
-      setClient("");
-      setUid("");
-      setLoggedIn(false);
+      Cookies.remove("access-token");
+      Cookies.remove("client");
+      Cookies.remove("uid");
+      Cookies.remove("provider");
+      Cookies.remove("loggedIn");
+
 
       sessionStorage.removeItem('recoil-persist');
 
