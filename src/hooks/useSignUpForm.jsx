@@ -4,16 +4,13 @@ import axios from "axios";
 import { useRecoilState } from "recoil";
 import { accessTokenState, clientState, loggedInState, uidState } from "@/state/atoms";
 import Cookies from "js-cookie";
+import { useUser } from "./useUser";
 
 
 export const useSignUpForm = () => {
   const [hasError, setHasError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
-  const [client, setClient] = useRecoilState(clientState);
-  const [uid, setUid] = useRecoilState(uidState);
-  const [loggedIn, setLoggedIn] = useRecoilState(loggedInState);
 
   const router = useRouter();
 
@@ -35,11 +32,10 @@ export const useSignUpForm = () => {
         throw new Error(`Request failed with status ${response.status}`);
       }
 
-      Cookies.set("access-token", response.headers['access-token'], { expires: 1, secure: process.env.NODE_ENV === 'production' });
-      Cookies.set("client", response.headers['client'], { expires: 1, secure: process.env.NODE_ENV === 'production' });
-      Cookies.set("uid", response.headers['uid'], { expires: 1, secure: process.env.NODE_ENV === 'production' });
-      Cookies.set("loggedIn", true, {expires: 1, secure: process.env.NODE_ENV === 'production' });
-
+      Cookies.set("access-token", response.headers['access-token'], { expires: 0.4, secure: process.env.NODE_ENV === 'production' });
+      Cookies.set("client", response.headers['client'], { expires: 0.4, secure: process.env.NODE_ENV === 'production' });
+      Cookies.set("uid", response.headers['uid'], { expires: 0.4, secure: process.env.NODE_ENV === 'production' });
+      Cookies.set("loggedIn", true, {expires: 0.4, secure: process.env.NODE_ENV === 'production' });
 
       router.push('/');
       alert("ログインしました。");

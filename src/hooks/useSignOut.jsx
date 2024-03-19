@@ -36,6 +36,7 @@ export const useSignOut = () => {
         throw new Error(`Request failed with status ${response.status}`);
       }
 
+      Cookies.remove("userId");
       Cookies.remove("access-token");
       Cookies.remove("client");
       Cookies.remove("uid");
