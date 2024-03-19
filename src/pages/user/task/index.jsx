@@ -36,7 +36,6 @@ export async function getServerSideProps(context) {
       'uid': uid,
     };
 
-    console.log(headers);
 
     const response = await axios.get(url, {headers: headers});
 
@@ -81,7 +80,6 @@ export default function Tasks({initialTasks}) {
 
 
   const handleTask = (id) => {
-    console.log(id);
     router.push(`/user/task/${id}`)
   };
 

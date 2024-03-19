@@ -44,7 +44,6 @@ export async function getStaticProps({params}) {
     }
 
     const spot = await res.json();
-    console.log(spot);
 
     return {
       props: {

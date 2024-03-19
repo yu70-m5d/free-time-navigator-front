@@ -58,7 +58,6 @@ export default function BasicCard(props) {
     const regex = /[^0-9]/g;
     const result = duration ? duration.replace(regex, "") : "";
     const durationTime = parseInt(result);
-    console.log(durationTime);
 
     return (
       <Card className={styles.containerShow}>
