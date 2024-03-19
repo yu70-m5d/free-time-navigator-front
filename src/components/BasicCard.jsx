@@ -11,9 +11,14 @@ import { Chip } from '@mui/material';
 import Link from 'next/link';
 import { useTagSelection } from '@/hooks/useTagSelection';
 import { translateToJapanese } from '@/utils/translationUtils';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import TimerModal from './TimerModal';
 import { useModalOperation } from '@/hooks/useModalOperation';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import AddIcon from '@mui/icons-material/Add';
+import { useFavorite } from '@/hooks/useFavorite';
+
 
 const bull = (
   <Box
@@ -24,7 +29,7 @@ const bull = (
 );
 
 export default function BasicCard(props) {
-  const { id, name, address, rating, image, duration, tags } = props;
+  const { id, name, address, rating, image, duration, tags, favorite } = props;
 
   const origin = useRecoilValue(locationState);
   const router = useRouter()
@@ -33,6 +38,7 @@ export default function BasicCard(props) {
 
   const [selectedTags, setSelectedTags] = useRecoilState(selectedTagsState);
   const { handleSelectedChange } = useTagSelection();
+  const { checkFavorites, addFavorites, removeFavorites } = useFavorite();
 
   const handleChipClick = (clickedTag) => {
     const isSelected = selectedTags.includes(clickedTag);
@@ -44,6 +50,26 @@ export default function BasicCard(props) {
   };
 
   const { modalOpen } = useModalOperation();
+
+  const [isFavorite, setIsFavorite] = useState(favorite);
+
+  useEffect(() => {
+    if (id && isContactPage) {
+      const getFavoriteStatus = async() => {
+        const favoritesStatus = await checkFavorites(id);
+        setIsFavorite(favoritesStatus);
+      };
+      getFavoriteStatus();
+    }
+  }, [id, isFavorite]);
+
+
+
+  const handleFavorites = (id) => {
+    isFavorite ? removeFavorites(id) : addFavorites(id);
+    setIsFavorite(checkFavorites);
+    // addFavorites(id);
+  };
 
 
   const aryMax = (a, b) => {return Math.max(a, b);}
@@ -87,6 +113,10 @@ export default function BasicCard(props) {
 						<p className={styles.timeText}>滞在時間:{ max === min ? `約${ave}分` : `約${min}~${max}分` }</p>
 					</div>
 				</div>
+        <div className={isFavorite ? styles.itemOfRemoveFavoriteBtnShow : styles.itemOfAddFavoriteBtnShow} onClick={() => handleFavorites(id)}>
+          <AddIcon />
+          <p className={styles.itemOfFavoriteBtnText}>お気に入り</p>
+        </div>
 				<div className={styles.item4Show}>
 					<p className={styles.addressText}>{address}</p>
 				</div>

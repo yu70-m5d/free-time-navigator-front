@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import BasicCard from "@/components/BasicCard";
 import Map from "@/components/Map";
@@ -8,6 +8,7 @@ import styles from "@/styles/SpotShow.module.css"
 import TimerModal from "@/components/TimerModal";
 import { useRecoilState } from "recoil";
 import { modalIsOpenState } from "@/state/atoms";
+import { useFavorite } from "@/hooks/useFavorite";
 
 
 export async function getStaticPaths() {
@@ -62,8 +63,13 @@ export async function getStaticProps({params}) {
 
 export default function Spot( {spot} ) {
 
+  const { checkFavorites } = useFavorite();
+  const spotId = spot?.id;
+  const favorite = checkFavorites(spotId);
+
    // 子コンポーネントから受け取る
   const [duration, setDuration] = useState(null);
+
   const handleDurationChange = (newDuration) => {
     setDuration(newDuration);
   };
@@ -82,7 +88,7 @@ export default function Spot( {spot} ) {
       <Header origin={origin} />
       <div className={styles.container}>
         <div className={styles.item1}>
-          <BasicCard {...spot} duration={duration} />
+          <BasicCard {...spot} duration={duration} favorite={favorite} />
         </div>
       </div>
       <Map {...spot} origin={parsedOrigin} onDurationChange={handleDurationChange} />
