@@ -173,13 +173,17 @@ export default function User( {initialUser} ) {
           { user.favorite_spots.length > 0 && (
             <div className={styles.favoriteSpots}>
             {user.favorite_spots.map((favorite_spot, index) => (
-              <div className={styles.favorite} onClick={()=>(handleFavoriteSpot(favorite_spot.id))}>
+              <div key={favorite_spot.id} className={styles.favorite} onClick={()=>(handleFavoriteSpot(favorite_spot.id))}>
                 {index % 3 !== 0 && <div className={styles.delimiter}></div>}
                 <div className={styles.favoriteSpot}>
                   <div className={styles.favoriteSpotImage}>
-                    <img key={favorite_spot.id} src={favorite_spot.image} width={96} height={96} />
+                    { !!favorite_spot.image ? (
+                      <img src={favorite_spot.image} width={96} height={96} />
+                    ) : (
+                      <div className={styles.noImageBox}>No Image</div>
+                    ) }
                   </div>
-                  <p key={favorite_spot.id} className={styles.favoriteSpotName}>{favorite_spot.name.replace(/\s/g, "")}</p>
+                  <p className={styles.favoriteSpotName}>{favorite_spot.name.replace(/\s/g, "")}</p>
                 </div>
               </div>
             ))}
