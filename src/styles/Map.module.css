@@ -1,0 +1,35 @@
+
+.loadingAnimation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loadingAnimation > div {
+  width: 10px;
+  height: 10px;
+  margin: 2px;
+  background-color: #333;
+  border-radius: 50%;
+  animation: loading 1s ease-in-out infinite;
+}
+
+.loadingAnimation > div:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loadingAnimation > div:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes loading {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
