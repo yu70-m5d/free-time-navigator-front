@@ -18,6 +18,7 @@ import BookmarkIcon from '@mui/icons-material/Bookmark';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import AddIcon from '@mui/icons-material/Add';
 import { useFavorite } from '@/hooks/useFavorite';
+import Cookies from 'js-cookie';
 
 
 const bull = (
@@ -37,6 +38,7 @@ export default function BasicCard(props) {
   const isContactPage = router.pathname.includes("/spots/[id]");
 
   const [selectedTags, setSelectedTags] = useRecoilState(selectedTagsState);
+  const loggedIn = Cookies.get("loggedIn");
   const { handleSelectedChange } = useTagSelection();
   const { checkFavorites, addFavorites, removeFavorites } = useFavorite();
 
@@ -66,9 +68,12 @@ export default function BasicCard(props) {
 
 
   const handleFavorites = (id) => {
-    isFavorite ? removeFavorites(id) : addFavorites(id);
-    setIsFavorite(checkFavorites);
-    // addFavorites(id);
+    if (!loggedIn) {
+      alert("ログインしてください。");
+    } else {
+      isFavorite ? removeFavorites(id) : addFavorites(id);
+      setIsFavorite(checkFavorites);
+    }
   };
 
 
