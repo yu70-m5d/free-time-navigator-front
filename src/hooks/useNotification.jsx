@@ -16,10 +16,8 @@ export const useNotification = () => {
         time: time,
       }
 
-      console.log(params);
 
       const response = await axios.post(url, params, { headers });
-      console.log('Response:', response.data);
 
       if (response.status === 200) {
         alert("LINE通知を設定しました。");
