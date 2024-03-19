@@ -8,6 +8,7 @@ import Header from "@/components/Header";
 import AddIcon from '@mui/icons-material/Add';
 import { useRouter } from "next/router";
 import Footer from "@/components/Footer";
+import { useTask } from "@/hooks/useTask";
 
 
 export async function getServerSideProps(context) {
@@ -35,7 +36,6 @@ export async function getServerSideProps(context) {
       'uid': uid,
     };
 
-    console.log(headers);
 
     const response = await axios.get(url, {headers: headers});
 
@@ -43,12 +43,11 @@ export async function getServerSideProps(context) {
       throw new Error(`Failed to fetch data. Status: ${response.status}`);
     }
 
-    const tasks = await response.data;
-    console.log(tasks);
+    const initialTasks = await response.data;
 
     return {
       props: {
-        tasks,
+        initialTasks,
       },
     };
   } catch (error) {
@@ -60,14 +59,27 @@ export async function getServerSideProps(context) {
   }
 }
 
-export default function Tasks({tasks}) {
+export default function Tasks({initialTasks}) {
 
-  console.log(tasks);
+  const [tasks, setTasks] = useState(initialTasks);
+  const { fetchTasks } = useTask();
 
   const router = useRouter();
 
+  useEffect(()=>{
+    const refreshTasks = async() => {
+      try {
+        const fetchedTasks = await fetchTasks();
+        setTasks(fetchedTasks);
+      } catch (error) {
+        console.error('エラー：' + error.message);
+      }
+    };
+    refreshTasks();
+  }, []);
+
+
   const handleTask = (id) => {
-    console.log(id);
     router.push(`/user/task/${id}`)
   };
 

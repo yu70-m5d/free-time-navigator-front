@@ -10,6 +10,30 @@ export const useTask = () => {
   const client = Cookies.get('client');
   const uid = Cookies.get('uid');
 
+  const fetchTasks = async() => {
+
+    try {
+      const url = `${process.env.NEXT_PUBLIC_FTN_API_ORIGIN}/api/v1/tasks`;
+      const headers = {
+        'access-token': accessToken,
+        'client': client,
+        'uid': uid,
+      };
+
+      const response = await axios.get(url, {headers: headers});
+
+      if (response.status !== 200) {
+        throw new Error(`Failed to fetch data. Status: ${response.status}`);
+      }
+
+      const fetchedTasks = await response.data;
+
+      return fetchedTasks;
+    } catch (error) {
+      console.error('エラー：' + error.message);
+    }
+  }
+
   const createTask = async(data) => {
 
     setIsLoading(true);
@@ -101,5 +125,5 @@ export const useTask = () => {
     }
   }
 
-  return { createTask, editTask, deleteTask };
+  return { fetchTasks, createTask, editTask, deleteTask };
 };
