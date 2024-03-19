@@ -2,13 +2,36 @@ import { GoogleMap, MarkerF, useJsApiLoader, useLoadScript } from "@react-google
 import Direction from "./Direction";
 import { useRecoilValue } from "recoil";
 import { locationState } from "@/state/atoms";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { useGetLocation } from "@/hooks/useGetLocation";
+import styles from "@/styles/Map.module.css";
 
 
 export default function Map(props) {
 
   const { latitude, longitude, onDurationChange } = props;
   const origin = useRecoilValue(locationState);
+
+  const { getGeolocation } = useGetLocation();
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const getOrigin = async() => {
+      setLoading(true);
+      try {
+        await getGeolocation();
+      } catch (error) {
+        console.error("Error getting geolocation:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    if (origin.lat === 0 || origin.lng === 0) {
+      getOrigin();
+    }
+  }, [origin]);
+
 
   //目的地を取得する
   const destination = {
@@ -43,6 +66,16 @@ export default function Map(props) {
   const onUnmount = useCallback(function callback(map) {
     setMap(null)
   }, []);
+
+  if(loading) {
+    return (
+      <div className={styles.loadingAnimation}>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    )
+  }
 
 
   return isLoaded ? (
