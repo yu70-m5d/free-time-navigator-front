@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import BasicCard from "@/components/BasicCard";
 import Map from "@/components/Map";
@@ -8,6 +8,7 @@ import styles from "@/styles/SpotShow.module.css"
 import TimerModal from "@/components/TimerModal";
 import { useRecoilState } from "recoil";
 import { modalIsOpenState } from "@/state/atoms";
+import { useFavorite } from "@/hooks/useFavorite";
 
 
 export async function getStaticPaths() {
@@ -62,30 +63,45 @@ export async function getStaticProps({params}) {
 
 export default function Spot( {spot} ) {
 
+  const { checkFavorites } = useFavorite();
+  const spotId = spot?.id;
+  const favorite = checkFavorites(spotId);
+
    // 子コンポーネントから受け取る
   const [duration, setDuration] = useState(null);
+
   const handleDurationChange = (newDuration) => {
     setDuration(newDuration);
   };
 
   const router = useRouter()
-  const { origin } = router.query;
-
-  const parsedOrigin = origin ? JSON.parse(origin) : null;
 
   if( router.isFallback ) {
-    return <div>Loading...</div>
+    return (
+      <>
+        <Header />
+        <div className={styles.container}>
+          <div className={styles.item1NotFound}>スポットを取得しています。</div>
+          <div id={styles.animationContainer}>
+            <span></span>
+            <span></span>
+            <span></span>
+            <p>LOADING</p>
+          </div>
+        </div>
+      </>
+    );
   }
 
   return (
     <>
-      <Header origin={origin} />
+      <Header />
       <div className={styles.container}>
         <div className={styles.item1}>
-          <BasicCard {...spot} duration={duration} />
+          <BasicCard {...spot} duration={duration} favorite={favorite} />
         </div>
       </div>
-      <Map {...spot} origin={parsedOrigin} onDurationChange={handleDurationChange} />
+      <Map {...spot} onDurationChange={handleDurationChange} />
       <div className={styles.push}></div>
       <TimerModal />
       <Footer />

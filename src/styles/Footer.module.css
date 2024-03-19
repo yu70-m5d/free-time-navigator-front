@@ -32,6 +32,17 @@
   cursor: pointer;
 }
 
+.userIconBox {
+  height: 100%;
+  width: 96px;
+  background-color: #383838;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
 .onPageBar {
   height: 4px;
   width: 100%;

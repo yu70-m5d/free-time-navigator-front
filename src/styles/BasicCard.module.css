@@ -8,7 +8,7 @@
 .containerShow {
   display: grid;
   grid-template-columns: 1fr 2fr 2fr;
-  grid-template-rows: 0.5fr 2fr auto auto;
+  grid-template-rows: 0.5fr 2fr auto auto auto;
   gap: 2;
 }
 
@@ -107,7 +107,7 @@
 
 .item4Show {
   grid-column: 1/4;
-  grid-row: 3;
+  grid-row: 4;
   align-self: center;
   padding: 8px;
   padding-top: 0px;
@@ -119,14 +119,14 @@
 
 .item5Index {
   grid-column: 1/5;
-  grid-row: 3;
+  grid-row: 4;
   padding: 0px 4px;
   padding-bottom: 4px;
 }
 
 .item5Show {
   grid-column: 1/4;
-  grid-row: 4;
+  grid-row: 5;
   padding: 0px 4px;
   padding-bottom: 4px;
 }
@@ -136,4 +136,37 @@
   justify-content: flex-end;
   align-items: center;
   padding: 0px 8px
+}
+
+.itemOfAddFavoriteBtnShow {
+  grid-column: 1;
+  grid-row: 3;
+  width: 120px;
+  margin: 4px;
+  margin-top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #383838;
+  cursor: pointer;
+}
+
+.itemOfRemoveFavoriteBtnShow {
+  grid-column: 1;
+  grid-row: 3;
+  width: 120px;
+  margin: 4px;
+  margin-top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #383838;
+  cursor: pointer;
+  color: aliceblue;
+  background-color: #757575;
+}
+
+.itemOfFavoriteBtnText {
+  font-size: 14px;
+  margin: 0;
 }

@@ -2,17 +2,18 @@ import { TextField } from "@mui/material";
 
 
 export default function NameFrom(props) {
-  const { register, errorMessage } = props;
+  const { register, errorMessage, label, defaultValue, optional } = props;
 
   return (
     <TextField
       id="standard-basic"
-      label="お名前（必須）"
+      label={label}
       variant="filled"
+      defaultValue={defaultValue}
       error={errorMessage !== undefined}
-      helperText={errorMessage || ' '}
+      helperText={!optional && (errorMessage || ' ')}
       {...register('name', {
-        required: 'お名前を入力してください'
+        required: !optional && 'お名前を入力してください'
       })}
     />
   )
