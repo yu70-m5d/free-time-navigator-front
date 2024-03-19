@@ -6,6 +6,7 @@ import { style } from "@mui/system";
 import Header from "@/components/Header";
 import { useRouter } from "next/router";
 import { useTask } from "@/hooks/useTask";
+import Footer from "@/components/Footer";
 
 export async function getServerSideProps(context) {
   const { params } = context;
@@ -54,7 +55,6 @@ export async function getServerSideProps(context) {
 
 export default function Task( {task} ) {
 
-  console.log(task);
   const { deleteTask } = useTask();
   const router = useRouter();
 
@@ -96,6 +96,7 @@ export default function Task( {task} ) {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   )
 }
