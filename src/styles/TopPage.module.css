@@ -11,7 +11,7 @@
   width: 100%;
   margin-bottom: 48px;
   grid-template-columns: 1fr 368px 1fr;
-  grid-template-rows: 568px 568px 568px 284px;
+  grid-template-rows: 568px 568px 568px 568px 284px;
 }
 
 .itemOfAppTitle {
@@ -160,7 +160,7 @@
 }
 
 .item4 {
-  grid-row: 4;
+  grid-row: 5;
   grid-column: 2 / 3;
   border-left: 1px solid #383838;
   border-right: 1px solid #383838;
