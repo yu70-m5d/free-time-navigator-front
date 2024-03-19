@@ -8,6 +8,10 @@ import { useUser } from "@/hooks/useUser";
 import EditIcon from '@mui/icons-material/Edit';
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { useRouter } from "next/router";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { locationState } from "@/state/atoms";
+import { useGetLocation } from "@/hooks/useGetLocation";
 
 
 export async function getServerSideProps(context) {
@@ -58,6 +62,12 @@ export async function getServerSideProps(context) {
 export default function User( {initialUser} ) {
   const [showNameForm, setShowNameForm] = useState(false);
   const [user, setUser] = useState(initialUser);
+  const location = useRecoilValue(locationState);
+  const [loading, setLoading] = useState(false);
+
+  const { getGeolocation } = useGetLocation();
+
+  const router = useRouter();
 
   const { handleSubmit, formState: { errors }, register } = useForm();
   const formRef = useRef(null);
@@ -92,7 +102,35 @@ export default function User( {initialUser} ) {
     };
   }, []);
 
+  const handleFavoriteSpot = async(id) => {
+    try {
+      setLoading(true);
 
+      if (location.lat === 0 || location.lng === 0) {
+        await getGeolocation();
+      }
+      router.push(`/spots/${id}`);
+    } catch (error) {
+      console.error("エラー：", error);
+    }
+  };
+
+  if (loading) {
+    return (
+      <>
+        <Header />
+        <div className={styles.container}>
+          <div className={styles.item1NotFound}>スポットを取得しています。</div>
+          <div id={styles.animationContainer}>
+            <span></span>
+            <span></span>
+            <span></span>
+            <p>LOADING</p>
+          </div>
+        </div>
+      </>
+    );
+  };
 
   return(
     <>
@@ -135,7 +173,7 @@ export default function User( {initialUser} ) {
           { user.favorite_spots.length > 0 && (
             <div className={styles.favoriteSpots}>
             {user.favorite_spots.map((favorite_spot, index) => (
-              <div className={styles.favorite}>
+              <div className={styles.favorite} onClick={()=>(handleFavoriteSpot(favorite_spot.id))}>
                 {index % 3 !== 0 && <div className={styles.delimiter}></div>}
                 <div className={styles.favoriteSpot}>
                   <div className={styles.favoriteSpotImage}>

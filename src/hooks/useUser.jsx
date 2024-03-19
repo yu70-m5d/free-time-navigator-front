@@ -29,6 +29,24 @@ export const useUser = () => {
     }
   }
 
+  const getUserId = async() => {
+    try {
+      const url = `${process.env.NEXT_PUBLIC_FTN_API_ORIGIN}/api/v1/users`;
+      const response = await axios.get(url, {headers: headers});
+
+      if (response.status !== 200) {
+        throw new Error(`Failed to fetch data. Status: ${response.status}`);
+      }
+
+      console.log(response.data.id);
+
+      Cookies.set("userId", response.data.id, { expires: 0.4, secure: process.env.NODE_ENV === 'production' });
+
+    } catch (error) {
+      console.error('エラー：' + error.message);
+    }
+  }
+
   const editUserProfile = async( {userId, data} ) => {
     try {
       const url = `${process.env.NEXT_PUBLIC_FTN_API_ORIGIN}/api/v1/users/${userId}`;
@@ -51,6 +69,6 @@ export const useUser = () => {
     }
   }
 
-  return { fetchUser, editUserProfile };
+  return { fetchUser, getUserId, editUserProfile };
 
 }
