@@ -153,7 +153,7 @@ export default function User( {initialUser} ) {
                 color="primary"
                 className={styles.submitButton}
               >
-                  作成
+                  変更
               </Button>
             </form>
           ) : (
