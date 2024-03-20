@@ -12,7 +12,7 @@ import { useUser } from '@/hooks/useUser';
 export default function Footer() {
   const router = useRouter();
   const isSpotsPage = router.pathname.includes("/spots");
-  const isTaskPage = router.pathname === '/user/task';
+  const isTaskPage = router.pathname.startsWith('/user/task');
   const isUserPage = router.pathname.startsWith('/user/') && !isTaskPage;
 
   const loggedIn = Boolean(Cookies.get("loggedIn"));
