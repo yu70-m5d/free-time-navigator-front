@@ -7,6 +7,7 @@ import { useSignIn } from "@/hooks/useSignIn";
 import LineLoginButton from "@/components/LineLoginButton";
 import styles from "@/styles/SignIn.module.css";
 import Link from "next/link";
+import Layout from "@/components/Layout";
 
 export default function SignIn() {
   const { hasError, isLoading, sendData, closeError } = useSignUpForm();
@@ -15,6 +16,7 @@ export default function SignIn() {
 
   return (
     <>
+      <Layout>
       <Header isLoading={isLoading} pageTitle={"ログイン"} />
       <h2 className={styles.appName}>Free Time Navigator</h2>
       <SignInForm onSubmit={signIn} isLoading={isLoading} />
@@ -37,6 +39,7 @@ export default function SignIn() {
         <p className={styles.text}>パスワードをお忘れの場合</p>
       </Link>
       <ErrorSnackbar hasError={hasError} closeError={closeError} />
+      </Layout>
     </>
   )
 }

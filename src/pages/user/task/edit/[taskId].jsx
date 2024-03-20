@@ -8,6 +8,7 @@ import TitleForm from "@/components/TitleForm";
 import ContentForm from "@/components/ContentForm";
 import { Button } from "@mui/material";
 import Footer from "@/components/Footer";
+import Layout from "@/components/Layout";
 
 
 export async function getServerSideProps(context) {
@@ -71,33 +72,35 @@ export default function EditTask( {task} ) {
 
   return (
     <>
-      <Header />
-      <div className={styles.container}>
-        <form onSubmit={handleSubmit(onSubmit)} className={styles.item1} >
-          <div className={styles.titleForm}>
-            <TitleForm
-              register={register}
-              errorMessage={errors.title?.message}
-              className={styles.titleForm}
-              defaultValue={task.title}
-            />
-          </div>
-          <div className={styles.date}>
-            <p className={styles.dateText}>{currentDate.toLocaleDateString()}</p>
-          </div>
-          <div className={styles.contentForm}>
-            <ContentForm
-              register={register}
-              errorMessage={errors.content?.message}
-              defaultValue={task.content}
-            />
-          </div>
-          <div className={styles.button}>
-            <Button type="submit" variant="contained" color="primary">編集</Button>
-          </div>
-        </form>
-      </div>
-      <Footer />
+      <Layout>
+        <Header />
+        <div className={styles.container}>
+          <form onSubmit={handleSubmit(onSubmit)} className={styles.item1} >
+            <div className={styles.titleForm}>
+              <TitleForm
+                register={register}
+                errorMessage={errors.title?.message}
+                className={styles.titleForm}
+                defaultValue={task.title}
+              />
+            </div>
+            <div className={styles.date}>
+              <p className={styles.dateText}>{currentDate.toLocaleDateString()}</p>
+            </div>
+            <div className={styles.contentForm}>
+              <ContentForm
+                register={register}
+                errorMessage={errors.content?.message}
+                defaultValue={task.content}
+              />
+            </div>
+            <div className={styles.button}>
+              <Button type="submit" variant="contained" color="primary">編集</Button>
+            </div>
+          </form>
+        </div>
+        <Footer />
+      </Layout>
     </>
   );
 }

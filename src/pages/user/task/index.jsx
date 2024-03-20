@@ -9,6 +9,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { useRouter } from "next/router";
 import Footer from "@/components/Footer";
 import { useTask } from "@/hooks/useTask";
+import Layout from "@/components/Layout";
 
 
 export async function getServerSideProps(context) {
@@ -89,20 +90,22 @@ export default function Tasks({initialTasks}) {
 
   return (
     <>
-      <Header pageTitle={"やりたいこと"} />
-      <div className={styles.container}>
-        {tasks.map((task) => (
-          <div className={styles.item} key={task.id} onClick={() => handleTask(task.id)} >
-            <p className={styles.title}>{task.title}</p>
-            <p className={styles.date}>{task.created_at.split('T')[0]}</p>
+    <Layout>
+        <Header pageTitle={"やりたいこと"} />
+        <div className={styles.container}>
+          {tasks.map((task) => (
+            <div className={styles.item} key={task.id} onClick={() => handleTask(task.id)} >
+              <p className={styles.title}>{task.title}</p>
+              <p className={styles.date}>{task.created_at.split('T')[0]}</p>
+            </div>
+          ))}
+          <div className={styles.addBtn} onClick={handleAdd}>
+            <AddIcon />
+            <p>追加</p>
           </div>
-        ))}
-        <div className={styles.addBtn} onClick={handleAdd}>
-          <AddIcon />
-          <p>追加</p>
         </div>
-      </div>
-      <Footer />
+        <Footer />
+      </Layout>
     </>
   )
 }
