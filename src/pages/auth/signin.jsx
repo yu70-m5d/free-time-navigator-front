@@ -33,6 +33,9 @@ export default function SignIn() {
       <Link href="/auth/signup">
         <p className={styles.text}>登録する</p>
       </Link>
+      <Link href="/auth/password/reset">
+        <p className={styles.text}>パスワードをお忘れの場合</p>
+      </Link>
       <ErrorSnackbar hasError={hasError} closeError={closeError} />
     </>
   )
