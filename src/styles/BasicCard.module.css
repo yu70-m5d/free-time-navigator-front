@@ -8,7 +8,7 @@
 .containerShow {
   display: grid;
   grid-template-columns: 1fr 2fr 2fr;
-  grid-template-rows: 0.5fr 2fr auto auto auto;
+  grid-template-rows: 0.5fr 2fr auto auto auto auto;
   gap: 2;
 }
 
@@ -169,4 +169,10 @@
 .itemOfFavoriteBtnText {
   font-size: 14px;
   margin: 0;
+}
+
+.itemOfShareBtn {
+  grid-column: 3;
+  grid-row: 3;
+  text-align: center;
 }
