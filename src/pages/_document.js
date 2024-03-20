@@ -6,9 +6,8 @@ export default function Document() {
     <Html lang="ja">
       <Head>
         <Link rel="preconnect" href="https://fonts.googleapis.com" />
-        <Link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <Link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
         <Link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300&display=swap" rel="stylesheet" />
-        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
       </Head>
       <body>
         <Main />
