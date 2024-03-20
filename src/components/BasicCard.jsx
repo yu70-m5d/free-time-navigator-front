@@ -19,6 +19,7 @@ import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import AddIcon from '@mui/icons-material/Add';
 import { useFavorite } from '@/hooks/useFavorite';
 import Cookies from 'js-cookie';
+import TwitterShareButton from './TwitterShareButton';
 
 
 const bull = (
@@ -123,15 +124,7 @@ export default function BasicCard(props) {
           <p className={styles.itemOfFavoriteBtnText}>お気に入り</p>
         </div>
         <div className={styles.itemOfShareBtn}>
-          <a
-            href="https://twitter.com/share?ref_src=twsrc%5Etfw"
-            class="twitter-share-button"
-            data-text={`スポットをシェア！${props.name}`}
-            data-url={`${process.env.NEXT_PUBLIC_FTN_API_ORIGIN}/spots/${props.id}`}
-            data-lang="" data-show-count="false"
-          >
-            Share
-          </a>
+          <TwitterShareButton name={props.name} id={props.id} />
         </div>
 				<div className={styles.item4Show}>
 					<p className={styles.addressText}>{address}</p>
