@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import MultiSelectDropdown from "@/components/MultiSelectDropdown";
 import styles from "@/styles/SpotsIndex.module.css";
 import { useEffect } from "react";
+import Layout from "@/components/Layout";
 
 
 export default function Page() {
@@ -55,6 +56,7 @@ export default function Page() {
             <p>LOADING</p>
           </div>
         </div>
+        <Footer />
       </>
     );
   };
@@ -62,24 +64,26 @@ export default function Page() {
 
   return (
     <>
-      <Header />
-      <div className={styles.searchTags}>
-        <MultiSelectDropdown />
-      </div>
-      <div className={styles.container} >
-        {leadSpots.length > 0 ? leadSpots.map((spot) => (
-          <div className={styles.item1} key={spot.id}>
-            <BasicCard key={spot.id} {...spot} />
-          </div>
-        )) : <div className={styles.item1NotFound}>スポットが見つかりませんでした。</div> }
-        { spots.length > 0 && spots.map((spot) => (
-          <div className={styles.item1} key={spot.id}>
-            <BasicCard key={spot.id} {...spot} />
-          </div>
-        ))}
-        <div className={styles.push}></div>
-      </div>
-      <Footer />
+      <Layout>
+        <Header />
+        <div className={styles.searchTags}>
+          <MultiSelectDropdown />
+        </div>
+        <div className={styles.container} >
+          {leadSpots.length > 0 ? leadSpots.map((spot) => (
+            <div className={styles.item1} key={spot.id}>
+              <BasicCard key={spot.id} {...spot} />
+            </div>
+          )) : <div className={styles.item1NotFound}>スポットが見つかりませんでした。</div> }
+          { spots.length > 0 && spots.map((spot) => (
+            <div className={styles.item1} key={spot.id}>
+              <BasicCard key={spot.id} {...spot} />
+            </div>
+          ))}
+          <div className={styles.push}></div>
+        </div>
+        <Footer />
+      </Layout>
     </>
   )
 }
