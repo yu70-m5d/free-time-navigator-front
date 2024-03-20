@@ -12,6 +12,7 @@ import { useRouter } from "next/router";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { locationState } from "@/state/atoms";
 import { useGetLocation } from "@/hooks/useGetLocation";
+import Layout from "@/components/Layout";
 
 
 export async function getServerSideProps(context) {
@@ -134,64 +135,66 @@ export default function User( {initialUser} ) {
 
   return(
     <>
-      <Header />
-      <div className={styles.container}>
-        <div className={styles.profile} onSubmit={handleSubmit(onSubmit)}>
-          { showNameForm ? (
-            <form ref={formRef} className={styles.nameFormContainer}>
-              <NameFrom
-                register={register}
-                errorMessage={errors.title?.message}
-                className={styles.nameForm}
-                label={"ユーザーネーム"}
-                defaultValue={user.name}
-                optional
-              />
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                className={styles.submitButton}
-              >
-                  変更
-              </Button>
-            </form>
-          ) : (
-            <div className={styles.userNameContainer}>
-              <p className={styles.userName}>{user.name ? user.name : "未設定"}さん</p>
-              <EditIcon className={styles.editIcon} onClick={()=>(handleNameEdit())} />
-            </div>
-          ) }
-          <p className={styles.numberOfFavorite}>お気に入り：{user.favorite_spots.length}件</p>
-        </div>
-        <div className={styles.favorites}>
-          <div className={styles.favoriteHeadBox}>
-            <div className={styles.horizontalLine}></div>
-            <p className={styles.favoriteHead}>お気に入りスポット一覧</p>
-            <div className={styles.horizontalLine}></div>
-          </div>
-          { user.favorite_spots.length > 0 && (
-            <div className={styles.favoriteSpots}>
-            {user.favorite_spots.map((favorite_spot, index) => (
-              <div key={favorite_spot.id} className={styles.favorite} onClick={()=>(handleFavoriteSpot(favorite_spot.id))}>
-                {index % 3 !== 0 && <div className={styles.delimiter}></div>}
-                <div className={styles.favoriteSpot}>
-                  <div className={styles.favoriteSpotImage}>
-                    { !!favorite_spot.image ? (
-                      <img src={favorite_spot.image} width={96} height={96} />
-                    ) : (
-                      <div className={styles.noImageBox}>No Image</div>
-                    ) }
-                  </div>
-                  <p className={styles.favoriteSpotName}>{favorite_spot.name.replace(/\s/g, "")}</p>
-                </div>
+      <Layout>
+        <Header />
+        <div className={styles.container}>
+          <div className={styles.profile} onSubmit={handleSubmit(onSubmit)}>
+            { showNameForm ? (
+              <form ref={formRef} className={styles.nameFormContainer}>
+                <NameFrom
+                  register={register}
+                  errorMessage={errors.title?.message}
+                  className={styles.nameForm}
+                  label={"ユーザーネーム"}
+                  defaultValue={user.name}
+                  optional
+                />
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  className={styles.submitButton}
+                >
+                    変更
+                </Button>
+              </form>
+            ) : (
+              <div className={styles.userNameContainer}>
+                <p className={styles.userName}>{user.name ? user.name : "未設定"}さん</p>
+                <EditIcon className={styles.editIcon} onClick={()=>(handleNameEdit())} />
               </div>
-            ))}
+            ) }
+            <p className={styles.numberOfFavorite}>お気に入り：{user.favorite_spots.length}件</p>
           </div>
-          )}
+          <div className={styles.favorites}>
+            <div className={styles.favoriteHeadBox}>
+              <div className={styles.horizontalLine}></div>
+              <p className={styles.favoriteHead}>お気に入りスポット一覧</p>
+              <div className={styles.horizontalLine}></div>
+            </div>
+            { user.favorite_spots.length > 0 && (
+              <div className={styles.favoriteSpots}>
+              {user.favorite_spots.map((favorite_spot, index) => (
+                <div key={favorite_spot.id} className={styles.favorite} onClick={()=>(handleFavoriteSpot(favorite_spot.id))}>
+                  {index % 3 !== 0 && <div className={styles.delimiter}></div>}
+                  <div className={styles.favoriteSpot}>
+                    <div className={styles.favoriteSpotImage}>
+                      { !!favorite_spot.image ? (
+                        <img src={favorite_spot.image} width={96} height={96} />
+                      ) : (
+                        <div className={styles.noImageBox}>No Image</div>
+                      ) }
+                    </div>
+                    <p className={styles.favoriteSpotName}>{favorite_spot.name.replace(/\s/g, "")}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            )}
+          </div>
         </div>
-      </div>
-      <Footer />
+        <Footer />
+      </Layout>
     </>
   )
 }

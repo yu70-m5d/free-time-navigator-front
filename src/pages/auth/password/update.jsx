@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import styles from "@/styles/PasswordReset.module.css";
 import { useEffect, useState } from "react";
+import Layout from "@/components/Layout";
 
 
 export default function Update() {
@@ -36,28 +37,30 @@ export default function Update() {
 
   return (
     <>
-      <Header pageTitle={"パスワード再設定"} />
-      <div className={styles.container}>
-        <p className={styles.text}>新しいパスワードを設定してください。</p>
-        <form onSubmit={handleSubmit(onSubmit)} className={styles.formBox}>
-          <PasswordFrom
-            register={register}
-            errorMessage={errors.password?.message}
-          />
-          <PasswordConfirmationFrom
-            register={register}
-            errorMessage={errors.PasswordConfirmation?.message}
-          />
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            disabled={loading}
-          >
-            { !loading ? '変更' : '変更中' }
-          </Button>
-        </form>
-      </div>
+      <Layout>
+        <Header pageTitle={"パスワード再設定"} />
+        <div className={styles.container}>
+          <p className={styles.text}>新しいパスワードを設定してください。</p>
+          <form onSubmit={handleSubmit(onSubmit)} className={styles.formBox}>
+            <PasswordFrom
+              register={register}
+              errorMessage={errors.password?.message}
+            />
+            <PasswordConfirmationFrom
+              register={register}
+              errorMessage={errors.PasswordConfirmation?.message}
+            />
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              disabled={loading}
+            >
+              { !loading ? '変更' : '変更中' }
+            </Button>
+          </form>
+        </div>
+      </Layout>
     </>
   )
 

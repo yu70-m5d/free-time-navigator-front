@@ -7,6 +7,7 @@ import Header from "@/components/Header";
 import { useRouter } from "next/router";
 import { useTask } from "@/hooks/useTask";
 import Footer from "@/components/Footer";
+import Layout from "@/components/Layout";
 
 export async function getServerSideProps(context) {
   const { params } = context;
@@ -69,34 +70,36 @@ export default function Task( {task} ) {
 
   return (
     <>
-      <Header />
-      <div className={styles.container}>
-        <div className={styles.item}>
-          <div className={styles.title}>
-            <p className={styles.titleText}>{task.title}</p>
-          </div>
-          <div className={styles.date}>
-            <p className={styles.dataText}>作成日：{task.created_at.split('T')[0]}</p>
-          </div>
-          <div></div>
-          <div className={styles.content}>
-            <p>{task.content}</p>
-          </div>
-          <div className={styles.box}>
-            <div className={styles.btn}>
-              <div className={styles.deleteBtn} onClick={handleDelete}>
-                <DeleteIcon />
-                <p>削除</p>
-              </div>
-              <div className={styles.editBtn} onClick={handleEditPage}>
-                <EditIcon />
-                <p>編集</p>
+      <Layout>
+        <Header />
+        <div className={styles.container}>
+          <div className={styles.item}>
+            <div className={styles.title}>
+              <p className={styles.titleText}>{task.title}</p>
+            </div>
+            <div className={styles.date}>
+              <p className={styles.dataText}>作成日：{task.created_at.split('T')[0]}</p>
+            </div>
+            <div></div>
+            <div className={styles.content}>
+              <p>{task.content}</p>
+            </div>
+            <div className={styles.box}>
+              <div className={styles.btn}>
+                <div className={styles.deleteBtn} onClick={handleDelete}>
+                  <DeleteIcon />
+                  <p>削除</p>
+                </div>
+                <div className={styles.editBtn} onClick={handleEditPage}>
+                  <EditIcon />
+                  <p>編集</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <Footer />
+        <Footer />
+      </Layout>
     </>
   )
 }

@@ -9,6 +9,7 @@ import TimerModal from "@/components/TimerModal";
 import { useRecoilState } from "recoil";
 import { modalIsOpenState } from "@/state/atoms";
 import { useFavorite } from "@/hooks/useFavorite";
+import Layout from "@/components/Layout";
 
 
 export async function getStaticPaths() {
@@ -95,16 +96,18 @@ export default function Spot( {spot} ) {
 
   return (
     <>
-      <Header />
-      <div className={styles.container}>
-        <div className={styles.item1}>
-          <BasicCard {...spot} duration={duration} favorite={favorite} />
+    <Layout>
+        <Header />
+        <div className={styles.container}>
+          <div className={styles.item1}>
+            <BasicCard {...spot} duration={duration} favorite={favorite} />
+          </div>
         </div>
-      </div>
-      <Map {...spot} onDurationChange={handleDurationChange} />
-      <div className={styles.push}></div>
-      <TimerModal />
-      <Footer />
+        <Map {...spot} onDurationChange={handleDurationChange} />
+        <div className={styles.push}></div>
+        <TimerModal />
+        <Footer />
+      </Layout>
     </>
   );
 };

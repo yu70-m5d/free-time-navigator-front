@@ -1,6 +1,7 @@
 import ContactForm from "@/components/ContactForm";
 import { ErrorSnackbar } from "@/components/ErrorSnackbar";
 import Header from "@/components/Header";
+import Layout from "@/components/Layout";
 import { useContactForm } from "@/hooks/useContactForm";
 
 export default function Page() {
@@ -8,9 +9,11 @@ export default function Page() {
 
   return (
     <>
-      <Header isLoading={isLoading} pageTitle={"お問い合わせ"} />
-      <ContactForm onSubmit={sendData} isLoading={isLoading} />
-      <ErrorSnackbar hasError={hasError} closeError={closeError} />
+      <Layout>
+        <Header isLoading={isLoading} pageTitle={"お問い合わせ"} />
+        <ContactForm onSubmit={sendData} isLoading={isLoading} />
+        <ErrorSnackbar hasError={hasError} closeError={closeError} />
+      </Layout>
     </>
   )
 }

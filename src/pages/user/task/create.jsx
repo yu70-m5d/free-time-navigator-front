@@ -10,6 +10,7 @@ import { useRouter } from "next/router";
 import Footer from "@/components/Footer";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
+import Layout from "@/components/Layout";
 
 
 export default function CreateTask() {
@@ -39,6 +40,7 @@ export default function CreateTask() {
 
   return (
     <>
+      <Layout>
       <Header />
       { loggedIn && (
               <div className={styles.container}>
@@ -66,6 +68,7 @@ export default function CreateTask() {
             </div>
       )}
       <Footer />
+      </Layout>
     </>
   )
 }
