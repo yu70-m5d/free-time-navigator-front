@@ -122,6 +122,17 @@ export default function BasicCard(props) {
           <AddIcon />
           <p className={styles.itemOfFavoriteBtnText}>お気に入り</p>
         </div>
+        <div className={styles.itemOfShareBtn}>
+          <a
+            href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+            class="twitter-share-button"
+            data-text={`スポットをシェア！${props.name}`}
+            data-url={`${process.env.NEXT_PUBLIC_FTN_API_ORIGIN}/spots/${props.id}`}
+            data-lang="" data-show-count="false"
+          >
+            Share
+          </a>
+        </div>
 				<div className={styles.item4Show}>
 					<p className={styles.addressText}>{address}</p>
 				</div>
