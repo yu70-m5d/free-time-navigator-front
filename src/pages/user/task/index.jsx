@@ -90,7 +90,7 @@ export default function Tasks({initialTasks}) {
 
   return (
     <>
-    <Layout>
+      <Layout>
         <Header pageTitle={"やりたいこと"} />
         <div className={styles.container}>
           {tasks.map((task) => (

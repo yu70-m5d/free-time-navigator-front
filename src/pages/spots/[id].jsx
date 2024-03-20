@@ -96,7 +96,7 @@ export default function Spot( {spot} ) {
 
   return (
     <>
-    <Layout>
+      <Layout>
         <Header />
         <div className={styles.container}>
           <div className={styles.item1}>
