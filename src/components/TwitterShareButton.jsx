@@ -21,7 +21,7 @@ export default function TwitterShareButton(props) {
       href="https://twitter.com/share?ref_src=twsrc%5Etfw"
       className="twitter-share-button"
       data-text={`スポットをシェア！${name}`}
-      data-url={`${process.env.NEXT_PUBLIC_FTN_API_ORIGIN}/spots/${id}`}
+      data-url={`${process.env.NEXT_PUBLIC_FTN_FRONT_ORIGIN}/spots/${id}`}
       data-show-count="false">
         Tweet
     </a>
