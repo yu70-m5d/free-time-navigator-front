@@ -56,7 +56,7 @@ export default function TimerModal() {
       <>
         <div id={styles.overlay} onClick={modalClose}>
           <div id={styles.content} onClick={(e) => e.stopPropagation()}>
-            <div className={styles.modalHeader}>
+            {/* <div className={styles.modalHeader}>
               <HelpIcon className={styles.helpIcon} onClick={helpOpen} />
               <p className={styles.message}>設定した時刻の5分前にLINEで通知します。</p>
             </div>
@@ -69,6 +69,17 @@ export default function TimerModal() {
               </div>
               <div className={styles.buttons}>
                 <button className={styles.submitButton} type="submit">通知する</button>
+                <button className={styles.closeButton} onClick={modalClose}>キャンセル</button>
+              </div>
+            </form> */}
+            <div className={styles.modalHeader}>
+              <HelpIcon className={styles.helpIcon} onClick={helpOpen} />
+              <p className={styles.message}>大変申し訳ありません。</p>
+              <p className={styles.message}>LINE通知機能は現在メンテナンス中のためご利用できません。</p>
+            </div>
+            <form className={styles.form} onSubmit={handleSubmit}>
+              <div className={styles.buttons}>
+                {/* <button className={styles.submitButton} type="submit">通知する</button> */}
                 <button className={styles.closeButton} onClick={modalClose}>キャンセル</button>
               </div>
             </form>
